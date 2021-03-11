@@ -16,7 +16,10 @@
 		FEADEEEE25FA3EDA00D5A92A /* GameChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEEED25FA3EDA00D5A92A /* GameChallengeUITests.swift */; };
 		FEADEF1625FA421A00D5A92A /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEF1525FA421A00D5A92A /* Manager.swift */; };
 		FEADEF1B25FA422600D5A92A /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEF1A25FA422600D5A92A /* Component.swift */; };
-		FEADEF2025FA423000D5A92A /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEF1F25FA423000D5A92A /* Entity.swift */; };
+		FEADEF2E25FA434A00D5A92A /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEF2D25FA434A00D5A92A /* Card.swift */; };
+		FEADEF3325FA442A00D5A92A /* StatusItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEF3225FA442A00D5A92A /* StatusItem.swift */; };
+		FEADEF3825FA44A400D5A92A /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEF3725FA44A400D5A92A /* Comment.swift */; };
+		FEADEF3D25FA44C400D5A92A /* Legend.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEF3C25FA44C400D5A92A /* Legend.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +55,10 @@
 		FEADEEEF25FA3EDA00D5A92A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FEADEF1525FA421A00D5A92A /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		FEADEF1A25FA422600D5A92A /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
-		FEADEF1F25FA423000D5A92A /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		FEADEF2D25FA434A00D5A92A /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		FEADEF3225FA442A00D5A92A /* StatusItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItem.swift; sourceTree = "<group>"; };
+		FEADEF3725FA44A400D5A92A /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		FEADEF3C25FA44C400D5A92A /* Legend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Legend.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,9 +109,9 @@
 		FEADEEC925FA3ED800D5A92A /* GameChallenge */ = {
 			isa = PBXGroup;
 			children = (
-				FEADEF1125FA41BF00D5A92A /* Manager */,
-				FEADEF1025FA41B300D5A92A /* Component */,
 				FEADEF0F25FA419900D5A92A /* Entity */,
+				FEADEF1025FA41B300D5A92A /* Component */,
+				FEADEF1125FA41BF00D5A92A /* Manager */,
 				FEADEF0E25FA419200D5A92A /* Shared */,
 				FEADEED025FA3ED800D5A92A /* GameScene.swift */,
 				FEADEED225FA3ED800D5A92A /* GameViewController.swift */,
@@ -145,7 +151,10 @@
 		FEADEF0F25FA419900D5A92A /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				FEADEF1F25FA423000D5A92A /* Entity.swift */,
+				FEADEF2D25FA434A00D5A92A /* Card.swift */,
+				FEADEF3225FA442A00D5A92A /* StatusItem.swift */,
+				FEADEF3725FA44A400D5A92A /* Comment.swift */,
+				FEADEF3C25FA44C400D5A92A /* Legend.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -317,9 +326,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				FEADEED125FA3ED800D5A92A /* GameScene.swift in Sources */,
+				FEADEF3D25FA44C400D5A92A /* Legend.swift in Sources */,
+				FEADEF2E25FA434A00D5A92A /* Card.swift in Sources */,
 				FEADEED325FA3ED800D5A92A /* GameViewController.swift in Sources */,
-				FEADEF2025FA423000D5A92A /* Entity.swift in Sources */,
+				FEADEF3825FA44A400D5A92A /* Comment.swift in Sources */,
 				FEADEECB25FA3ED800D5A92A /* AppDelegate.swift in Sources */,
+				FEADEF3325FA442A00D5A92A /* StatusItem.swift in Sources */,
 				FEADEF1625FA421A00D5A92A /* Manager.swift in Sources */,
 				FEADEF1B25FA422600D5A92A /* Component.swift in Sources */,
 			);
