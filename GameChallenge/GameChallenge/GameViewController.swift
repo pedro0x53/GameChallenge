@@ -16,15 +16,13 @@ class GameViewController: UIViewController {
             // Set the scale mode to scale to fit the window
         let sceneNode = GameScene(size: self.view.frame.size)
         sceneNode.scaleMode = .aspectFill
+        sceneNode.anchorPoint = CGPoint(x: 0.5, y: 0.5)
 
         // Present the scene
         if let view = self.view as? SKView {
             view.presentScene(sceneNode)
 
             view.ignoresSiblingOrder = true
-
-            view.showsFPS = true
-            view.showsNodeCount = true
         }
     }
 
@@ -33,11 +31,7 @@ class GameViewController: UIViewController {
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            return .allButUpsideDown
-        } else {
-            return .all
-        }
+        return .portrait
     }
 
     override var prefersStatusBarHidden: Bool {
