@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D91" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CardModel" representedClassName="CardModel" syncable="YES" codeGenerationType="class">
+        <attribute name="assetName" optional="YES" attributeType="String"/>
+        <attribute name="identifier" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="CurrentGameplay" representedClassName="CurrentGameplay" syncable="YES" codeGenerationType="class">
+        <attribute name="discard" optional="YES" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="hand" optional="YES" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="level" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="life" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="reveal" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="table" optional="YES" attributeType="Transformable" customClassName="[String]"/>
+    </entity>
+    <entity name="LegendInfo" representedClassName="LegendInfo" syncable="YES" codeGenerationType="class">
+        <attribute name="identifier" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="story" optional="YES" attributeType="String"/>
+        <relationship name="legend" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LegendModel" inverseName="info" inverseEntity="LegendModel"/>
+    </entity>
+    <entity name="LegendModel" representedClassName="LegendModel" syncable="YES" codeGenerationType="class">
+        <attribute name="cards" optional="YES" attributeType="Transformable" customClassName="[String: [Int]]"/>
+        <attribute name="identifier" optional="YES" attributeType="String"/>
+        <attribute name="level" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="info" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LegendInfo" inverseName="legend" inverseEntity="LegendInfo"/>
+    </entity>
+    <elements>
+        <element name="LegendModel" positionX="-226.4375" positionY="-136.2491760253906" width="128" height="103"/>
+        <element name="CardModel" positionX="-36" positionY="45" width="128" height="59"/>
+        <element name="LegendInfo" positionX="-386.8439331054688" positionY="176.2828369140625" width="128" height="103"/>
+        <element name="CurrentGameplay" positionX="54.49169921875" positionY="139.6088256835938" width="128" height="119"/>
+    </elements>
+</model>
