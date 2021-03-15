@@ -111,7 +111,6 @@
 		0061561725FF946B00605341 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0061562F25FFA1A700605341 /* Repositories */,
 				0061561825FF949500605341 /* CoreDataStack.swift */,
 				0061562025FF991600605341 /* GameData.xcdatamodeld */,
 			);
@@ -124,13 +123,6 @@
 				0061562725FF9FF800605341 /* RepositoryProtocol.swift */,
 			);
 			path = Protocols;
-			sourceTree = "<group>";
-		};
-		0061562F25FFA1A700605341 /* Repositories */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Repositories;
 			sourceTree = "<group>";
 		};
 		FE5AE4CD25FB8FD2006D4B85 /* Utils */ = {
