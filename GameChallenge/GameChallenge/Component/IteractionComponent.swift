@@ -12,7 +12,8 @@ class IteractionComponent: GKComponent {
     private var node: InteractionNode
 
     init(hitBox: CGSize,
-         touchBeganAction: (() -> Void)? = nil, touchEndedAction: (() -> Void)? = nil, touchMovedAction: (() -> Void)? = nil) {
+         touchBeganAction: (() -> Void)? = nil, touchEndedAction: (() -> Void)? = nil,
+         touchMovedAction: (() -> Void)? = nil) {
         self.node = InteractionNode(size: hitBox)
         self.node.touchBeganAction = touchBeganAction
         self.node.touchEndedAction = touchEndedAction

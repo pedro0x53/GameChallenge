@@ -9,7 +9,7 @@ import GameplayKit
 import SpriteKit
 
 class GameplayManager {
-    
+
 //    let entities: Set<GKEntity>
 //    let scene: SKScene
 //    //let statusManager: StatusManager
