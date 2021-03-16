@@ -31,6 +31,8 @@
 		FEADEF5025FA495500D5A92A /* LegendComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEF4F25FA495500D5A92A /* LegendComponent.swift */; };
 		FEADEF5525FA49AF00D5A92A /* StatusComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEF5425FA49AF00D5A92A /* StatusComponent.swift */; };
 		FEADEF5A25FA513900D5A92A /* InteractionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEF5925FA513900D5A92A /* InteractionComponent.swift */; };
+		FEB4502A2600EEFA00E5B25C /* HandManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB450292600EEFA00E5B25C /* HandManager.swift */; };
+		FEB450302600F08000E5B25C /* HandMangerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB4502F2600F08000E5B25C /* HandMangerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +83,8 @@
 		FEADEF4F25FA495500D5A92A /* LegendComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendComponent.swift; sourceTree = "<group>"; };
 		FEADEF5425FA49AF00D5A92A /* StatusComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusComponent.swift; sourceTree = "<group>"; };
 		FEADEF5925FA513900D5A92A /* InteractionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionComponent.swift; sourceTree = "<group>"; };
+		FEB450292600EEFA00E5B25C /* HandManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandManager.swift; sourceTree = "<group>"; };
+		FEB4502F2600F08000E5B25C /* HandMangerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandMangerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +188,7 @@
 		FEADEEE125FA3EDA00D5A92A /* GameChallengeTests */ = {
 			isa = PBXGroup;
 			children = (
+				FEB4502E2600F00700E5B25C /* Managers */,
 				FEADEEE225FA3EDA00D5A92A /* GameChallengeTests.swift */,
 				FEADEEE425FA3EDA00D5A92A /* Info.plist */,
 			);
@@ -236,8 +241,17 @@
 			isa = PBXGroup;
 			children = (
 				0061560F25FF931E00605341 /* GameplayManager.swift */,
+				FEB450292600EEFA00E5B25C /* HandManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		FEB4502E2600F00700E5B25C /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				FEB4502F2600F08000E5B25C /* HandMangerTests.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -398,6 +412,7 @@
 				0061562825FF9FF800605341 /* RepositoryProtocol.swift in Sources */,
 				FEADEF2E25FA434A00D5A92A /* Card.swift in Sources */,
 				FEADEED325FA3ED800D5A92A /* GameViewController.swift in Sources */,
+				FEB4502A2600EEFA00E5B25C /* HandManager.swift in Sources */,
 				FEADEF5025FA495500D5A92A /* LegendComponent.swift in Sources */,
 				FEADEF3825FA44A400D5A92A /* Comment.swift in Sources */,
 				FEADEECB25FA3ED800D5A92A /* AppDelegate.swift in Sources */,
@@ -417,6 +432,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEB450302600F08000E5B25C /* HandMangerTests.swift in Sources */,
 				FEADEEE325FA3EDA00D5A92A /* GameChallengeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
