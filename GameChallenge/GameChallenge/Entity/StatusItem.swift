@@ -7,6 +7,4 @@
 
 import GameplayKit
 
-class StatusItem: GKEntity {
-
-}
+class StatusItem: GKEntity {}
