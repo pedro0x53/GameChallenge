@@ -37,9 +37,7 @@ class GameplayManager {
         }
     }
 
-    func drawCards() -> [Card] {
-        return []
-    }
+    func drawCards() {}
 
     func putCardsOnTheTable(cards: [Card]) {}
 
