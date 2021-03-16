@@ -8,13 +8,13 @@
 import Foundation
 
 protocol RepositoryProtocol {
-    associatedtype D
-    associatedtype E
-    
-    func create(with data: D) -> E?
-    func readAll() -> [E]
-    func read(identifier: String) -> E?
-    func update(_ entity: E, with data: D) -> Bool
+    associatedtype Data
+    associatedtype Entity
+
+    func create(with data: Data) -> Entity?
+    func readAll() -> [Entity]
+    func read(identifier: String) -> Entity?
+    func update(_ entity: Entity, with data: Data) -> Bool
     func delete(identifier: String) -> Bool
     func drop() -> Bool
     func saveContext() -> Bool

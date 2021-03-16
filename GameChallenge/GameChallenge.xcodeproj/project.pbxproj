@@ -30,7 +30,7 @@
 		FEADEF4B25FA459E00D5A92A /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEF4A25FA459E00D5A92A /* SpriteComponent.swift */; };
 		FEADEF5025FA495500D5A92A /* LegendComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEF4F25FA495500D5A92A /* LegendComponent.swift */; };
 		FEADEF5525FA49AF00D5A92A /* StatusComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEF5425FA49AF00D5A92A /* StatusComponent.swift */; };
-		FEADEF5A25FA513900D5A92A /* IteractionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEF5925FA513900D5A92A /* IteractionComponent.swift */; };
+		FEADEF5A25FA513900D5A92A /* InteractionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEF5925FA513900D5A92A /* InteractionComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,7 +80,7 @@
 		FEADEF4A25FA459E00D5A92A /* SpriteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
 		FEADEF4F25FA495500D5A92A /* LegendComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendComponent.swift; sourceTree = "<group>"; };
 		FEADEF5425FA49AF00D5A92A /* StatusComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusComponent.swift; sourceTree = "<group>"; };
-		FEADEF5925FA513900D5A92A /* IteractionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IteractionComponent.swift; sourceTree = "<group>"; };
+		FEADEF5925FA513900D5A92A /* InteractionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,7 +224,7 @@
 				FEADEF4A25FA459E00D5A92A /* SpriteComponent.swift */,
 				FEADEF4F25FA495500D5A92A /* LegendComponent.swift */,
 				FEADEF5425FA49AF00D5A92A /* StatusComponent.swift */,
-				FEADEF5925FA513900D5A92A /* IteractionComponent.swift */,
+				FEADEF5925FA513900D5A92A /* InteractionComponent.swift */,
 				FE5AE4F325FBB0FB006D4B85 /* FollowComponent.swift */,
 				FE5AE4F825FBB214006D4B85 /* MovementComponent.swift */,
 				0061560A25FF90FE00605341 /* CardInfoComponent.swift */,
@@ -408,7 +408,7 @@
 				FE5AE4DE25FB9746006D4B85 /* StatusNode.swift in Sources */,
 				FE5AE4D025FB8FFB006D4B85 /* InteractionNode.swift in Sources */,
 				FE5AE4F425FBB0FB006D4B85 /* FollowComponent.swift in Sources */,
-				FEADEF5A25FA513900D5A92A /* IteractionComponent.swift in Sources */,
+				FEADEF5A25FA513900D5A92A /* InteractionComponent.swift in Sources */,
 				FEADEF4B25FA459E00D5A92A /* SpriteComponent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
