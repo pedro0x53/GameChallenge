@@ -12,6 +12,10 @@
 		0061561925FF949500605341 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061561825FF949500605341 /* CoreDataStack.swift */; };
 		0061562225FF991600605341 /* GameData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0061562025FF991600605341 /* GameData.xcdatamodeld */; };
 		0061562825FF9FF800605341 /* RepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061562725FF9FF800605341 /* RepositoryProtocol.swift */; };
+		0061563325FFA5B700605341 /* LegendInfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061563225FFA5B700605341 /* LegendInfoData.swift */; };
+		0061563B25FFA5C100605341 /* LegendData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061563A25FFA5C100605341 /* LegendData.swift */; };
+		0061564325FFA67000605341 /* LegendRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061564225FFA67000605341 /* LegendRepository.swift */; };
+		0061564925FFA76300605341 /* CoreDataStackTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061564825FFA76300605341 /* CoreDataStackTest.swift */; };
 		FE5AE4D025FB8FFB006D4B85 /* InteractionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5AE4CF25FB8FFB006D4B85 /* InteractionNode.swift */; };
 		FE5AE4DE25FB9746006D4B85 /* StatusNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5AE4DD25FB9746006D4B85 /* StatusNode.swift */; };
 		FE5AE4F425FBB0FB006D4B85 /* FollowComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5AE4F325FBB0FB006D4B85 /* FollowComponent.swift */; };
@@ -56,6 +60,10 @@
 		0061561825FF949500605341 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		0061562125FF991600605341 /* GameData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GameData.xcdatamodel; sourceTree = "<group>"; };
 		0061562725FF9FF800605341 /* RepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryProtocol.swift; sourceTree = "<group>"; };
+		0061563225FFA5B700605341 /* LegendInfoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendInfoData.swift; sourceTree = "<group>"; };
+		0061563A25FFA5C100605341 /* LegendData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendData.swift; sourceTree = "<group>"; };
+		0061564225FFA67000605341 /* LegendRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendRepository.swift; sourceTree = "<group>"; };
+		0061564825FFA76300605341 /* CoreDataStackTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackTest.swift; sourceTree = "<group>"; };
 		FE5AE4CF25FB8FFB006D4B85 /* InteractionNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionNode.swift; sourceTree = "<group>"; };
 		FE5AE4DD25FB9746006D4B85 /* StatusNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusNode.swift; sourceTree = "<group>"; };
 		FE5AE4F325FBB0FB006D4B85 /* FollowComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowComponent.swift; sourceTree = "<group>"; };
@@ -111,6 +119,8 @@
 		0061561725FF946B00605341 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0061563125FFA59D00605341 /* Repositories */,
+				0061563025FFA58B00605341 /* Structs */,
 				0061561825FF949500605341 /* CoreDataStack.swift */,
 				0061562025FF991600605341 /* GameData.xcdatamodeld */,
 			);
@@ -123,6 +133,31 @@
 				0061562725FF9FF800605341 /* RepositoryProtocol.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		0061563025FFA58B00605341 /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				0061563225FFA5B700605341 /* LegendInfoData.swift */,
+				0061563A25FFA5C100605341 /* LegendData.swift */,
+			);
+			path = Structs;
+			sourceTree = "<group>";
+		};
+		0061563125FFA59D00605341 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				0061564225FFA67000605341 /* LegendRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		0061564725FFA73900605341 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0061564825FFA76300605341 /* CoreDataStackTest.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		FE5AE4CD25FB8FD2006D4B85 /* Utils */ = {
@@ -184,6 +219,7 @@
 		FEADEEE125FA3EDA00D5A92A /* GameChallengeTests */ = {
 			isa = PBXGroup;
 			children = (
+				0061564725FFA73900605341 /* Model */,
 				FEADEEE225FA3EDA00D5A92A /* GameChallengeTests.swift */,
 				FEADEEE425FA3EDA00D5A92A /* Info.plist */,
 			);
@@ -392,9 +428,11 @@
 			files = (
 				FE5AE4F925FBB214006D4B85 /* MovementComponent.swift in Sources */,
 				FEADEED125FA3ED800D5A92A /* GameScene.swift in Sources */,
+				0061563325FFA5B700605341 /* LegendInfoData.swift in Sources */,
 				FEADEF5525FA49AF00D5A92A /* StatusComponent.swift in Sources */,
 				0061561925FF949500605341 /* CoreDataStack.swift in Sources */,
 				FEADEF3D25FA44C400D5A92A /* Legend.swift in Sources */,
+				0061564325FFA67000605341 /* LegendRepository.swift in Sources */,
 				0061562825FF9FF800605341 /* RepositoryProtocol.swift in Sources */,
 				FEADEF2E25FA434A00D5A92A /* Card.swift in Sources */,
 				FEADEED325FA3ED800D5A92A /* GameViewController.swift in Sources */,
@@ -403,6 +441,7 @@
 				FEADEECB25FA3ED800D5A92A /* AppDelegate.swift in Sources */,
 				0061562225FF991600605341 /* GameData.xcdatamodeld in Sources */,
 				0061561025FF931E00605341 /* GameplayManager.swift in Sources */,
+				0061563B25FFA5C100605341 /* LegendData.swift in Sources */,
 				0061560B25FF90FE00605341 /* CardInfoComponent.swift in Sources */,
 				FEADEF3325FA442A00D5A92A /* StatusItem.swift in Sources */,
 				FE5AE4DE25FB9746006D4B85 /* StatusNode.swift in Sources */,
@@ -418,6 +457,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FEADEEE325FA3EDA00D5A92A /* GameChallengeTests.swift in Sources */,
+				0061564925FFA76300605341 /* CoreDataStackTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

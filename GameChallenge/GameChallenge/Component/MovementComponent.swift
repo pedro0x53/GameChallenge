@@ -12,7 +12,7 @@ class MovementComponent: GKAgent2D, GKAgentDelegate {
     func agentDidUpdate(_ agent: GKAgent) {
         guard let entity = entity,
               let spriteComponent = entity.component(ofType: SpriteComponent.self) else { return }
-        
+
         self.position = vector_float2(x: Float(spriteComponent.node.position.x),
                                       y: Float(spriteComponent.node.position.y))
     }
@@ -20,7 +20,7 @@ class MovementComponent: GKAgent2D, GKAgentDelegate {
     func agentWillUpdate(_ agent: GKAgent) {
         guard let entity = entity,
               let spriteComponent = entity.component(ofType: SpriteComponent.self) else { return }
-        
+
         spriteComponent.node.position = CGPoint(x: CGFloat(self.position.x),
                                                 y: CGFloat(self.position.y))
     }
