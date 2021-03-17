@@ -21,16 +21,26 @@ class BoardManagerTests: XCTestCase {
         let newCard = Card()
         boardManager.add(newCard)
         let currentCardsCount = boardManager.cards.count
+
         XCTAssertEqual(prevCardsCount, currentCardsCount - 1)
     }
 
     func test_if_clear_remove_just_wrong_cards() {
-        
+        let card1 = Card()
+        let card2 = Card()
+        let card3 = Card()
+        boardManager.add(card1, card2, card3)
+        let wrongCards: Set<Card> = [card1, card2]
+        let prevCardsCount = boardManager.cards.count
+        boardManager.clear(wrongCards: wrongCards)
+        let currentCardsCount = boardManager.cards.count
+
+        XCTAssertEqual(prevCardsCount - 2, currentCardsCount)
     }
 
-    override func tearDown() {
-        
-    }
+    func test_if_draw_correct_cards() {}
+
+    override func tearDown() {}
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
