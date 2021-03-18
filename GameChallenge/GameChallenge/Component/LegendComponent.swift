@@ -8,10 +8,12 @@
 import GameplayKit
 
 class LegendComponent: GKComponent {
-    var solution: Set<String>
-
-    init(solution: Set<String>) {
-        self.solution = solution
+    var primary: Set<Int>
+    var secundary: Set<Int>
+    
+    init(primary: Set<Int>, secundary: Set<Int>) {
+        self.primary = primary
+        self.secundary = secundary
         super.init()
     }
 

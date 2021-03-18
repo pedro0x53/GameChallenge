@@ -32,8 +32,8 @@ class BoardManager {
     //Funcao temporaria, remover quando as cartas  vierem
     // de outro Manager
     func tempGenerateCards(num: Int) {
-        for _ in 0..<num {
-            let card = Card()
+        for index in 0..<num {
+            let card = Card(identifier: index, assetName: "")
             self.deck.append(card)
         }
     }
@@ -41,6 +41,7 @@ class BoardManager {
     func add(_ cards: Card...) {
         for card in cards {
             self.cards.insert(card)
+            gamePlayManager.add(entity: card)
         }
     }
 
@@ -78,9 +79,43 @@ class BoardManager {
     }
 
     func checkSubmition() {
-//        var wrongCards: Set<Card>
-//        executeActionFrom(submition: .gold, wrongCards: wrongCards)
-//        return .gold
+        let pontuationAndWrongCard = calculatePontuationAndWrongCards(legend: self.legend, cards: self.cards)
+        if pontuationAndWrongCard.1.count > 0 {
+            executeActionFrom(submition: .wrong, wrongCards: pontuationAndWrongCard.1)
+            return
+        }
+        let pontuation = pontuationAndWrongCard.0
+        if pontuation>=16 {
+            executeActionFrom(submition: .gold)
+            return
+        } else if pontuation>=13 {
+            executeActionFrom(submition: .silver)
+            return
+        } else {
+            executeActionFrom(submition: .bronze)
+            return
+        }
+    }
+
+    func calculatePontuationAndWrongCards(legend: Legend, cards: Set<Card>) -> (Int, Set<Card>) {
+        guard let legendComponent = legend.component(ofType: LegendComponent.self) else { return (0, cards) }
+        var primaryCount = 0
+        var secundaryCount = 0
+        var wrongCards = Set<Card>()
+        for card in cards {
+            if let cardInfoComponent = card.component(ofType: CardInfoComponent.self) {
+                let cardIdentifier = cardInfoComponent.identifier
+                if legendComponent.primary.contains(cardIdentifier) {
+                    primaryCount += 1
+                } else if legendComponent.secundary.contains(cardIdentifier) {
+                    secundaryCount += 1
+                } else {
+                    wrongCards.insert(card)
+                }
+            }
+        }
+        let pontuation = 4*primaryCount + secundaryCount
+        return (pontuation, wrongCards)
     }
 
     func executeActionFrom(submition: SubmitionResult, wrongCards: Set<Card> = Set<Card>()) {
