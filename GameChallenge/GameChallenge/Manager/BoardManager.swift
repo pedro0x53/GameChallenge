@@ -7,6 +7,7 @@
 
 import Foundation
 import GameplayKit
+import SpriteKit
 
 enum SubmitionResult {
     case gold
@@ -20,6 +21,10 @@ class BoardManager {
     let legend: Legend
     private(set) var cards = Set<Card>()
     var deck: [Card]
+    var maxCardsBoard = 4
+    var startPoint: CGPoint = CGPoint()
+    var spaceBetweenCards = CGFloat()
+    var cardHeight = CGFloat()
 
     init(manager: GameplayManager, legend: Legend) {
         gamePlayManager = manager
@@ -40,9 +45,20 @@ class BoardManager {
 
     func add(_ cards: Card...) {
         for card in cards {
+            if self.cards.count >= self.maxCardsBoard {return}
             self.cards.insert(card)
             gamePlayManager.add(entity: card)
         }
+    }
+
+    func renderCardToView(view: SKNode, cardNode: SKNode) {
+        view.addChild(cardNode)
+        cardNode.position = calcBoardNewCardPosition()
+    }
+
+    func calcBoardNewCardPosition() -> CGPoint {
+        let yPosition = startPoint.y - CGFloat(cards.count) * (spaceBetweenCards + cardHeight)
+        return CGPoint(x: startPoint.x, y: yPosition)
     }
 
     func clear(wrongCards: Set<Card>) {

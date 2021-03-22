@@ -17,12 +17,23 @@ class BoardManagerTests: XCTestCase {
     }
 
     func test_if_add_card_to_board() {
+        boardManager.clear(wrongCards: boardManager.cards)
         let prevCardsCount = boardManager.cards.count
         let newCard = Card(identifier: 100, assetName: "")
         boardManager.add(newCard)
         let currentCardsCount = boardManager.cards.count
-
         XCTAssertEqual(prevCardsCount, currentCardsCount - 1)
+
+        boardManager.maxCardsBoard = 4
+
+        boardManager.add(Card(identifier: 0, assetName: ""))
+        boardManager.add(Card(identifier: 0, assetName: ""))
+        boardManager.add(Card(identifier: 0, assetName: ""))
+        boardManager.add(Card(identifier: 0, assetName: ""))
+        boardManager.add(Card(identifier: 0, assetName: ""))
+        boardManager.add(Card(identifier: 0, assetName: ""))
+
+        XCTAssertEqual(boardManager.cards.count, 4)
     }
 
     func test_if_clear_remove_just_wrong_cards() {
@@ -121,6 +132,21 @@ class BoardManagerTests: XCTestCase {
         boardManager.deck = [card1, card2, card3, card4, card5, card6, card7]
         result = boardManager.drawCards(amount: 3)
         XCTAssertEqual(result, [card7, card6, card5])
+    }
+    
+    func test_position_calculate() {
+        boardManager.clear(wrongCards: boardManager.cards)
+        boardManager.maxCardsBoard = 2
+        boardManager.startPoint = CGPoint(x: 10, y: 1000)
+        boardManager.cardHeight = CGFloat(200)
+        boardManager.spaceBetweenCards = CGFloat(15)
+        let firstCardPosition = boardManager.calcBoardNewCardPosition()
+        boardManager.add(Card(identifier: 0, assetName: ""))
+        let calculatedSecondCardPosition = boardManager.calcBoardNewCardPosition()
+        let trueSecondCardPosition = CGPoint(x: boardManager.startPoint.x, y: boardManager.startPoint.y - (CGFloat(15) + boardManager.cardHeight))
+
+        XCTAssertEqual(CGPoint(x: 10, y: 1000), firstCardPosition)
+        XCTAssertEqual(trueSecondCardPosition, calculatedSecondCardPosition)
     }
 
     override func tearDown() {}
