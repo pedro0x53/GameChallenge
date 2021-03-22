@@ -19,7 +19,7 @@ class HandMangerTests: XCTestCase {
     func test_handManager_add() {
         let oldSize = sut.cards.count
 
-        sut.add(Card())
+        sut.add(Card(identifier: 1, assetName: ""))
 
         let newSize = sut.cards.count
 
@@ -27,7 +27,7 @@ class HandMangerTests: XCTestCase {
     }
 
     func test_handManager_remove() {
-        let card = Card()
+        let card = Card(identifier: 1, assetName: "")
         sut.add(card)
 
         let oldSize = sut.cards.count
@@ -39,33 +39,35 @@ class HandMangerTests: XCTestCase {
         XCTAssertEqual(oldSize - 1, newSize)
     }
 
-    func test_handManager_selectCard_firstTouchOnCard() {
+    func test_handManager_select_firstTouchOnCard() {
         let oldSize = sut.selectedCards.count
 
-        sut.selectCard(Card())
+        sut.select(Card(identifier: 1, assetName: ""))
 
         let newSize = sut.selectedCards.count
 
         XCTAssertEqual(oldSize + 1, newSize)
     }
 
-    func test_handManager_selectCard_secondTouchOnCard() {
-        let oldSize = sut.selectedCards.count
+    func test_handManager_toggleSelection() {
+        let card = Card(identifier: 0, assetName: "")
 
-        let card = Card()
+        sut.toggleSelection(card)
+        var currentValue = sut.selectedCards.count
 
-        sut.selectCard(card)
-        sut.selectCard(card)
+        XCTAssertEqual(1, currentValue)
 
-        let newSize = sut.selectedCards.count
+        sut.toggleSelection(card)
+        currentValue = sut.selectedCards.count
 
-        XCTAssertEqual(oldSize, newSize)
+        XCTAssertEqual(0, currentValue)
     }
 
-    func test_handManager_dragAction() {
-//        let targetCard = Card()
-//        let followerCard = Card()
+    func test_handManager_dropAction_withMovement() {
+        
+    }
 
-//        targetCard
+    func test_handManager_dropAction_withoutMovement() {
+        
     }
 }
