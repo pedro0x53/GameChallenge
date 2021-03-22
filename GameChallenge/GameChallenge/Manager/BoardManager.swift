@@ -53,18 +53,23 @@ class BoardManager {
 
     func drawCards(amount: Int) -> [Card] {
         var returnedCards: [Card] = []
+        if self.deck.count < amount {
+            return []
+        }
         for _ in 0..<amount {
-            let lastCard = self.deck.removeLast()
+            let lastCard = addCardToDownDeck(self.deck.last!)
             returnedCards.append(lastCard)
-            addCardToDownDeck(lastCard)
         }
         return returnedCards
     }
 
-    func addCardToDownDeck(_ card: Card) {
+    func addCardToDownDeck(_ card: Card) -> Card {
         var tempDeck: [Card] = []
         tempDeck.append(card)
+        let card = self.deck.removeLast()
         tempDeck.append(contentsOf: self.deck)
+        self.deck = tempDeck
+        return card
     }
 
     func shuffleDeck() {

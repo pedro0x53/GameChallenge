@@ -40,6 +40,89 @@ class BoardManagerTests: XCTestCase {
 
     func test_if_draw_correct_cards() {}
 
+    func test_calculate_pontuation_and_wrong_card() {
+        let legend = Legend()
+        let emptyCards = Set<Card>()
+        var result = boardManager.calculatePontuationAndWrongCards(legend: legend, cards: emptyCards)
+        XCTAssertEqual(result.0, 0)
+        XCTAssertEqual(result.1, Set<Card>())
+
+        let legendComponent = LegendComponent(primary: [0, 1, 2, 3], secundary: [4, 5, 6, 7])
+        legend.addComponent(legendComponent)
+        let allPrimaryCards: Set<Card> = [
+            Card(identifier: 0, assetName: ""),
+            Card(identifier: 1, assetName: ""),
+            Card(identifier: 2, assetName: ""),
+            Card(identifier: 3, assetName: "")
+        ]
+        result = boardManager.calculatePontuationAndWrongCards(legend: legend, cards: allPrimaryCards)
+        XCTAssertEqual(result.0, 16)
+        XCTAssertEqual(result.1, Set<Card>())
+
+        let secundaryAndPrimaryCards: Set<Card> = [
+            Card(identifier: 0, assetName: ""),
+            Card(identifier: 1, assetName: ""),
+            Card(identifier: 4, assetName: ""),
+            Card(identifier: 5, assetName: "")
+        ]
+
+        result = boardManager.calculatePontuationAndWrongCards(legend: legend, cards: secundaryAndPrimaryCards)
+        XCTAssertEqual(result.0, 10)
+        XCTAssertEqual(result.1, Set<Card>())
+
+        let wrongCard1 = Card(identifier: 12, assetName: "")
+        let wrongCard2 = Card(identifier: 13, assetName: "")
+        let wrong2CardsAnd2PrimaryCards: Set<Card> = [
+            Card(identifier: 0, assetName: ""),
+            Card(identifier: 1, assetName: ""),
+            wrongCard1,
+            wrongCard2
+        ]
+        result = boardManager.calculatePontuationAndWrongCards(legend: legend, cards: wrong2CardsAnd2PrimaryCards)
+        XCTAssertEqual(result.0, 8)
+        XCTAssertEqual(result.1, [wrongCard2, wrongCard1])
+    }
+
+    func test_if_excution_submission_action_works() {
+        let wrongCard1 = Card(identifier: 10, assetName: "")
+        let wrongCard2 = Card(identifier: 11, assetName: "")
+        boardManager.add(wrongCard1, wrongCard2)
+        XCTAssertTrue(boardManager.cards.contains(wrongCard1))
+        XCTAssertTrue(boardManager.cards.contains(wrongCard2))
+        boardManager.executeActionFrom(submition: .wrong, wrongCards: [wrongCard1, wrongCard2])
+        XCTAssertFalse(boardManager.cards.contains(wrongCard1))
+        XCTAssertFalse(boardManager.cards.contains(wrongCard2))
+    }
+
+    func test_if_add_card_to_down_deck_works() {
+        let card1 = Card(identifier: 1, assetName: "")
+        let card2 = Card(identifier: 2, assetName: "")
+        let card3 = Card(identifier: 3, assetName: "")
+        let card4 = Card(identifier: 4, assetName: "")
+        let card5 = Card(identifier: 5, assetName: "")
+        let card6 = Card(identifier: 6, assetName: "")
+        let card7 = Card(identifier: 7, assetName: "")
+        boardManager.deck = [card1, card2, card3, card4, card5, card6, card7]
+        boardManager.addCardToDownDeck(card7)
+        XCTAssertEqual(boardManager.deck, [card7, card1, card2, card3, card4, card5, card6])
+    }
+
+    func test_if_draw_cards_works() {
+        boardManager.deck = []
+        var result = boardManager.drawCards(amount: 3)
+
+        let card1 = Card(identifier: 1, assetName: "")
+        let card2 = Card(identifier: 2, assetName: "")
+        let card3 = Card(identifier: 3, assetName: "")
+        let card4 = Card(identifier: 4, assetName: "")
+        let card5 = Card(identifier: 5, assetName: "")
+        let card6 = Card(identifier: 6, assetName: "")
+        let card7 = Card(identifier: 7, assetName: "")
+        boardManager.deck = [card1, card2, card3, card4, card5, card6, card7]
+        result = boardManager.drawCards(amount: 3)
+        XCTAssertEqual(result, [card7, card6, card5])
+    }
+
     override func tearDown() {}
 
     func testPerformanceExample() throws {
