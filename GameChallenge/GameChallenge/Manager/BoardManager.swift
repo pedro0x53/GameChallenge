@@ -25,6 +25,7 @@ class BoardManager {
     var startPoint: CGPoint = CGPoint()
     var spaceBetweenCards = CGFloat()
     var cardHeight = CGFloat()
+    var boardCardSize = CGSize()
 
     init(manager: GameplayManager, legend: Legend) {
         gamePlayManager = manager
@@ -47,13 +48,10 @@ class BoardManager {
         for card in cards {
             if self.cards.count >= self.maxCardsBoard {return}
             self.cards.insert(card)
-            gamePlayManager.add(entity: card)
+            guard let cardInfoComponent = card.component(ofType: CardInfoComponent.self) else {return}
+            let cardSpriteComponent = SpriteComponent(assetName: cardInfoComponent.assetName, size: boardCardSize)
+            cardSpriteComponent.node.position = calcBoardNewCardPosition()
         }
-    }
-
-    func renderCardToView(view: SKNode, cardNode: SKNode) {
-        view.addChild(cardNode)
-        cardNode.position = calcBoardNewCardPosition()
     }
 
     func calcBoardNewCardPosition() -> CGPoint {
