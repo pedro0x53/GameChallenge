@@ -14,8 +14,6 @@
 		0061562825FF9FF800605341 /* RepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061562725FF9FF800605341 /* RepositoryProtocol.swift */; };
 		275F490C2600EE0200EE30A9 /* BoardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275F490B2600EE0200EE30A9 /* BoardManager.swift */; };
 		275F49112600EE3C00EE30A9 /* BoardManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275F49102600EE3C00EE30A9 /* BoardManagerTests.swift */; };
-		27A1FF8A260376B6002FD1DA /* Randomize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A1FF89260376B6002FD1DA /* Randomize.swift */; };
-		27A1FF9726037BC5002FD1DA /* RandomizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A1FF9626037BC5002FD1DA /* RandomizeTests.swift */; };
 		FE5AE4D025FB8FFB006D4B85 /* InteractionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5AE4CF25FB8FFB006D4B85 /* InteractionNode.swift */; };
 		FE5AE4DE25FB9746006D4B85 /* StatusNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5AE4DD25FB9746006D4B85 /* StatusNode.swift */; };
 		FE5AE4F425FBB0FB006D4B85 /* FollowComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5AE4F325FBB0FB006D4B85 /* FollowComponent.swift */; };
@@ -62,8 +60,6 @@
 		0061562725FF9FF800605341 /* RepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryProtocol.swift; sourceTree = "<group>"; };
 		275F490B2600EE0200EE30A9 /* BoardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardManager.swift; sourceTree = "<group>"; };
 		275F49102600EE3C00EE30A9 /* BoardManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardManagerTests.swift; sourceTree = "<group>"; };
-		27A1FF89260376B6002FD1DA /* Randomize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Randomize.swift; sourceTree = "<group>"; };
-		27A1FF9626037BC5002FD1DA /* RandomizeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomizeTests.swift; sourceTree = "<group>"; };
 		FE5AE4CF25FB8FFB006D4B85 /* InteractionNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionNode.swift; sourceTree = "<group>"; };
 		FE5AE4DD25FB9746006D4B85 /* StatusNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusNode.swift; sourceTree = "<group>"; };
 		FE5AE4F325FBB0FB006D4B85 /* FollowComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowComponent.swift; sourceTree = "<group>"; };
@@ -195,7 +191,6 @@
 				FEADEEE225FA3EDA00D5A92A /* GameChallengeTests.swift */,
 				FEADEEE425FA3EDA00D5A92A /* Info.plist */,
 				275F49102600EE3C00EE30A9 /* BoardManagerTests.swift */,
-				27A1FF9626037BC5002FD1DA /* RandomizeTests.swift */,
 			);
 			path = GameChallengeTests;
 			sourceTree = "<group>";
@@ -213,7 +208,6 @@
 			isa = PBXGroup;
 			children = (
 				FEADEECA25FA3ED800D5A92A /* AppDelegate.swift */,
-				27A1FF89260376B6002FD1DA /* Randomize.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -417,7 +411,6 @@
 				0061562225FF991600605341 /* GameData.xcdatamodeld in Sources */,
 				0061561025FF931E00605341 /* GameplayManager.swift in Sources */,
 				0061560B25FF90FE00605341 /* CardInfoComponent.swift in Sources */,
-				27A1FF8A260376B6002FD1DA /* Randomize.swift in Sources */,
 				FEADEF3325FA442A00D5A92A /* StatusItem.swift in Sources */,
 				FE5AE4DE25FB9746006D4B85 /* StatusNode.swift in Sources */,
 				FE5AE4D025FB8FFB006D4B85 /* InteractionNode.swift in Sources */,
@@ -431,7 +424,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27A1FF9726037BC5002FD1DA /* RandomizeTests.swift in Sources */,
 				275F49112600EE3C00EE30A9 /* BoardManagerTests.swift in Sources */,
 				FEADEEE325FA3EDA00D5A92A /* GameChallengeTests.swift in Sources */,
 			);
