@@ -26,6 +26,18 @@ class HandMangerTests: XCTestCase {
         XCTAssertEqual(oldSize + 1, newSize)
     }
 
+    func test_handManager_add_fullHand() {
+        sut.add(Card(identifier: 1, assetName: ""))
+        sut.add(Card(identifier: 2, assetName: ""))
+        sut.add(Card(identifier: 3, assetName: ""))
+        sut.add(Card(identifier: 4, assetName: ""))
+
+        let card5 = Card(identifier: 5, assetName: "")
+        sut.add(card5)
+
+        XCTAssertFalse(sut.cards.contains(card5))
+    }
+
     func test_handManager_remove() {
         let card = Card(identifier: 1, assetName: "")
         sut.add(card)
@@ -61,13 +73,5 @@ class HandMangerTests: XCTestCase {
         currentValue = sut.selectedCards.count
 
         XCTAssertEqual(0, currentValue)
-    }
-
-    func test_handManager_dropAction_withMovement() {
-        
-    }
-
-    func test_handManager_dropAction_withoutMovement() {
-        
     }
 }

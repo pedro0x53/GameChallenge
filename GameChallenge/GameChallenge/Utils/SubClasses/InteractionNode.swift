@@ -21,7 +21,6 @@ class InteractionNode: SKSpriteNode {
         super.init(texture: nil, color: .clear, size: size)
 
         self.isUserInteractionEnabled = true
-        self.zPosition = .infinity
         self.position = position
 
         self.touchBeganAction = touchBeganAction

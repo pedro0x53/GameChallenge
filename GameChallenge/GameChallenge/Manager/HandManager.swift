@@ -11,57 +11,71 @@ import GameplayKit
 class HandManager {
     private let gameplayManager: GameplayManager
 
-    private(set) var cards = Set<Card>()
-    private(set) var selectedCards = Set<Card>()
+    private(set) var cards: [Card] = []
+    private(set) var selectedCards: [Card] = []
 
     private var isMoving: Bool = false
 
     private let responsiver = Responsiver(designSize: CGSize(width: 390, height: 844))
+
+    private let cardSize = CGSize(width: 100, height: 140)
 
     init(manager: GameplayManager) {
         self.gameplayManager = manager
     }
 
     func add(_ card: Card) {
-        if self.cards.count > 4 {
-            return
+        if self.cards.count < 4 && !cards.contains(card) {
+            self.cards.append(card)
         }
+    }
 
-        self.cards.insert(card)
+    func render() {
+        for (index, card) in cards.enumerated() {
+            guard let cardComponent = card.component(ofType: CardInfoComponent.self) else { return }
 
-        guard let cardComponent = card.component(ofType: CardInfoComponent.self) else { return }
+            let currentCardSize = responsiver.responsiveSize(for: self.cardSize)
 
-        let cardSize = responsiver.responsiveSize(for: CGSize(width: 100, height: 140))
+            let position = self.position(at: index)
+            let rotation = self.rotation(at: index)
 
-        let randomPoint = CGPoint.randomCenterBased(in: gameplayManager.scene.size)
+            let spriteComponent = SpriteComponent(assetName: cardComponent.assetName,
+                                                  size: currentCardSize,
+                                                  position: position)
+            spriteComponent.node.zRotation = rotation
+            spriteComponent.node.zPosition = CGFloat(index + 10)
 
-        let spriteComponent = SpriteComponent(assetName: cardComponent.assetName,
-                                              size: cardSize,
-                                              position: randomPoint)
-        card.addComponent(spriteComponent)
+            card.addComponent(spriteComponent)
 
-        let interactionComponent = InteractionComponent(hitBox: cardSize,
-                                                        position: randomPoint,
-                                                        touchEndedAction: self.dropAction,
-                                                        touchMovedAction: self.dragAction)
-        card.addComponent(interactionComponent)
+            let interactionComponent = InteractionComponent(hitBox: currentCardSize,
+                                                            position: position,
+                                                            touchEndedAction: self.dropAction,
+                                                            touchMovedAction: self.dragAction)
+            interactionComponent.node.zRotation = rotation
+            interactionComponent.node.zPosition = CGFloat(index + 11)
+            card.addComponent(interactionComponent)
 
-        gameplayManager.add(entity: card)
+            gameplayManager.add(entity: card)
+        }
     }
 
     func remove(_ card: Card) {
-        self.cards.remove(card)
+        guard let index = self.selectedCards.firstIndex(of: card) else { return }
+        self.cards.remove(at: index)
     }
 
     func select(_ card: Card) {
-        self.selectedCards.insert(card)
+        if !selectedCards.contains(card) {
+            selectedCards.append(card)
+        }
     }
 
     func toggleSelection(_ card: Card) {
-        if self.selectedCards.contains(card) {
-            self.selectedCards.remove(card)
+        if self.selectedCards.contains(card),
+           let index = self.selectedCards.firstIndex(of: card) {
+            self.selectedCards.remove(at: index)
         } else {
-            self.selectedCards.insert(card)
+            self.selectedCards.append(card)
         }
     }
 
@@ -111,7 +125,8 @@ class HandManager {
         }
     }
 
-    // Temporary function
+    // Temporary functions
+    // Back to initial point animation
     private func backToOrigin() {
         for selectedCard in selectedCards {
             gameplayManager.moveSystem.removeComponent(foundIn: selectedCard)
@@ -130,5 +145,48 @@ class HandManager {
                 SKAction.move(to: spriteComponent.origin, duration: 0.3)
             )
         }
+    }
+
+    // Get initial point
+    private func position(at index: Int) -> CGPoint {
+        let sceneSize = self.gameplayManager.scene.size
+        let currentCardSize = responsiver.responsiveSize(for: CGSize(width: 100, height: 140))
+
+        var positionX: CGFloat = currentCardSize.width * 1.5 - 44
+        var positionY: CGFloat = (-sceneSize.height / 2) + 30 + currentCardSize.height
+
+        if index == 0 {
+            positionX *= -1
+        }
+
+        if index == 1 || index == 2 {
+            positionY += 4
+
+            positionX = currentCardSize.width / 2 - 11
+
+            if index == 1 {
+                positionX *= -1
+            }
+        }
+
+        return CGPoint(x: positionX, y: positionY)
+    }
+
+    private func rotation(at index: Int) -> CGFloat {
+        var rotation: CGFloat = 4 * radian
+
+        if index == 3 {
+            rotation *= -1
+        }
+
+        if index == 1 || index == 2 {
+            rotation = 2 * radian
+
+            if index == 2 {
+                rotation *= -1
+            }
+        }
+
+        return rotation
     }
 }
