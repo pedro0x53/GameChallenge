@@ -9,11 +9,17 @@ import GameplayKit
 import SpriteKit
 
 class SpriteComponent: GKComponent {
-    var node: SKSpriteNode
+    let node: SKSpriteNode
 
-    init(assetName: String, size: CGSize) {
+    let origin: CGPoint
+
+    init(assetName: String, size: CGSize, position: CGPoint) {
+        self.origin = position
+
         let texture = SKTexture(imageNamed: assetName)
         self.node = SKSpriteNode(texture: texture, color: .clear, size: size)
+        self.node.position = position
+
         super.init()
     }
 
