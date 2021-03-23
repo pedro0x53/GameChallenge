@@ -14,14 +14,19 @@ class GameplayManager {
     private var entities = Set<GKEntity>()
 
     // let statusManager: StatusManager
-    // let tableManager: TableManager
-     var handManager: HandManager!
+    var boardManager: BoardManager!
+    var handManager: HandManager!
 
     let moveSystem = GKComponentSystem(componentClass: MovementComponent.self)
 
     init(scene: SKScene) {
         self.scene = scene
+
+        let legend = Legend()
+        legend.addComponent(LegendComponent(primary: [1, 2, 3, 4], secondary: [3, 4, 5, 6]))
+
         self.handManager = HandManager(manager: self)
+        self.boardManager = BoardManager(manager: self, legend: legend)
     }
 
     func add(entity: GKEntity) {
@@ -51,13 +56,31 @@ class GameplayManager {
         self.scene.removeChildren(in: toRemove)
     }
 
-    func drawCards() {}
+    func drawCards(_ point: CGPoint) {
+        let cardsOnHand = self.handManager.cards
+        self.handManager.cards = self.boardManager.drawCards(cards: cardsOnHand)
+        handManager.render()
+    }
 
-    func putCardsOnTheTable(cards: [Card]) {}
+    func putCardsOnTheTable(cards: [Card]) {
+        let selectedCards = self.handManager.selectedCards
+        for card in selectedCards {
+            if !self.boardManager.add(card) {
+                self.handManager.backToHand(card)
+            }
+        }
+    }
 
-    func revealCard() {}
+    func revealCard(_ point: CGPoint) {
+        let identifiers: [Int] = self.boardManager.cards.compactMap { card in
+            guard let cardInfo = card.component(ofType: CardInfoComponent.self) else { return nil }
+            return cardInfo.identifier
+        }
+    }
 
-    func takeDamage() {}
+    func takeDamage() {
+        
+    }
 
     func nextLevel() {}
 

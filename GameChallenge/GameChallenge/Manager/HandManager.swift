@@ -11,7 +11,7 @@ import GameplayKit
 class HandManager {
     private let gameplayManager: GameplayManager
 
-    private(set) var cards: [Card] = []
+    var cards: [Card] = []
     private(set) var selectedCards: [Card] = []
 
     private var isMoving: Bool = false
@@ -61,6 +61,8 @@ class HandManager {
 
     func remove(_ card: Card) {
         guard let index = self.selectedCards.firstIndex(of: card) else { return }
+        card.removeComponent(ofType: SpriteComponent.self)
+        card.removeComponent(ofType: InteractionComponent.self)
         self.cards.remove(at: index)
     }
 
@@ -123,6 +125,24 @@ class HandManager {
         } else {
             self.backToOrigin()
         }
+    }
+
+    func backToHand(_ card: Card) {
+        gameplayManager.moveSystem.removeComponent(foundIn: card)
+
+        card.removeComponent(ofType: FollowComponent.self)
+        card.removeComponent(ofType: MovementComponent.self)
+
+        guard let spriteComponent = card.component(ofType: SpriteComponent.self),
+              let interactionComponent = card.component(ofType: InteractionComponent.self) else { return }
+
+        interactionComponent.node.run(
+            SKAction.move(to: spriteComponent.origin, duration: 0.3)
+        )
+
+        spriteComponent.node.run(
+            SKAction.move(to: spriteComponent.origin, duration: 0.3)
+        )
     }
 
     // Temporary functions

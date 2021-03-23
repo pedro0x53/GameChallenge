@@ -44,15 +44,15 @@ class BoardManager {
         }
     }
 
-    func add(_ cards: Card...) {
-        for card in cards {
-            if self.cards.count >= self.maxCardsBoard {return}
-            self.cards.insert(card)
-            guard let cardInfoComponent = card.component(ofType: CardInfoComponent.self) else {return}
-            let cardSpriteComponent = SpriteComponent(assetName: cardInfoComponent.assetName,
-                                                      size: boardCardSize,
-                                                      position: calcBoardNewCardPosition())
-        }
+    func add(_ card: Card) -> Bool {
+        if self.cards.count >= self.maxCardsBoard { return false }
+        self.cards.insert(card)
+        guard let cardInfoComponent = card.component(ofType: CardInfoComponent.self) else { return false }
+        card.addComponent(SpriteComponent(assetName: cardInfoComponent.assetName,
+                                                  size: boardCardSize,
+                                                  position: calcBoardNewCardPosition()))
+        self.gamePlayManager.add(entity: card)
+        return true
     }
 
     func calcBoardNewCardPosition() -> CGPoint {
@@ -117,7 +117,7 @@ class BoardManager {
                 let cardIdentifier = cardInfoComponent.identifier
                 if legendComponent.primary.contains(cardIdentifier) {
                     primaryCount += 1
-                } else if legendComponent.secundary.contains(cardIdentifier) {
+                } else if legendComponent.secondary.contains(cardIdentifier) {
                     secundaryCount += 1
                 } else {
                     wrongCards.insert(card)
@@ -132,7 +132,9 @@ class BoardManager {
         switch submition {
         case .gold, .silver, .bronze:
             print(submition)
+            self.gamePlayManager.nextLevel()
         case .wrong:
+            self.gamePlayManager.takeDamage()
             clear(wrongCards: wrongCards)
         }
     }
