@@ -27,7 +27,24 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FEADEEDD25FA3EDA00D5A92A"
+            BuildableName = "GameChallengeTests.xctest"
+            BlueprintName = "GameChallengeTests"
+            ReferencedContainer = "container:GameChallenge.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FEADEEC625FA3ED800D5A92A"
+            BuildableName = "GameChallenge.app"
+            BlueprintName = "GameChallenge"
+            ReferencedContainer = "container:GameChallenge.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
          <TestableReference
             skipped = "NO">

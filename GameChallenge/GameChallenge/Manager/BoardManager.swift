@@ -35,7 +35,7 @@ class BoardManager {
         shuffleDeck()
     }
 
-    //Funcao temporaria, remover quando as cartas  vierem
+    // Funcao temporaria, remover quando as cartas  vierem
     // de outro Manager
     func tempGenerateCards(num: Int) {
         for index in 0..<num {
@@ -49,8 +49,9 @@ class BoardManager {
             if self.cards.count >= self.maxCardsBoard {return}
             self.cards.insert(card)
             guard let cardInfoComponent = card.component(ofType: CardInfoComponent.self) else {return}
-            let cardSpriteComponent = SpriteComponent(assetName: cardInfoComponent.assetName, size: boardCardSize)
-            cardSpriteComponent.node.position = calcBoardNewCardPosition()
+            let cardSpriteComponent = SpriteComponent(assetName: cardInfoComponent.assetName,
+                                                      size: boardCardSize,
+                                                      position: calcBoardNewCardPosition())
         }
     }
 
