@@ -11,7 +11,7 @@ import GameplayKit
 class StatusItem: GKEntity {
     var statusValue: Int
     var statusType: Int
-    //statusType 0 para Vida, e 1 para Reveals.
+    //statusType 0 para Vida, e 1 para Reveals. Vai ser usado pra representação adequada na tela.
     
     init(statusValue: Int, statusType: Int) {
         self.statusValue = statusValue

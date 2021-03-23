@@ -11,9 +11,13 @@ import SpriteKit
 class StatusManager {
     let gameplayManager: GameplayManager
     var lifeItem: StatusItem
+    var revealItem: StatusItem
     
     init(manager: GameplayManager) {
-        //Iniciar o statusitem com 3 vidas e 2 reveals
+        gameplayManager = manager // Define o gameplayManager como o recebido no init.
+        lifeItem = StatusItem(statusValue: 3, statusType:0) // Inicializa um status de Vida com valor 3.
+        revealItem = StatusItem(statusValue: 2, statusType:1) // Inicializa um status de Revelar com valor 2.
+        return
     }
     
     func wrong(){
