@@ -44,6 +44,7 @@ class BoardManager {
         }
     }
 
+    @discardableResult
     func add(_ card: Card) -> Bool {
         if self.cards.count >= self.maxCardsBoard { return false }
         self.cards.insert(card)
@@ -131,11 +132,50 @@ class BoardManager {
     func executeActionFrom(submition: SubmitionResult, wrongCards: Set<Card> = Set<Card>()) {
         switch submition {
         case .gold, .silver, .bronze:
-            print(submition)
             self.gamePlayManager.nextLevel()
         case .wrong:
             self.gamePlayManager.takeDamage()
             clear(wrongCards: wrongCards)
+        }
+    }
+
+    func revealCard() {
+        var cardRevealedIdentifier: Int?
+        cardRevealedIdentifier = getFirstSecondaryIdentifierOutOfBoard()
+        if let identifier = cardRevealedIdentifier {
+            removeCardsOfDeck(identifier: identifier)
+            let card = Card(identifier: identifier, assetName: "hand-card")
+            add(card)
+        }
+    }
+
+    func getFirstSecondaryIdentifierOutOfBoard() -> Int? {
+        guard let legendComponent = legend.component(ofType: LegendComponent.self) else { return nil }
+        let allSecondaryCardsIdentifiers = legendComponent.secondary
+        let allIdentifiersOnBoard = getAllCardsIdentifiersOnBoard()
+        for secondaryCardIdentifier in allSecondaryCardsIdentifiers {
+            if !allIdentifiersOnBoard.contains(secondaryCardIdentifier) {
+                return secondaryCardIdentifier
+            }
+        }
+        return nil
+    }
+
+    func getAllCardsIdentifiersOnBoard() -> [Int] {
+        let identifiers: [Int] = self.cards.compactMap { card in
+            guard let cardInfo = card.component(ofType: CardInfoComponent.self) else { return nil }
+            return cardInfo.identifier
+        }
+        return identifiers
+    }
+
+    func removeCardsOfDeck(identifier: Int) {
+        self.deck.removeAll { card in
+            if let cardInfoComponent = card.component(ofType: CardInfoComponent.self) {
+                let cardIdentifier = cardInfoComponent.identifier
+                return cardIdentifier == identifier
+            }
+            return false
         }
     }
 }
