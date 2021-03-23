@@ -133,7 +133,7 @@ class BoardManagerTests: XCTestCase {
         result = boardManager.drawCards(amount: 3)
         XCTAssertEqual(result, [card7, card6, card5])
     }
-    
+
     func test_position_calculate() {
         boardManager.clear(wrongCards: boardManager.cards)
         boardManager.maxCardsBoard = 2
@@ -143,7 +143,8 @@ class BoardManagerTests: XCTestCase {
         let firstCardPosition = boardManager.calcBoardNewCardPosition()
         boardManager.add(Card(identifier: 0, assetName: ""))
         let calculatedSecondCardPosition = boardManager.calcBoardNewCardPosition()
-        let trueSecondCardPosition = CGPoint(x: boardManager.startPoint.x, y: boardManager.startPoint.y - (CGFloat(15) + boardManager.cardHeight))
+        let trueSecondCardPosition = CGPoint(x: boardManager.startPoint.x,
+                                             y: boardManager.startPoint.y - (CGFloat(15) + boardManager.cardHeight))
 
         XCTAssertEqual(CGPoint(x: 10, y: 1000), firstCardPosition)
         XCTAssertEqual(trueSecondCardPosition, calculatedSecondCardPosition)
