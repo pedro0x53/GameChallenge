@@ -21,6 +21,14 @@ class StatusManager {
     }
     
     func wrong(){
-        //Chamar a função take damage do gameplay manager
+        gameplayManager.takeDamage() //Ver isso com o grupo depois, talvez fosse interessante deixar o statusManager cuidar do dano.
+        //lifeItem.removeOne()
     }
+    
+    func reveal(){
+        gameplayManager.revealCard()
+        revealItem.removeOne()
+    }
+    
+    
 }
