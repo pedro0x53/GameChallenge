@@ -65,25 +65,15 @@ class BoardManager {
         }
     }
 
-    func drawCards(amount: Int) -> [Card] {
-        var returnedCards: [Card] = []
-        if self.deck.count < amount {
-            return []
-        }
-        for _ in 0..<amount {
-            let lastCard = addCardToDownDeck(self.deck.last!)
-            returnedCards.append(lastCard)
-        }
-        return returnedCards
+    func drawCards(cards: [Card]) -> [Card] {
+        self.deck.insert(contentsOf: cards.reversed(), at: 0)
+        let returnedCards = self.deck[self.deck.count-4...self.deck.count-1]
+        self.deck.removeLast(4)
+        return [Card](returnedCards)
     }
 
-    func addCardToDownDeck(_ card: Card) -> Card {
-        var tempDeck: [Card] = []
-        tempDeck.append(card)
-        let card = self.deck.removeLast()
-        tempDeck.append(contentsOf: self.deck)
-        self.deck = tempDeck
-        return card
+    func removeFirstCardOfDeck() -> Card {
+        return self.deck.remove(at: self.deck.count - 1)
     }
 
     func shuffleDeck() {
