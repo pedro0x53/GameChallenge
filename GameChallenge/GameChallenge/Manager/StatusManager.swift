@@ -13,10 +13,10 @@ class StatusManager {
     var lifeItem: StatusItem
     
     init(manager: GameplayManager) {
-        //iniciar com 3 vidas e 2 reveals
+        //Iniciar o statusitem com 3 vidas e 2 reveals
     }
     
     func wrong(){
-        //reduzir vida
+        //Chamar a função take damage do gameplay manager
     }
 }

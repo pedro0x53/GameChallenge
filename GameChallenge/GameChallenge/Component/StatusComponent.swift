@@ -6,7 +6,7 @@
 //
 
 import GameplayKit
-import  SpriteKit
+import SpriteKit
 
 class StatusComponent: GKComponent {
     private(set) var value: Int
