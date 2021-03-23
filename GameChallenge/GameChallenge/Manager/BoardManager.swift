@@ -26,6 +26,8 @@ class BoardManager {
     var spaceBetweenCards = CGFloat()
     var cardHeight = CGFloat()
     var boardCardSize = CGSize()
+    private let goldPontuation = 16
+    private let silverPontuation = 13
 
     init(manager: GameplayManager, legend: Legend) {
         gamePlayManager = manager
@@ -96,10 +98,10 @@ class BoardManager {
             return
         }
         let pontuation = pontuationAndWrongCard.0
-        if pontuation>=16 {
+        if pontuation>=goldPontuation {
             executeActionFrom(submition: .gold)
             return
-        } else if pontuation>=13 {
+        } else if pontuation>=silverPontuation {
             executeActionFrom(submition: .silver)
             return
         } else {
