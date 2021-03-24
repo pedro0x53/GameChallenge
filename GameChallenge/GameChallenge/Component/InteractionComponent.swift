@@ -15,7 +15,7 @@ class InteractionComponent: GKComponent {
     private var touchEndedAction: ((GKEntity, CGPoint) -> Void)?
     private var touchMovedAction: ((GKEntity, CGPoint) -> Void)?
 
-    init(hitBox: CGSize, position: CGPoint,
+    init(hitBox: CGSize,
          touchBeganAction: ((GKEntity, CGPoint) -> Void)? = nil,
          touchEndedAction: ((GKEntity, CGPoint) -> Void)? = nil,
          touchMovedAction: ((GKEntity, CGPoint) -> Void)? = nil) {
@@ -26,7 +26,7 @@ class InteractionComponent: GKComponent {
 
         super.init()
 
-        self.node = InteractionNode(size: hitBox, position: position,
+        self.node = InteractionNode(size: hitBox,
                                     touchBeganAction: self.touchBegan,
                                     touchEndedAction: self.touchEnded,
                                     touchMovedAction: self.touchMoved)

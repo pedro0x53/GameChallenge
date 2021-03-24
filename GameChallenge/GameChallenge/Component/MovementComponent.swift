@@ -19,7 +19,10 @@ class MovementComponent: GKComponent {
         let targetEntity = followComponent.target
         guard let targetSprite = targetEntity.component(ofType: SpriteComponent.self) else { return }
 
-        let moveTo = targetSprite.node.position - (spriteComponent.origin / 10)
+        let moveToX = targetSprite.node.position.x + spriteComponent.origin.x / 10
+        let moveToY = targetSprite.node.position.y
+
+        let moveTo = CGPoint(x: moveToX, y: moveToY)
 
         spriteComponent.node.run(
             SKAction.move(to: moveTo, duration: 0.3)
