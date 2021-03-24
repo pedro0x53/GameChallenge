@@ -9,11 +9,10 @@ import GameplayKit
 
 //Classe para construir os StatusItems, aka Vida e Reveals.
 class StatusItem: GKEntity {
-    init(statusValue: Int, statusType: Int) {
+    init(statusType: String, statusValue: Int) {
         super.init()
-        self.addComponent(StatusComponent(icon: "Coracao", value: 3, size: CGSize(width: 50, height: 40)))
-        
-        
+        self.addComponent(StatusComponent(icon: "Coracao", value: 3, size: CGSize(width: 30, height: 30)))
+
     }
 
     required init?(coder: NSCoder) {
