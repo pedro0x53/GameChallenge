@@ -9,25 +9,15 @@ import GameplayKit
 
 //Classe para construir os StatusItems, aka Vida e Reveals.
 class StatusItem: GKEntity {
-    var statusValue: Int
-    var statusType: Int
-    //statusType 0 para Vida, e 1 para Reveals. Vai ser usado pra representação adequada na tela.
-    
     init(statusValue: Int, statusType: Int) {
-        self.statusValue = statusValue
-        self.statusType = statusType
         super.init()
+        self.addComponent(StatusComponent(icon: "Coracao", value: 3, size: CGSize(width: 50, height: 40)))
+        
+        
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func addOne(){
-        statusValue+=1
-    }
-    
-    func removeOne(){
-        statusValue-=1
-    }
+
 }

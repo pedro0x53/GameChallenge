@@ -12,23 +12,15 @@ class StatusManager {
     let gameplayManager: GameplayManager
     var lifeItem: StatusItem
     var revealItem: StatusItem
-    
+
     init(manager: GameplayManager) {
         gameplayManager = manager // Define o gameplayManager como o recebido no init.
-        lifeItem = StatusItem(statusValue: 3, statusType:0) // Inicializa um status de Vida com valor 3.
-        revealItem = StatusItem(statusValue: 2, statusType:1) // Inicializa um status de Revelar com valor 2.
+        lifeItem = StatusItem(statusValue: 3, statusType: 0) // Inicializa um status de Vida com valor 3.
+        revealItem = StatusItem(statusValue: 2, statusType: 1) // Inicializa um status de Revelar com valor 2.
         return
     }
-    
-    func wrong(){
-        gameplayManager.takeDamage() //Ver isso com o grupo depois, talvez fosse interessante deixar o statusManager cuidar do dano.
-        //lifeItem.removeOne()
-    }
-    
-    func reveal(){
-        gameplayManager.revealCard()
-        revealItem.removeOne()
-    }
-    
-    
+
+    //As funções abaixo apenas diminuem um da vida ou revelar quando se recebe dano/revela.
+
+
 }
