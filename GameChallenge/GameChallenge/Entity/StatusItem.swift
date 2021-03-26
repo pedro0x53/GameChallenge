@@ -11,7 +11,7 @@ import GameplayKit
 class StatusItem: GKEntity {
     init(statusType: String, statusValue: Int) {
         super.init()
-        self.addComponent(StatusComponent(icon: "Coracao", value: 3, size: CGSize(width: 30, height: 30)))
+        self.addComponent(StatusComponent(icon: statusType, value: statusValue, size: CGSize(width: 30, height: 30)))
 
     }
 

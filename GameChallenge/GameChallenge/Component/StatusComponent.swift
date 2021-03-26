@@ -16,6 +16,7 @@ class StatusComponent: GKComponent {
     init(icon: String, value: Int, size: CGSize) {
         self.value = value
         self.node = StatusNode(icon: icon, label: String(value), size: size)
+        
         super.init()
     }
 
