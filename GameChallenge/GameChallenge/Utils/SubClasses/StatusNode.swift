@@ -26,14 +26,15 @@ class StatusNode: SKNode {
     }
 
     private func setupLayout() {
-        label.position.x = -scene!.size.width / 2  + 30
-        label.position.y = scene!.size.height / 2 - 30
+        //icon.position.x = -scene!.size.width / 2  + 30
+        icon.position.y = self.scene!.size.height / 2 - 30
+        icon.position.x = 100
+        //icon.position.y = -100
+        label.position.x = icon.position.x + icon.size.width+4
+        label.position.y = icon.position.y - icon.size.height/2+4
+
         self.addChild(label)
         self.addChild(icon)
-       
-        //Fazer o ajuste aqui da label e icon pra colocar os 2 na pos. correta
-        
-        
     }
 
     func setLabelText(to text: String) {

@@ -27,6 +27,11 @@ class GameplayManager {
         if let spriteComponent = entity.component(ofType: SpriteComponent.self) {
             self.scene.addChild(spriteComponent.node)
         }
+        
+        if let statusComponent = entity.component(ofType: StatusComponent.self) {
+                self.scene.removeChildren(in: [statusComponent.node])
+                self.scene.addChild(statusComponent.node)
+        }
     }
 
     func remove(entity: GKEntity) {

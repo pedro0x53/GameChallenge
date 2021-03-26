@@ -12,7 +12,6 @@ class StatusItem: GKEntity {
     init(statusType: String, statusValue: Int) {
         super.init()
         self.addComponent(StatusComponent(icon: statusType, value: statusValue, size: CGSize(width: 30, height: 30)))
-
     }
 
     required init?(coder: NSCoder) {
