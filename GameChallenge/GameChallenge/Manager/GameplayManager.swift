@@ -82,15 +82,7 @@ class GameplayManager {
 
     func isOverLegend(point: CGPoint) -> Bool {
         guard let spriteComponent = self.legend.component(ofType: SpriteComponent.self) else { return false }
-
-        let halfWidth = spriteComponent.node.size.width / 2
-        let halfHeight = spriteComponent.node.size.height / 2
-
-        if  (point.x < halfWidth || point.x > -halfWidth) &&
-            (point.y < halfHeight || point.x > -halfHeight) {
-            return true
-        }
-        return false
+        return spriteComponent.node.frame.contains(point)
     }
 
     func drawCards(_ point: CGPoint = CGPoint(x: 0, y: 0)) {
