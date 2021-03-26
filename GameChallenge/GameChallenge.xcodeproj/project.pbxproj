@@ -13,6 +13,7 @@
 		0061562225FF991600605341 /* GameData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0061562025FF991600605341 /* GameData.xcdatamodeld */; };
 		0061562825FF9FF800605341 /* RepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061562725FF9FF800605341 /* RepositoryProtocol.swift */; };
 		27920337260B8576007E8A64 /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27920336260B8576007E8A64 /* MainMenuScene.swift */; };
+		27F6FBD8260E2BA400BE2726 /* background_jogo2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 27F6FBD7260E2BA400BE2726 /* background_jogo2.mp3 */; };
 		FE5AE4D025FB8FFB006D4B85 /* InteractionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5AE4CF25FB8FFB006D4B85 /* InteractionNode.swift */; };
 		FE5AE4DE25FB9746006D4B85 /* StatusNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5AE4DD25FB9746006D4B85 /* StatusNode.swift */; };
 		FE5AE4F425FBB0FB006D4B85 /* FollowComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5AE4F325FBB0FB006D4B85 /* FollowComponent.swift */; };
@@ -58,6 +59,7 @@
 		0061562125FF991600605341 /* GameData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GameData.xcdatamodel; sourceTree = "<group>"; };
 		0061562725FF9FF800605341 /* RepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryProtocol.swift; sourceTree = "<group>"; };
 		27920336260B8576007E8A64 /* MainMenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
+		27F6FBD7260E2BA400BE2726 /* background_jogo2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background_jogo2.mp3; sourceTree = "<group>"; };
 		FE5AE4CF25FB8FFB006D4B85 /* InteractionNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionNode.swift; sourceTree = "<group>"; };
 		FE5AE4DD25FB9746006D4B85 /* StatusNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusNode.swift; sourceTree = "<group>"; };
 		FE5AE4F325FBB0FB006D4B85 /* FollowComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowComponent.swift; sourceTree = "<group>"; };
@@ -127,6 +129,14 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		27F6FBD6260E2B7900BE2726 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				27F6FBD7260E2BA400BE2726 /* background_jogo2.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		FE5AE4CD25FB8FD2006D4B85 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +178,7 @@
 		FEADEEC925FA3ED800D5A92A /* GameChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				27F6FBD6260E2B7900BE2726 /* Sounds */,
 				0061561725FF946B00605341 /* Model */,
 				FE5AE4CD25FB8FD2006D4B85 /* Utils */,
 				FEADEF0F25FA419900D5A92A /* Entity */,
@@ -347,6 +358,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27F6FBD8260E2BA400BE2726 /* background_jogo2.mp3 in Resources */,
 				FEADEED625FA3ED800D5A92A /* Main.storyboard in Resources */,
 				FEADEED825FA3EDA00D5A92A /* Assets.xcassets in Resources */,
 			);

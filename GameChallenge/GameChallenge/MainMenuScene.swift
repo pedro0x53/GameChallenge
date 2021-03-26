@@ -7,7 +7,7 @@
 
 import SpriteKit
 import Foundation
-import UIKit
+import AVKit
 
 class MainMenuScene: SKScene {
 
@@ -15,7 +15,11 @@ class MainMenuScene: SKScene {
     let soundGameButton: SKSpriteNode = SKSpriteNode(color: .red, size: CGSize(width: 44, height: 44))
     let gameNameImage = SKSpriteNode(color: .cyan, size: CGSize(width: 200, height: 100))
     lazy var backgroundImage: SKSpriteNode = SKSpriteNode(color: .brown, size: view!.bounds.size)
+    var soundPlayer: AVAudioPlayer?
+    var backAudioActive: Bool = true
+
     override func didMove(to view: SKView) {
+        addBackgroundSound()
         addChild(backgroundImage)
         addGameNameImage()
         addStartButton()
@@ -47,6 +51,9 @@ class MainMenuScene: SKScene {
             if element == "start-button" {
                 goToGameScene()
             }
+            if element == "sound-button" {
+                self.toggleStateOfSound()
+            }
         }
     }
 
@@ -77,5 +84,27 @@ class MainMenuScene: SKScene {
             bottomPadding = window.safeAreaInsets.bottom
         }
         return (bottomPadding, topPadding)
+    }
+    
+    func toggleStateOfSound() {
+        backAudioActive = !backAudioActive
+        if(backAudioActive) {
+            soundGameButton.color = .red
+            soundPlayer?.play()
+        }else {
+            soundGameButton.color = .darkGray
+            soundPlayer?.pause()
+        }
+    }
+
+    func addBackgroundSound() {
+        let url = Bundle.main.url(forResource: "background_jogo2", withExtension: "mp3")!
+
+        do {
+            try soundPlayer = AVAudioPlayer(contentsOf: url)
+            soundPlayer?.play()
+        } catch {
+            return
+        }
     }
 }
