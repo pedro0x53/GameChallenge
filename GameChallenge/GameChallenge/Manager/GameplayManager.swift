@@ -14,35 +14,59 @@ class GameplayManager {
     private var entities = Set<GKEntity>()
 
     // let statusManager: StatusManager
-    var boardManager: BoardManager!
-    var handManager: HandManager!
+    private(set) var boardManager: BoardManager!
+    private(set) var handManager: HandManager!
 
     let moveSystem = GKComponentSystem(componentClass: MovementComponent.self)
+
+    private let legend = Legend()
+    private let legendSize = CGSize(width: 276, height: 382)
+
+    private let responsiver = Responsiver(designSize: CGSize(width: 390, height: 844))
 
     init(scene: SKScene) {
         self.scene = scene
 
-        let legend = Legend()
-        legend.addComponent(LegendComponent(primary: [1, 2, 3, 4], secondary: [3, 4, 5, 6]))
+        setupLegend()
+
+        self.boardManager = BoardManager(manager: self, legend: legend)
 
         self.handManager = HandManager(manager: self)
-        self.boardManager = BoardManager(manager: self, legend: legend)
+        self.drawCards()
+    }
+
+    func setupLegend() {
+        let size = self.responsiver.responsiveSize(for: self.legendSize)
+
+        let positionX: CGFloat = 0
+        let positionY: CGFloat = (self.scene.size.height / 2) - (size.height / 2) - 90
+        legend.addComponent(SpriteComponent(assetName: "hand-card",
+                                            size: size,
+                                            position: CGPoint(x: positionX, y: positionY),
+                                            rotation: 0,
+                                            zPosition: 0))
+        legend.addComponent(LegendComponent(primary: [1, 2, 3, 4], secondary: [3, 4, 5, 6]))
+        self.add(entity: legend)
     }
 
     func add(entity: GKEntity) {
         self.entities.insert(entity)
 
         if let spriteComponent = entity.component(ofType: SpriteComponent.self) {
+            self.scene.removeChildren(in: [spriteComponent.node])
             self.scene.addChild(spriteComponent.node)
         }
 
         if let interactionComponent = entity.component(ofType: InteractionComponent.self) {
+            self.scene.removeChildren(in: [interactionComponent.node])
             self.scene.addChild(interactionComponent.node)
         }
     }
 
     func remove(entity: GKEntity) {
         self.entities.remove(entity)
+
+        self.moveSystem.removeComponent(foundIn: entity)
 
         var toRemove: [SKNode] = []
         if let spriteComponent = entity.component(ofType: SpriteComponent.self) {
@@ -56,16 +80,23 @@ class GameplayManager {
         self.scene.removeChildren(in: toRemove)
     }
 
-    func drawCards(_ point: CGPoint) {
+    func isOverLegend(point: CGPoint) -> Bool {
+        guard let spriteComponent = self.legend.component(ofType: SpriteComponent.self) else { return false }
+        return spriteComponent.node.frame.contains(point)
+    }
+
+    func drawCards(_ point: CGPoint = CGPoint(x: 0, y: 0)) {
         let cardsOnHand = self.handManager.cards
-        self.handManager.cards = self.boardManager.drawCards(cards: cardsOnHand)
-        handManager.render()
+        let newCards = self.boardManager.drawCards(cards: cardsOnHand)
+        self.handManager.add(newCards)
     }
 
     func putCardsOnTheTable(cards: [Card]) {
-        let selectedCards = self.handManager.selectedCards
-        for card in selectedCards {
-            if !self.boardManager.add(card) {
+        for card in cards {
+            AnimationManager.zFall(entity: card)
+            if self.boardManager.add(card) {
+                self.handManager.remove(card)
+            } else {
                 self.handManager.backToHand(card)
             }
         }

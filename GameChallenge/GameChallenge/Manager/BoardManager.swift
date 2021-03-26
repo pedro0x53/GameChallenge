@@ -41,7 +41,7 @@ class BoardManager {
     // de outro Manager
     func tempGenerateCards(num: Int) {
         for index in 0..<num {
-            let card = Card(identifier: index, assetName: "")
+            let card = Card(identifier: index, assetName: "hand-card")
             self.deck.append(card)
         }
     }
@@ -53,8 +53,11 @@ class BoardManager {
         guard let cardInfoComponent = card.component(ofType: CardInfoComponent.self) else { return false }
         card.addComponent(SpriteComponent(assetName: cardInfoComponent.assetName,
                                                   size: boardCardSize,
-                                                  position: calcBoardNewCardPosition()))
+                                                  position: calcBoardNewCardPosition(),
+                                                  rotation: 0,
+                                                  zPosition: 0))
         self.gamePlayManager.add(entity: card)
+        print(self.cards)
         return true
     }
 

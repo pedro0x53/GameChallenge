@@ -13,7 +13,7 @@ class InteractionNode: SKSpriteNode {
     var touchEndedAction: ((CGPoint) -> Void)?
     var touchMovedAction: ((CGPoint) -> Void)?
 
-    init(size: CGSize, position: CGPoint,
+    init(size: CGSize,
          touchBeganAction: ((CGPoint) -> Void)? = nil,
          touchEndedAction: ((CGPoint) -> Void)? = nil,
          touchMovedAction: ((CGPoint) -> Void)? = nil) {
@@ -21,7 +21,6 @@ class InteractionNode: SKSpriteNode {
         super.init(texture: nil, color: .clear, size: size)
 
         self.isUserInteractionEnabled = true
-        self.position = position
 
         self.touchBeganAction = touchBeganAction
         self.touchEndedAction = touchEndedAction

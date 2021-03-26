@@ -11,7 +11,8 @@ import GameplayKit
 class HandManager {
     private let gameplayManager: GameplayManager
 
-    var cards: [Card] = []
+    private(set) var cards: [Card] = []
+
     private(set) var selectedCards: [Card] = []
 
     private var isMoving: Bool = false
@@ -24,14 +25,13 @@ class HandManager {
         self.gameplayManager = manager
     }
 
-    func add(_ card: Card) {
-        if self.cards.count < 4 && !cards.contains(card) {
-            self.cards.append(card)
-        }
-    }
+    func add(_ cards: [Card]) {
+        self.cards = []
+        for card in cards where self.cards.count < 4 {
+            let index = self.cards.count
 
-    func render() {
-        for (index, card) in cards.enumerated() {
+            self.cards.append(card)
+
             guard let cardComponent = card.component(ofType: CardInfoComponent.self) else { return }
 
             let currentCardSize = responsiver.responsiveSize(for: self.cardSize)
@@ -41,29 +41,42 @@ class HandManager {
 
             let spriteComponent = SpriteComponent(assetName: cardComponent.assetName,
                                                   size: currentCardSize,
-                                                  position: position)
-            spriteComponent.node.zRotation = rotation
-            spriteComponent.node.zPosition = CGFloat(index + 10)
+                                                  position: position,
+                                                  rotation: rotation,
+                                                  zPosition: CGFloat(index + 10))
+            spriteComponent.node.isHidden = true
 
             card.addComponent(spriteComponent)
 
             let interactionComponent = InteractionComponent(hitBox: currentCardSize,
-                                                            position: position,
                                                             touchEndedAction: self.dropAction,
                                                             touchMovedAction: self.dragAction)
-            interactionComponent.node.zRotation = rotation
+
+            interactionComponent.node.position = position
             interactionComponent.node.zPosition = CGFloat(index + 11)
+            interactionComponent.node.zRotation = rotation
+            interactionComponent.node.isHidden = true
             card.addComponent(interactionComponent)
 
             gameplayManager.add(entity: card)
         }
+        self.render()
+    }
+
+    func render() {
+        for card in cards {
+            if let spriteComponent = card.component(ofType: SpriteComponent.self),
+               let interactionComponent = card.component(ofType: InteractionComponent.self) {
+                spriteComponent.node.isHidden = false
+                interactionComponent.node.isHidden = false
+            }
+        }
     }
 
     func remove(_ card: Card) {
-        guard let index = self.selectedCards.firstIndex(of: card) else { return }
-        card.removeComponent(ofType: SpriteComponent.self)
-        card.removeComponent(ofType: InteractionComponent.self)
+        guard let index = self.cards.firstIndex(of: card) else { return }
         self.cards.remove(at: index)
+        self.gameplayManager.remove(entity: card)
     }
 
     func select(_ card: Card) {
@@ -82,20 +95,18 @@ class HandManager {
     }
 
     func dragAction(entity: GKEntity, point: CGPoint) {
-        guard let card = entity as? Card,
-              let spriteComponent = card.component(ofType: SpriteComponent.self),
-              let interactionComponent = card.component(ofType: InteractionComponent.self) else { return }
+        guard let card = entity as? Card else { return }
 
-        interactionComponent.node.run(
-            SKAction.move(to: point, duration: 0)
-        )
-
-        spriteComponent.node.run(
-            SKAction.move(to: point, duration: 0)
-        )
+        AnimationManager.goTo(point: point, entity: card)
 
         if !isMoving {
             isMoving = true
+
+            guard let spritecomponent = card.component(ofType: SpriteComponent.self),
+                  let interactionComponent = card.component(ofType: InteractionComponent.self) else { return }
+
+            spritecomponent.node.zPosition = 99
+            interactionComponent.node.zPosition = 100
 
             card.removeComponent(ofType: FollowComponent.self)
             card.removeComponent(ofType: MovementComponent.self)
@@ -122,6 +133,9 @@ class HandManager {
         let deltaPoint = spriteComponent.node.position - spriteComponent.origin
         if deltaPoint < 0.1 {
             self.toggleSelection(card)
+        } else if self.gameplayManager.isOverLegend(point: point) {
+            gameplayManager.putCardsOnTheTable(cards: self.selectedCards)
+            self.selectedCards = []
         } else {
             self.backToOrigin()
         }
@@ -133,47 +147,21 @@ class HandManager {
         card.removeComponent(ofType: FollowComponent.self)
         card.removeComponent(ofType: MovementComponent.self)
 
-        guard let spriteComponent = card.component(ofType: SpriteComponent.self),
-              let interactionComponent = card.component(ofType: InteractionComponent.self) else { return }
-
-        interactionComponent.node.run(
-            SKAction.move(to: spriteComponent.origin, duration: 0.3)
-        )
-
-        spriteComponent.node.run(
-            SKAction.move(to: spriteComponent.origin, duration: 0.3)
-        )
+        AnimationManager.backToOrigin(card)
     }
 
-    // Temporary functions
-    // Back to initial point animation
     private func backToOrigin() {
         for selectedCard in selectedCards {
-            gameplayManager.moveSystem.removeComponent(foundIn: selectedCard)
-
-            selectedCard.removeComponent(ofType: FollowComponent.self)
-            selectedCard.removeComponent(ofType: MovementComponent.self)
-
-            guard let spriteComponent = selectedCard.component(ofType: SpriteComponent.self),
-                  let interactionComponent = selectedCard.component(ofType: InteractionComponent.self) else { return }
-
-            interactionComponent.node.run(
-                SKAction.move(to: spriteComponent.origin, duration: 0.3)
-            )
-
-            spriteComponent.node.run(
-                SKAction.move(to: spriteComponent.origin, duration: 0.3)
-            )
+            self.backToHand(selectedCard)
         }
     }
 
-    // Get initial point
     private func position(at index: Int) -> CGPoint {
         let sceneSize = self.gameplayManager.scene.size
-        let currentCardSize = responsiver.responsiveSize(for: CGSize(width: 100, height: 140))
+        let currentCardSize = responsiver.responsiveSize(for: self.cardSize)
 
-        var positionX: CGFloat = currentCardSize.width * 1.5 - 44
-        var positionY: CGFloat = (-sceneSize.height / 2) + 30 + currentCardSize.height
+        var positionX: CGFloat = currentCardSize.width * 1.5 - 33
+        var positionY: CGFloat = (-sceneSize.height / 2) + 20 + currentCardSize.height
 
         if index == 0 {
             positionX *= -1
