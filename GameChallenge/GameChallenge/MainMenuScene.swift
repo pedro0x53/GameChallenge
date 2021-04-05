@@ -85,13 +85,13 @@ class MainMenuScene: SKScene {
         }
         return (bottomPadding, topPadding)
     }
-    
+
     func toggleStateOfSound() {
         backAudioActive = !backAudioActive
-        if(backAudioActive) {
+        if backAudioActive {
             soundGameButton.color = .red
             soundPlayer?.play()
-        }else {
+        } else {
             soundGameButton.color = .darkGray
             soundPlayer?.pause()
         }
