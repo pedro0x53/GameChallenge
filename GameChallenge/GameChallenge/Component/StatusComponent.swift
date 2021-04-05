@@ -16,7 +16,7 @@ class StatusComponent: GKComponent {
     init(icon: String, value: Int, size: CGSize) {
         self.value = value
         self.node = StatusNode(icon: icon, label: String(value), size: size)
-        
+        //node.position.x = scene.size.width-50
         super.init()
     }
 

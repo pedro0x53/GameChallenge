@@ -11,14 +11,22 @@ import SpriteKit
 class GameplayManager {
 
     private var entities = Set<GKEntity>()
-    private let scene: SKScene
+    let scene: SKScene
 
-    // let statusManager: StatusManager
+    
+   // private let statusManager = StatusManager()
     // let tableManager: TableManager
     // let handManager: HandManager
+    
+    private let itemTeste = StatusItem(statusType: "Life", statusValue: 2)
 
     init(scene: SKScene) {
         self.scene = scene
+
+        self.add(entity: itemTeste)
+        
+        //isso ta errado corrigeee
+        let statusManager = StatusManager(manager: self)
     }
 
     func add(entity: GKEntity) {
@@ -48,7 +56,9 @@ class GameplayManager {
 
     func revealCard() {}
 
-    func takeDamage() {}
+    func takeDamage() {
+        
+    }
 
     func nextLevel() {}
 
