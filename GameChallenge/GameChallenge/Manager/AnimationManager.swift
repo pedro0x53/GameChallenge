@@ -37,9 +37,8 @@ class AnimationManager {
 
     public static func zFall(entity: GKEntity, delay: CGFloat = 0) {
         guard let spriteComponent = entity.component(ofType: SpriteComponent.self) else { return }
-        
+
         let fade = SKAction.fadeOut(withDuration: 0.3)
-//            let rotate = SKAction.rotate(toAngle: 2 * radian, duration: 0.6)
         let shrink = SKAction.scale(to: 0, duration: 0.6)
 
         spriteComponent.node.run(SKAction.sequence([

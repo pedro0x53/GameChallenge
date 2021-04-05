@@ -19,10 +19,32 @@ class HandManager {
 
     private let responsiver = Responsiver(designSize: CGSize(width: 390, height: 844))
 
-    private let cardSize = CGSize(width: 100, height: 140)
+    private var cardSize = CGSize(width: 110, height: 154) {
+        didSet {
+            self.cardSize = responsiver.responsiveSize(for: self.cardSize)
+        }
+    }
 
     init(manager: GameplayManager) {
         self.gameplayManager = manager
+        setupButtons()
+    }
+
+    func setupButtons() {
+        let buttonSize = responsiver.responsiveSize(for: CGSize(width: 90, height: 60))
+        let positionY = self.position(at: 1).y + self.cardSize.height + 20
+
+        let revealButton = ButtonNode(size: buttonSize)
+        revealButton.setAction(for: .touchEnded, action: self.gameplayManager.revealCard)
+        revealButton.position = CGPoint(x: -buttonSize.width / 2 - 20, y: positionY)
+        revealButton.color = .lightGray
+        self.gameplayManager.scene.addChild(revealButton)
+
+        let drawButton = ButtonNode(size: buttonSize)
+        drawButton.setAction(for: .touchEnded, action: self.gameplayManager.drawCards)
+        drawButton.position = CGPoint(x: buttonSize.width / 2 + 20, y: positionY)
+        drawButton.color = .lightGray
+        self.gameplayManager.scene.addChild(drawButton)
     }
 
     func add(_ cards: [Card]) {
@@ -158,10 +180,9 @@ class HandManager {
 
     private func position(at index: Int) -> CGPoint {
         let sceneSize = self.gameplayManager.scene.size
-        let currentCardSize = responsiver.responsiveSize(for: self.cardSize)
 
-        var positionX: CGFloat = currentCardSize.width * 1.5 - 33
-        var positionY: CGFloat = (-sceneSize.height / 2) + 20 + currentCardSize.height
+        var positionX: CGFloat = cardSize.width * 1.5 - 33
+        var positionY: CGFloat = (-sceneSize.height + cardSize.height) / 2 + 40
 
         if index == 0 {
             positionX *= -1
@@ -170,7 +191,7 @@ class HandManager {
         if index == 1 || index == 2 {
             positionY += 4
 
-            positionX = currentCardSize.width / 2 - 11
+            positionX = cardSize.width / 2 - 11
 
             if index == 1 {
                 positionX *= -1
