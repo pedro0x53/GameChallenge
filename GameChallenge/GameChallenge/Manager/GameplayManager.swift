@@ -13,11 +13,11 @@ class GameplayManager {
     private var entities = Set<GKEntity>()
     let scene: SKScene
 
-    
+
    // private let statusManager = StatusManager()
     // let tableManager: TableManager
     // let handManager: HandManager
-    
+
     private let itemTeste = StatusItem(statusType: "Life", statusValue: 2)
 
     init(scene: SKScene) {
@@ -31,7 +31,7 @@ class GameplayManager {
         if let spriteComponent = entity.component(ofType: SpriteComponent.self) {
             self.scene.addChild(spriteComponent.node)
         }
-        
+
         if let statusComponent = entity.component(ofType: StatusComponent.self) {
                 self.scene.removeChildren(in: [statusComponent.node])
                 self.scene.addChild(statusComponent.node)

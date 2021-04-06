@@ -22,11 +22,15 @@ class StatusManager {
     }
     
     func setupStatusItems(){
-//        lifeItem.component(ofType: StatusComponent.self)?.node.position.x = gameplayManager.scene.size.width/2-100
-        lifeItem.component(ofType: StatusComponent.self)?.node.self.position.x = -50
-        //lifeItem.component(ofType: StatusComponent.self)?.self.setpos(posX: -50, posY: -50)
+        lifeItem.component(ofType: StatusComponent.self)?.node.position.x = -gameplayManager.scene.size.width/2+30
+        lifeItem.component(ofType: StatusComponent.self)?.node.position.y = gameplayManager.scene.size.height/2-30
+
+        revealItem.component(ofType: StatusComponent.self)?.node.position.x = -30
+        revealItem.component(ofType: StatusComponent.self)?.node.position.y = -30
+        
         gameplayManager.add(entity: lifeItem)
-        //print (lifeItem.component(ofType: StatusComponent.self)?.node.position.x)
+        gameplayManager.add(entity: revealItem)
+        print (lifeItem.component(ofType: StatusComponent.self)?.node.position.x)
         
     }
 }

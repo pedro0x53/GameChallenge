@@ -16,7 +16,6 @@ class StatusComponent: GKComponent {
     init(icon: String, value: Int, size: CGSize) {
         self.value = value
         self.node = StatusNode(icon: icon, label: String(value), size: size)
-        print(self.node.position.x)
         super.init()
     }
 
@@ -32,10 +31,4 @@ class StatusComponent: GKComponent {
         self.node.setLabelText(to: String(value))
             return value
         }
-    
-    func setpos(posX: CGFloat, posY: CGFloat) -> Void{
-        self.node.position.x = posX
-        self.node.position.y = posY
-        
-    }
 }
