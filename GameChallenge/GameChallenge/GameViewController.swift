@@ -15,10 +15,7 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
             // Set the scale mode to scale to fit the window
         let sceneNode = GameScene(size: self.view.frame.size)
-        
-        //Testes meus
         let gameplayManager = GameplayManager(scene: sceneNode)
-        //Fim dos meus testes
 
         sceneNode.scaleMode = .aspectFill
         sceneNode.anchorPoint = CGPoint(x: 0.5, y: 0.5)

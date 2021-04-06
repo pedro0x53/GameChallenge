@@ -20,17 +20,15 @@ class StatusManager {
         setupStatusItems()
         return
     }
-    
-    func setupStatusItems(){
+
+    func setupStatusItems() {
         lifeItem.component(ofType: StatusComponent.self)?.node.position.x = -gameplayManager.scene.size.width/2+30
         lifeItem.component(ofType: StatusComponent.self)?.node.position.y = gameplayManager.scene.size.height/2-30
 
         revealItem.component(ofType: StatusComponent.self)?.node.position.x = -30
         revealItem.component(ofType: StatusComponent.self)?.node.position.y = -30
-        
+
         gameplayManager.add(entity: lifeItem)
         gameplayManager.add(entity: revealItem)
-        print (lifeItem.component(ofType: StatusComponent.self)?.node.position.x)
-        
     }
 }

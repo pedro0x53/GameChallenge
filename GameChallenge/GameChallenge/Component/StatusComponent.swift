@@ -27,7 +27,7 @@ class StatusComponent: GKComponent {
         if self.value > 0 {
             self.value -= 1
         }
-    
+
         self.node.setLabelText(to: String(value))
             return value
         }

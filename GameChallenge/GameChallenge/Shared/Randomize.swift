@@ -29,7 +29,7 @@ class Randomize {
         //var maxNumPos = -1
         for index in 0..<1 {
             let anyConst = 2984023
-            
+
             let num = generateRandomInt(min: 0, max: 100, seed: index+anyConst)
             print(num)
             //numCounts[num] = numCounts[num] + 1

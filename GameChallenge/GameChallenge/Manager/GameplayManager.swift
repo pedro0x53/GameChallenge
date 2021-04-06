@@ -13,7 +13,6 @@ class GameplayManager {
     private var entities = Set<GKEntity>()
     let scene: SKScene
 
-
    // private let statusManager = StatusManager()
     // let tableManager: TableManager
     // let handManager: HandManager
@@ -53,7 +52,7 @@ class GameplayManager {
     func revealCard() {}
 
     func takeDamage() {
-        
+
     }
 
     func nextLevel() {}
