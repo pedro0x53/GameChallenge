@@ -17,14 +17,16 @@ class StatusManager {
         gameplayManager = manager // Define o gameplayManager como o recebido no init.
         lifeItem = StatusItem(statusType: "Life", statusValue: 3) // Inicializa um status de Vida com valor 3.
         revealItem = StatusItem(statusType: "Reveal", statusValue: 2) // Inicializa um status de Revelar com valor 2.
-        print("initou status manager")
         setupStatusItems()
-        //print(scene.size.width)
-        print(gameplayManager.scene.size.width)
         return
     }
     
     func setupStatusItems(){
-        //lifeItem.component(ofType: StatusComponent?).node.position.x = 50
+//        lifeItem.component(ofType: StatusComponent.self)?.node.position.x = gameplayManager.scene.size.width/2-100
+        lifeItem.component(ofType: StatusComponent.self)?.node.self.position.x = -50
+        //lifeItem.component(ofType: StatusComponent.self)?.self.setpos(posX: -50, posY: -50)
+        gameplayManager.add(entity: lifeItem)
+        //print (lifeItem.component(ofType: StatusComponent.self)?.node.position.x)
+        
     }
 }

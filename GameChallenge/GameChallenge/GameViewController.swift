@@ -18,8 +18,6 @@ class GameViewController: UIViewController {
         
         //Testes meus
         let gameplayManager = GameplayManager(scene: sceneNode)
-        //let statMg = StatusManager(manager: gameplayManager)
-        //gameplayManager.add(entity: itemTeste)
         //Fim dos meus testes
 
         sceneNode.scaleMode = .aspectFill

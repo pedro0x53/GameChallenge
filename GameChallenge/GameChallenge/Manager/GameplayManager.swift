@@ -22,10 +22,6 @@ class GameplayManager {
 
     init(scene: SKScene) {
         self.scene = scene
-
-        self.add(entity: itemTeste)
-        
-        //isso ta errado corrigeee
         let statusManager = StatusManager(manager: self)
     }
 
