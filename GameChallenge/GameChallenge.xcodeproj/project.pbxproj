@@ -12,6 +12,7 @@
 		0061561925FF949500605341 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061561825FF949500605341 /* CoreDataStack.swift */; };
 		0061562225FF991600605341 /* GameData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0061562025FF991600605341 /* GameData.xcdatamodeld */; };
 		0061562825FF9FF800605341 /* RepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061562725FF9FF800605341 /* RepositoryProtocol.swift */; };
+		0061566026039A2500605341 /* StatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061565F26039A2500605341 /* StatusManager.swift */; };
 		275F490C2600EE0200EE30A9 /* BoardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275F490B2600EE0200EE30A9 /* BoardManager.swift */; };
 		275F49112600EE3C00EE30A9 /* BoardManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275F49102600EE3C00EE30A9 /* BoardManagerTests.swift */; };
 		FE252AEB261B29DA0049F3A6 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE252AEA261B29DA0049F3A6 /* ButtonNode.swift */; };
@@ -66,6 +67,7 @@
 		0061561825FF949500605341 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		0061562125FF991600605341 /* GameData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GameData.xcdatamodel; sourceTree = "<group>"; };
 		0061562725FF9FF800605341 /* RepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryProtocol.swift; sourceTree = "<group>"; };
+		0061565F26039A2500605341 /* StatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusManager.swift; sourceTree = "<group>"; };
 		275F490B2600EE0200EE30A9 /* BoardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardManager.swift; sourceTree = "<group>"; };
 		275F49102600EE3C00EE30A9 /* BoardManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardManagerTests.swift; sourceTree = "<group>"; };
 		FE252AEA261B29DA0049F3A6 /* ButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				0061560F25FF931E00605341 /* GameplayManager.swift */,
 				FEB450292600EEFA00E5B25C /* HandManager.swift */,
 				275F490B2600EE0200EE30A9 /* BoardManager.swift */,
+				0061565F26039A2500605341 /* StatusManager.swift */,
 				FE46A627260B644C0072339F /* AnimationManager.swift */,
 			);
 			path = Manager;
@@ -444,6 +447,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0061566026039A2500605341 /* StatusManager.swift in Sources */,
 				FE5AE4F925FBB214006D4B85 /* MovementComponent.swift in Sources */,
 				FEADEED125FA3ED800D5A92A /* GameScene.swift in Sources */,
 				FEADEF5525FA49AF00D5A92A /* StatusComponent.swift in Sources */,

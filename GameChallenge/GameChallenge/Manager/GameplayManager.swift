@@ -13,17 +13,20 @@ class GameplayManager {
     let scene: SKScene
     private var entities = Set<GKEntity>()
 
-    // let statusManager: StatusManager
-    var boardManager: BoardManager!
-    var handManager: HandManager!
+    private(set) var statusManager: StatusManager!
+    private(set) var boardManager: BoardManager!
+    private(set) var handManager: HandManager!
 
     let moveSystem = GKComponentSystem(componentClass: MovementComponent.self)
 
     init(scene: SKScene) {
         self.scene = scene
 
+        self.statusManager = StatusManager(manager: self)
+
         let legend = Legend(identifier: 1)
         self.add(entity: legend)
+
         self.boardManager = BoardManager(manager: self, legend: legend)
 
         self.handManager = HandManager(manager: self)
@@ -41,6 +44,11 @@ class GameplayManager {
         if let interactionComponent = entity.component(ofType: InteractionComponent.self) {
             self.scene.removeChildren(in: [interactionComponent.node])
             self.scene.addChild(interactionComponent.node)
+        }
+
+        if let statusComponent = entity.component(ofType: StatusComponent.self) {
+                self.scene.removeChildren(in: [statusComponent.node])
+                self.scene.addChild(statusComponent.node)
         }
     }
 
@@ -88,6 +96,18 @@ class GameplayManager {
         }
     }
 
+    func takeDamage() {
+        if !self.statusManager.update(status: .life) {
+            self.gameOver()
+        }
+    }
+
+    func nextLevel() {}
+
+    func gameOver() {
+        print("Game Over")
+    }
+
     func putCardsOnTheTable(cards: [Card]) {
         for card in cards {
             AnimationManager.zFall(entity: card)
@@ -99,18 +119,14 @@ class GameplayManager {
         }
     }
 
-    func revealCard(_ point: CGPoint = CGPoint(x: 0, y: 0)) {
-        let identifiers: [Int] = self.boardManager.cards.compactMap { card in
-            guard let cardInfo = card.component(ofType: CardInfoComponent.self) else { return nil }
-            return cardInfo.identifier
+    func revealCard(_ point: CGPoint) {
+        if self.statusManager.update(status: .reveal) {
+            let identifiers: [Int] = self.boardManager.cards.compactMap { card in
+                guard let cardInfo = card.component(ofType: CardInfoComponent.self) else { return nil }
+                return cardInfo.identifier
+            }
         }
     }
-
-    func takeDamage() {}
-
-    func nextLevel() {}
-
-    func gameOver() {}
 
     func update(_ deltaTime: CFTimeInterval) {
         moveSystem.update(deltaTime: deltaTime)
