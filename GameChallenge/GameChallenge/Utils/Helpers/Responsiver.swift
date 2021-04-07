@@ -11,7 +11,7 @@ class Responsiver {
 
     let designSize: CGSize
 
-    private let sizeProportion: CGFloat
+    let sizeProportion: CGFloat
 
     init(designSize: CGSize) {
         self.designSize = designSize
@@ -28,12 +28,5 @@ class Responsiver {
         let newHeight = size.height / sizeProportion
 
         return CGSize(width: newWidth, height: newHeight)
-    }
-
-    func responsivePoint(for point: CGPoint) -> CGPoint {
-        let newX = point.x * Responsiver.deviceSize.width / designSize.width
-        let newY = point.y * Responsiver.deviceSize.height / designSize.height
-
-        return CGPoint(x: newX, y: newY)
     }
 }

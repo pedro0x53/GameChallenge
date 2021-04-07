@@ -19,6 +19,8 @@ class StatusNode: SKNode {
         super.init()
 
         setupLayout()
+
+        self.zPosition = 2
     }
 
     required init?(coder aDecoder: NSCoder) {

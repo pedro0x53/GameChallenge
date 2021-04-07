@@ -19,36 +19,18 @@ class GameplayManager {
 
     let moveSystem = GKComponentSystem(componentClass: MovementComponent.self)
 
-    private let legend = Legend()
-    private let legendSize = CGSize(width: 276, height: 382)
-
-    private let responsiver = Responsiver(designSize: CGSize(width: 390, height: 844))
-
     init(scene: SKScene) {
         self.scene = scene
 
-        setupLegend()
-
         self.statusManager = StatusManager(manager: self)
+
+        let legend = Legend(identifier: 1)
+        self.add(entity: legend)
 
         self.boardManager = BoardManager(manager: self, legend: legend)
 
         self.handManager = HandManager(manager: self)
         self.drawCards()
-    }
-
-    func setupLegend() {
-        let size = self.responsiver.responsiveSize(for: self.legendSize)
-
-        let positionX: CGFloat = 0
-        let positionY: CGFloat = (self.scene.size.height / 2) - (size.height / 2) - 90
-        legend.addComponent(SpriteComponent(assetName: "hand-card",
-                                            size: size,
-                                            position: CGPoint(x: positionX, y: positionY),
-                                            rotation: 0,
-                                            zPosition: 0))
-        legend.addComponent(LegendComponent(primary: [1, 2, 3, 4], secondary: [3, 4, 5, 6]))
-        self.add(entity: legend)
     }
 
     func add(entity: GKEntity) {
@@ -88,14 +70,30 @@ class GameplayManager {
     }
 
     func isOverLegend(point: CGPoint) -> Bool {
-        guard let spriteComponent = self.legend.component(ofType: SpriteComponent.self) else { return false }
-        return spriteComponent.node.frame.contains(point)
+        return self.boardManager.isOverLegend(point: point)
     }
 
     func drawCards(_ point: CGPoint = CGPoint(x: 0, y: 0)) {
         let cardsOnHand = self.handManager.cards
+        self.handManager.reset()
+
+        AnimationManager.drawCardsOut(scene: self.scene, entities: cardsOnHand) {
+            for card in cardsOnHand {
+                self.remove(entity: card)
+            }
+        }
+
         let newCards = self.boardManager.drawCards(cards: cardsOnHand)
-        self.handManager.add(newCards)
+
+        for card in newCards {
+            self.handManager.add(card)
+        }
+
+        if cardsOnHand.isEmpty {
+            AnimationManager.drawCardsIn(entities: newCards)
+        } else {
+            AnimationManager.drawCardsIn(entities: newCards, wait: 0.5)
+        }
     }
 
     func takeDamage() {

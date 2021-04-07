@@ -18,14 +18,14 @@ enum SubmitionResult {
 
 class BoardManager {
     let gamePlayManager: GameplayManager
-    let legend: Legend
+    private var legend: Legend
+
     private(set) var cards = Set<Card>()
     var deck: [Card]
     var maxCardsBoard = 4
-    var startPoint: CGPoint = CGPoint()
-    var spaceBetweenCards = CGFloat()
-    var cardHeight = CGFloat()
-    var boardCardSize = CGSize()
+
+    let spaceBetweenCards: CGFloat = 10
+
     private let goldPontuation = 16
     private let silverPontuation = 13
 
@@ -33,8 +33,30 @@ class BoardManager {
         gamePlayManager = manager
         self.legend = legend
         self.deck = []
+
         tempGenerateCards(num: 20)
         shuffleDeck()
+
+        setupLegend()
+    }
+
+    private func setupLegend() {
+        let positionX: CGFloat = -(Sizes.boardCard.width + 10) / 2
+        let positionY: CGFloat = (gamePlayManager.scene.size.height - Sizes.legend.height) / 2 -
+            90 / Sizes.responsiver.sizeProportion
+
+        legend.addComponent(SpriteComponent(assetName: "legend_default",
+                                            size: Sizes.legend,
+                                            position: CGPoint(x: positionX, y: positionY),
+                                            rotation: 0,
+                                            zPosition: 1))
+
+        self.gamePlayManager.add(entity: legend)
+    }
+
+    func isOverLegend(point: CGPoint) -> Bool {
+        guard let spriteComponent = self.legend.component(ofType: SpriteComponent.self) else { return false }
+        return spriteComponent.node.frame.contains(point)
     }
 
     // Funcao temporaria, remover quando as cartas  vierem
@@ -52,18 +74,19 @@ class BoardManager {
         self.cards.insert(card)
         guard let cardInfoComponent = card.component(ofType: CardInfoComponent.self) else { return false }
         card.addComponent(SpriteComponent(assetName: cardInfoComponent.assetName,
-                                                  size: boardCardSize,
-                                                  position: calcBoardNewCardPosition(),
-                                                  rotation: 0,
-                                                  zPosition: 0))
+                                          size: Sizes.boardCard,
+                                          position: calcBoardNewCardPosition(),
+                                          rotation: 0,
+                                          zPosition: 0))
         self.gamePlayManager.add(entity: card)
         print(self.cards)
         return true
     }
 
     func calcBoardNewCardPosition() -> CGPoint {
-        let yPosition = startPoint.y - CGFloat(cards.count) * (spaceBetweenCards + cardHeight)
-        return CGPoint(x: startPoint.x, y: yPosition)
+        let xPosition = Sizes.boardCard.width
+        let yPosition = Sizes.boardCard.height * 1.5 + (CGFloat(cards.count) * (spaceBetweenCards + Sizes.boardCard.height))
+        return CGPoint(x: xPosition, y: yPosition)
     }
 
     func clear(wrongCards: Set<Card>) {

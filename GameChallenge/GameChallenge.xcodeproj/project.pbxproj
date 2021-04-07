@@ -15,12 +15,14 @@
 		0061566026039A2500605341 /* StatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061565F26039A2500605341 /* StatusManager.swift */; };
 		275F490C2600EE0200EE30A9 /* BoardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275F490B2600EE0200EE30A9 /* BoardManager.swift */; };
 		275F49112600EE3C00EE30A9 /* BoardManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275F49102600EE3C00EE30A9 /* BoardManagerTests.swift */; };
+		FE252AEB261B29DA0049F3A6 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE252AEA261B29DA0049F3A6 /* ButtonNode.swift */; };
 		FE46A628260B644C0072339F /* AnimationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE46A627260B644C0072339F /* AnimationManager.swift */; };
 		FE51F7FE2603C1AA00F9C763 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE51F7FD2603C1AA00F9C763 /* Helper.swift */; };
 		FE5AE4D025FB8FFB006D4B85 /* InteractionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5AE4CF25FB8FFB006D4B85 /* InteractionNode.swift */; };
 		FE5AE4DE25FB9746006D4B85 /* StatusNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5AE4DD25FB9746006D4B85 /* StatusNode.swift */; };
 		FE5AE4F425FBB0FB006D4B85 /* FollowComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5AE4F325FBB0FB006D4B85 /* FollowComponent.swift */; };
 		FE5AE4F925FBB214006D4B85 /* MovementComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5AE4F825FBB214006D4B85 /* MovementComponent.swift */; };
+		FE734FD6261C7ACC005FBB98 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE734FD5261C7ACC005FBB98 /* Sizes.swift */; };
 		FEA725FF26024AB600D76F68 /* Responsiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA725FE26024AB600D76F68 /* Responsiver.swift */; };
 		FEADEECB25FA3ED800D5A92A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEECA25FA3ED800D5A92A /* AppDelegate.swift */; };
 		FEADEED125FA3ED800D5A92A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEED025FA3ED800D5A92A /* GameScene.swift */; };
@@ -68,12 +70,14 @@
 		0061565F26039A2500605341 /* StatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusManager.swift; sourceTree = "<group>"; };
 		275F490B2600EE0200EE30A9 /* BoardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardManager.swift; sourceTree = "<group>"; };
 		275F49102600EE3C00EE30A9 /* BoardManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardManagerTests.swift; sourceTree = "<group>"; };
+		FE252AEA261B29DA0049F3A6 /* ButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 		FE46A627260B644C0072339F /* AnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationManager.swift; sourceTree = "<group>"; };
 		FE51F7FD2603C1AA00F9C763 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		FE5AE4CF25FB8FFB006D4B85 /* InteractionNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionNode.swift; sourceTree = "<group>"; };
 		FE5AE4DD25FB9746006D4B85 /* StatusNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusNode.swift; sourceTree = "<group>"; };
 		FE5AE4F325FBB0FB006D4B85 /* FollowComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowComponent.swift; sourceTree = "<group>"; };
 		FE5AE4F825FBB214006D4B85 /* MovementComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementComponent.swift; sourceTree = "<group>"; };
+		FE734FD5261C7ACC005FBB98 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
 		FEA725FE26024AB600D76F68 /* Responsiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responsiver.swift; sourceTree = "<group>"; };
 		FEADEEC725FA3ED800D5A92A /* GameChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEADEECA25FA3ED800D5A92A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -159,6 +163,7 @@
 			children = (
 				FE5AE4CF25FB8FFB006D4B85 /* InteractionNode.swift */,
 				FE5AE4DD25FB9746006D4B85 /* StatusNode.swift */,
+				FE252AEA261B29DA0049F3A6 /* ButtonNode.swift */,
 			);
 			path = SubClasses;
 			sourceTree = "<group>";
@@ -168,6 +173,7 @@
 			children = (
 				FEA725FE26024AB600D76F68 /* Responsiver.swift */,
 				FE51F7FD2603C1AA00F9C763 /* Helper.swift */,
+				FE734FD5261C7ACC005FBB98 /* Sizes.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -459,8 +465,10 @@
 				0061562225FF991600605341 /* GameData.xcdatamodeld in Sources */,
 				0061561025FF931E00605341 /* GameplayManager.swift in Sources */,
 				FE46A628260B644C0072339F /* AnimationManager.swift in Sources */,
+				FE252AEB261B29DA0049F3A6 /* ButtonNode.swift in Sources */,
 				0061560B25FF90FE00605341 /* CardInfoComponent.swift in Sources */,
 				FEADEF3325FA442A00D5A92A /* StatusItem.swift in Sources */,
+				FE734FD6261C7ACC005FBB98 /* Sizes.swift in Sources */,
 				FE5AE4DE25FB9746006D4B85 /* StatusNode.swift in Sources */,
 				FE5AE4D025FB8FFB006D4B85 /* InteractionNode.swift in Sources */,
 				FE5AE4F425FBB0FB006D4B85 /* FollowComponent.swift in Sources */,

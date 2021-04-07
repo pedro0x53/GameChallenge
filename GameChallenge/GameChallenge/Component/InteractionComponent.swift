@@ -26,26 +26,25 @@ class InteractionComponent: GKComponent {
 
         super.init()
 
-        self.node = InteractionNode(size: hitBox,
-                                    touchBeganAction: self.touchBegan,
-                                    touchEndedAction: self.touchEnded,
-                                    touchMovedAction: self.touchMoved)
+        self.node = InteractionNode(size: hitBox)
+        self.node.setAction(for: .touchBegan, action: self.touchBegan)
+        self.node.setAction(for: .touchMoved, action: self.touchMoved)
+        self.node.setAction(for: .touchEnded, action: self.touchEnded)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setAction(touchBeganAction: @escaping (GKEntity, CGPoint) -> Void) {
-        self.touchBeganAction = touchBeganAction
-    }
-
-    func setAction(touchEndedAction: @escaping (GKEntity, CGPoint) -> Void) {
-        self.touchEndedAction = touchEndedAction
-    }
-
-    func setAction(touchMovedAction: @escaping (GKEntity, CGPoint) -> Void) {
-        self.touchMovedAction = touchMovedAction
+    func setAction(for interaction: Event, action: @escaping (GKEntity, CGPoint) -> Void) {
+        switch interaction {
+        case .touchBegan:
+            self.touchBeganAction = action
+        case .touchMoved:
+            self.touchMovedAction = action
+        case .touchEnded:
+            self.touchEndedAction = action
+        }
     }
 
     func touchBegan(point: CGPoint) {
