@@ -13,7 +13,7 @@ class GameplayManager {
     let scene: SKScene
     private var entities = Set<GKEntity>()
 
-    // let statusManager: StatusManager
+    private(set) var statusManager: StatusManager!
     private(set) var boardManager: BoardManager!
     private(set) var handManager: HandManager!
 
@@ -28,6 +28,8 @@ class GameplayManager {
         self.scene = scene
 
         setupLegend()
+
+        self.statusManager = StatusManager(manager: self)
 
         self.boardManager = BoardManager(manager: self, legend: legend)
 
@@ -61,6 +63,11 @@ class GameplayManager {
             self.scene.removeChildren(in: [interactionComponent.node])
             self.scene.addChild(interactionComponent.node)
         }
+
+        if let statusComponent = entity.component(ofType: StatusComponent.self) {
+                self.scene.removeChildren(in: [statusComponent.node])
+                self.scene.addChild(statusComponent.node)
+        }
     }
 
     func remove(entity: GKEntity) {
@@ -91,6 +98,18 @@ class GameplayManager {
         self.handManager.add(newCards)
     }
 
+    func takeDamage() {
+        if !self.statusManager.update(status: .life) {
+            self.gameOver()
+        }
+    }
+
+    func nextLevel() {}
+
+    func gameOver() {
+        print("Game Over")
+    }
+
     func putCardsOnTheTable(cards: [Card]) {
         for card in cards {
             AnimationManager.zFall(entity: card)
@@ -103,19 +122,13 @@ class GameplayManager {
     }
 
     func revealCard(_ point: CGPoint) {
-        let identifiers: [Int] = self.boardManager.cards.compactMap { card in
-            guard let cardInfo = card.component(ofType: CardInfoComponent.self) else { return nil }
-            return cardInfo.identifier
+        if self.statusManager.update(status: .reveal) {
+            let identifiers: [Int] = self.boardManager.cards.compactMap { card in
+                guard let cardInfo = card.component(ofType: CardInfoComponent.self) else { return nil }
+                return cardInfo.identifier
+            }
         }
     }
-
-    func takeDamage() {
-        
-    }
-
-    func nextLevel() {}
-
-    func gameOver() {}
 
     func update(_ deltaTime: CFTimeInterval) {
         moveSystem.update(deltaTime: deltaTime)

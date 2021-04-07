@@ -26,6 +26,9 @@ class StatusNode: SKNode {
     }
 
     private func setupLayout() {
+        label.position.x = icon.position.x + icon.size.width+4
+        label.position.y = icon.position.y - icon.size.height/2+4
+
         self.addChild(label)
         self.addChild(icon)
     }
