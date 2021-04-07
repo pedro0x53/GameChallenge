@@ -17,72 +17,45 @@ class HandManager {
 
     private var isMoving: Bool = false
 
-    private let responsiver = Responsiver(designSize: CGSize(width: 390, height: 844))
-
-    private var cardSize = CGSize(width: 110, height: 154) {
-        didSet {
-            self.cardSize = responsiver.responsiveSize(for: self.cardSize)
-        }
-    }
-
     init(manager: GameplayManager) {
         self.gameplayManager = manager
-        setupButtons()
     }
 
-    func setupButtons() {
-        let buttonSize = responsiver.responsiveSize(for: CGSize(width: 90, height: 60))
-        let positionY = self.position(at: 1).y + self.cardSize.height + 20
-
-        let revealButton = ButtonNode(size: buttonSize)
-        revealButton.setAction(for: .touchEnded, action: self.gameplayManager.revealCard)
-        revealButton.position = CGPoint(x: -buttonSize.width / 2 - 20, y: positionY)
-        revealButton.color = .lightGray
-        self.gameplayManager.scene.addChild(revealButton)
-
-        let drawButton = ButtonNode(size: buttonSize)
-        drawButton.setAction(for: .touchEnded, action: self.gameplayManager.drawCards)
-        drawButton.position = CGPoint(x: buttonSize.width / 2 + 20, y: positionY)
-        drawButton.color = .lightGray
-        self.gameplayManager.scene.addChild(drawButton)
-    }
-
-    func add(_ cards: [Card]) {
+    func reset() {
         self.cards = []
-        for card in cards where self.cards.count < 4 {
+        self.selectedCards = []
+    }
+
+    func add(_ card: Card) {
+        if self.cards.count < 4 {
             let index = self.cards.count
 
             self.cards.append(card)
 
             guard let cardComponent = card.component(ofType: CardInfoComponent.self) else { return }
 
-            let currentCardSize = responsiver.responsiveSize(for: self.cardSize)
-
             let position = self.position(at: index)
             let rotation = self.rotation(at: index)
 
             let spriteComponent = SpriteComponent(assetName: cardComponent.assetName,
-                                                  size: currentCardSize,
+                                                  size: Sizes.handCard,
                                                   position: position,
                                                   rotation: rotation,
                                                   zPosition: CGFloat(index + 10))
-            spriteComponent.node.isHidden = true
 
             card.addComponent(spriteComponent)
 
-            let interactionComponent = InteractionComponent(hitBox: currentCardSize,
+            let interactionComponent = InteractionComponent(hitBox: Sizes.handCard,
                                                             touchEndedAction: self.dropAction,
                                                             touchMovedAction: self.dragAction)
 
             interactionComponent.node.position = position
             interactionComponent.node.zPosition = CGFloat(index + 11)
             interactionComponent.node.zRotation = rotation
-            interactionComponent.node.isHidden = true
             card.addComponent(interactionComponent)
 
             gameplayManager.add(entity: card)
         }
-        self.render()
     }
 
     func render() {
@@ -179,10 +152,16 @@ class HandManager {
     }
 
     private func position(at index: Int) -> CGPoint {
+        var margin: CGFloat = 20
+        if #available(iOS 11.0, *) {
+            if let window = UIApplication.shared.windows.first {
+                margin += window.safeAreaInsets.bottom
+            }
+        }
         let sceneSize = self.gameplayManager.scene.size
 
-        var positionX: CGFloat = cardSize.width * 1.5 - 33
-        var positionY: CGFloat = (-sceneSize.height + cardSize.height) / 2 + 40
+        var positionX: CGFloat = Sizes.handCard.width * 1.05
+        var positionY: CGFloat = (-sceneSize.height + Sizes.handCard.height) / 2 + margin
 
         if index == 0 {
             positionX *= -1
@@ -191,7 +170,7 @@ class HandManager {
         if index == 1 || index == 2 {
             positionY += 4
 
-            positionX = cardSize.width / 2 - 11
+            positionX = Sizes.handCard.width * 0.35
 
             if index == 1 {
                 positionX *= -1

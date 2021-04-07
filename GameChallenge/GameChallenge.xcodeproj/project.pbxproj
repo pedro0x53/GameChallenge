@@ -21,6 +21,7 @@
 		FE5AE4DE25FB9746006D4B85 /* StatusNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5AE4DD25FB9746006D4B85 /* StatusNode.swift */; };
 		FE5AE4F425FBB0FB006D4B85 /* FollowComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5AE4F325FBB0FB006D4B85 /* FollowComponent.swift */; };
 		FE5AE4F925FBB214006D4B85 /* MovementComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5AE4F825FBB214006D4B85 /* MovementComponent.swift */; };
+		FE734FD6261C7ACC005FBB98 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE734FD5261C7ACC005FBB98 /* Sizes.swift */; };
 		FEA725FF26024AB600D76F68 /* Responsiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA725FE26024AB600D76F68 /* Responsiver.swift */; };
 		FEADEECB25FA3ED800D5A92A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEECA25FA3ED800D5A92A /* AppDelegate.swift */; };
 		FEADEED125FA3ED800D5A92A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEED025FA3ED800D5A92A /* GameScene.swift */; };
@@ -74,6 +75,7 @@
 		FE5AE4DD25FB9746006D4B85 /* StatusNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusNode.swift; sourceTree = "<group>"; };
 		FE5AE4F325FBB0FB006D4B85 /* FollowComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowComponent.swift; sourceTree = "<group>"; };
 		FE5AE4F825FBB214006D4B85 /* MovementComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementComponent.swift; sourceTree = "<group>"; };
+		FE734FD5261C7ACC005FBB98 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
 		FEA725FE26024AB600D76F68 /* Responsiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responsiver.swift; sourceTree = "<group>"; };
 		FEADEEC725FA3ED800D5A92A /* GameChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEADEECA25FA3ED800D5A92A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 			children = (
 				FEA725FE26024AB600D76F68 /* Responsiver.swift */,
 				FE51F7FD2603C1AA00F9C763 /* Helper.swift */,
+				FE734FD5261C7ACC005FBB98 /* Sizes.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 				FE252AEB261B29DA0049F3A6 /* ButtonNode.swift in Sources */,
 				0061560B25FF90FE00605341 /* CardInfoComponent.swift in Sources */,
 				FEADEF3325FA442A00D5A92A /* StatusItem.swift in Sources */,
+				FE734FD6261C7ACC005FBB98 /* Sizes.swift in Sources */,
 				FE5AE4DE25FB9746006D4B85 /* StatusNode.swift in Sources */,
 				FE5AE4D025FB8FFB006D4B85 /* InteractionNode.swift in Sources */,
 				FE5AE4F425FBB0FB006D4B85 /* FollowComponent.swift in Sources */,

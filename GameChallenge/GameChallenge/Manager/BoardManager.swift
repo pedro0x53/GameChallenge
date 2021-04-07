@@ -24,20 +24,7 @@ class BoardManager {
     var deck: [Card]
     var maxCardsBoard = 4
 
-    private let responsiver = Responsiver(designSize: CGSize(width: 390, height: 844))
-
     let spaceBetweenCards: CGFloat = 10
-
-    private(set) var boardCardSize = CGSize(width: 53, height: 74) {
-        didSet {
-            self.boardCardSize = self.responsiver.responsiveSize(for: boardCardSize)
-        }
-    }
-    private(set) var legendSize = CGSize(width: 300, height: 420) {
-        didSet {
-            self.legendSize = self.responsiver.responsiveSize(for: legendSize)
-        }
-    }
 
     private let goldPontuation = 16
     private let silverPontuation = 13
@@ -54,14 +41,15 @@ class BoardManager {
     }
 
     private func setupLegend() {
-        let positionX: CGFloat = -(self.boardCardSize.width + 10) / 2
-        let positionY: CGFloat = (gamePlayManager.scene.size.height / 2) - (legendSize.height / 2) - 90
+        let positionX: CGFloat = -(Sizes.boardCard.width + 10) / 2
+        let positionY: CGFloat = (gamePlayManager.scene.size.height - Sizes.legend.height) / 2 -
+            90 / Sizes.responsiver.sizeProportion
 
-        legend.addComponent(SpriteComponent(assetName: "hand-card",
-                                            size: self.legendSize,
+        legend.addComponent(SpriteComponent(assetName: "legend_default",
+                                            size: Sizes.legend,
                                             position: CGPoint(x: positionX, y: positionY),
                                             rotation: 0,
-                                            zPosition: 0))
+                                            zPosition: 1))
 
         self.gamePlayManager.add(entity: legend)
     }
@@ -86,18 +74,18 @@ class BoardManager {
         self.cards.insert(card)
         guard let cardInfoComponent = card.component(ofType: CardInfoComponent.self) else { return false }
         card.addComponent(SpriteComponent(assetName: cardInfoComponent.assetName,
-                                                  size: boardCardSize,
-                                                  position: calcBoardNewCardPosition(),
-                                                  rotation: 0,
-                                                  zPosition: 0))
+                                          size: Sizes.boardCard,
+                                          position: calcBoardNewCardPosition(),
+                                          rotation: 0,
+                                          zPosition: 0))
         self.gamePlayManager.add(entity: card)
         print(self.cards)
         return true
     }
 
     func calcBoardNewCardPosition() -> CGPoint {
-        let xPosition = boardCardSize.width
-        let yPosition = boardCardSize.height * 1.5 + (CGFloat(cards.count) * (spaceBetweenCards + boardCardSize.height))
+        let xPosition = Sizes.boardCard.width
+        let yPosition = Sizes.boardCard.height * 1.5 + (CGFloat(cards.count) * (spaceBetweenCards + Sizes.boardCard.height))
         return CGPoint(x: xPosition, y: yPosition)
     }
 

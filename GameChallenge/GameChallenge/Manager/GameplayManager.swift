@@ -67,8 +67,25 @@ class GameplayManager {
 
     func drawCards(_ point: CGPoint = CGPoint(x: 0, y: 0)) {
         let cardsOnHand = self.handManager.cards
+        self.handManager.reset()
+
+        AnimationManager.drawCardsOut(scene: self.scene, entities: cardsOnHand) {
+            for card in cardsOnHand {
+                self.remove(entity: card)
+            }
+        }
+
         let newCards = self.boardManager.drawCards(cards: cardsOnHand)
-        self.handManager.add(newCards)
+
+        for card in newCards {
+            self.handManager.add(card)
+        }
+
+        if cardsOnHand.isEmpty {
+            AnimationManager.drawCardsIn(entities: newCards)
+        } else {
+            AnimationManager.drawCardsIn(entities: newCards, wait: 0.5)
+        }
     }
 
     func putCardsOnTheTable(cards: [Card]) {
