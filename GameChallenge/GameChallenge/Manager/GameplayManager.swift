@@ -13,15 +13,13 @@ class GameplayManager {
     private var entities = Set<GKEntity>()
     let scene: SKScene
 
-   // private let statusManager = StatusManager()
+    var statusManager: StatusManager!
     // let tableManager: TableManager
     // let handManager: HandManager
 
-    private let itemTeste = StatusItem(statusType: "Life", statusValue: 2)
-
     init(scene: SKScene) {
         self.scene = scene
-        let statusManager = StatusManager(manager: self)
+        self.statusManager = StatusManager(manager: self)
     }
 
     func add(entity: GKEntity) {
@@ -49,13 +47,21 @@ class GameplayManager {
 
     func putCardsOnTheTable(cards: [Card]) {}
 
-    func revealCard() {}
+    func revealCard() {
+        if self.statusManager.update(status: .reveal) {
+            print("Add card to board")
+        }
+    }
 
     func takeDamage() {
-
+        if !self.statusManager.update(status: .life) {
+            self.gameOver()
+        }
     }
 
     func nextLevel() {}
 
-    func gameOver() {}
+    func gameOver() {
+        print("Game Over")
+    }
 }

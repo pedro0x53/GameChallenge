@@ -7,11 +7,14 @@
 
 import GameplayKit
 
-//Classe para construir os StatusItems, aka Vida e Reveals.
+// Classe para construir os StatusItems, aka Vida e Reveals.
 class StatusItem: GKEntity {
-    init(statusType: String, statusValue: Int) {
+
+    public static let statusItemSize = CGSize(width: 30, height: 30)
+
+    init(assetName: String, statusValue: Int) {
         super.init()
-        self.addComponent(StatusComponent(icon: statusType, value: statusValue, size: CGSize(width: 30, height: 30)))
+        self.addComponent(StatusComponent(icon: assetName, value: statusValue, size: StatusItem.statusItemSize))
     }
 
     required init?(coder: NSCoder) {

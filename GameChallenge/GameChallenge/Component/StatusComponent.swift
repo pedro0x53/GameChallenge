@@ -26,9 +26,9 @@ class StatusComponent: GKComponent {
     func decrease() -> Int {
         if self.value > 0 {
             self.value -= 1
-        }
-
-        self.node.setLabelText(to: String(value))
+            self.node.setLabelText(to: String(value))
             return value
         }
+        return -1
+    }
 }
