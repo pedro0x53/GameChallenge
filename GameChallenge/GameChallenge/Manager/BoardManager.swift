@@ -7,6 +7,7 @@
 
 import Foundation
 import GameplayKit
+import SpriteKit
 
 enum SubmitionResult {
     case gold
@@ -20,6 +21,13 @@ class BoardManager {
     let legend: Legend
     private(set) var cards = Set<Card>()
     var deck: [Card]
+    var maxCardsBoard = 4
+    var startPoint: CGPoint = CGPoint()
+    var spaceBetweenCards = CGFloat()
+    var cardHeight = CGFloat()
+    var boardCardSize = CGSize()
+    private let goldPontuation = 16
+    private let silverPontuation = 13
 
     init(manager: GameplayManager, legend: Legend) {
         gamePlayManager = manager
@@ -29,20 +37,33 @@ class BoardManager {
         shuffleDeck()
     }
 
-    //Funcao temporaria, remover quando as cartas  vierem
+    // Funcao temporaria, remover quando as cartas  vierem
     // de outro Manager
     func tempGenerateCards(num: Int) {
         for index in 0..<num {
-            let card = Card(identifier: index, assetName: "")
+            let card = Card(identifier: index, assetName: "hand-card")
             self.deck.append(card)
         }
     }
 
-    func add(_ cards: Card...) {
-        for card in cards {
-            self.cards.insert(card)
-            gamePlayManager.add(entity: card)
-        }
+    @discardableResult
+    func add(_ card: Card) -> Bool {
+        if self.cards.count >= self.maxCardsBoard { return false }
+        self.cards.insert(card)
+        guard let cardInfoComponent = card.component(ofType: CardInfoComponent.self) else { return false }
+        card.addComponent(SpriteComponent(assetName: cardInfoComponent.assetName,
+                                                  size: boardCardSize,
+                                                  position: calcBoardNewCardPosition(),
+                                                  rotation: 0,
+                                                  zPosition: 0))
+        self.gamePlayManager.add(entity: card)
+        print(self.cards)
+        return true
+    }
+
+    func calcBoardNewCardPosition() -> CGPoint {
+        let yPosition = startPoint.y - CGFloat(cards.count) * (spaceBetweenCards + cardHeight)
+        return CGPoint(x: startPoint.x, y: yPosition)
     }
 
     func clear(wrongCards: Set<Card>) {
@@ -51,20 +72,15 @@ class BoardManager {
         }
     }
 
-    func drawCards(amount: Int) -> [Card] {
-        var returnedCards: [Card] = []
-        for _ in 0..<amount {
-            let lastCard = self.deck.removeLast()
-            returnedCards.append(lastCard)
-            addCardToDownDeck(lastCard)
-        }
-        return returnedCards
+    func drawCards(cards: [Card]) -> [Card] {
+        self.deck.insert(contentsOf: cards.reversed(), at: 0)
+        let returnedCards = self.deck[self.deck.count-4...self.deck.count-1]
+        self.deck.removeLast(4)
+        return [Card](returnedCards)
     }
 
-    func addCardToDownDeck(_ card: Card) {
-        var tempDeck: [Card] = []
-        tempDeck.append(card)
-        tempDeck.append(contentsOf: self.deck)
+    func removeFirstCardOfDeck() -> Card {
+        return self.deck.remove(at: self.deck.count - 1)
     }
 
     func shuffleDeck() {
@@ -85,10 +101,10 @@ class BoardManager {
             return
         }
         let pontuation = pontuationAndWrongCard.0
-        if pontuation>=16 {
+        if pontuation>=goldPontuation {
             executeActionFrom(submition: .gold)
             return
-        } else if pontuation>=13 {
+        } else if pontuation>=silverPontuation {
             executeActionFrom(submition: .silver)
             return
         } else {
@@ -107,7 +123,7 @@ class BoardManager {
                 let cardIdentifier = cardInfoComponent.identifier
                 if legendComponent.primary.contains(cardIdentifier) {
                     primaryCount += 1
-                } else if legendComponent.secundary.contains(cardIdentifier) {
+                } else if legendComponent.secondary.contains(cardIdentifier) {
                     secundaryCount += 1
                 } else {
                     wrongCards.insert(card)
@@ -121,9 +137,50 @@ class BoardManager {
     func executeActionFrom(submition: SubmitionResult, wrongCards: Set<Card> = Set<Card>()) {
         switch submition {
         case .gold, .silver, .bronze:
-            print(submition)
+            self.gamePlayManager.nextLevel()
         case .wrong:
+            self.gamePlayManager.takeDamage()
             clear(wrongCards: wrongCards)
+        }
+    }
+
+    func revealCard() {
+        var cardRevealedIdentifier: Int?
+        cardRevealedIdentifier = getFirstSecondaryIdentifierOutOfBoard()
+        if let identifier = cardRevealedIdentifier {
+            removeCardsOfDeck(identifier: identifier)
+            let card = Card(identifier: identifier, assetName: "hand-card")
+            add(card)
+        }
+    }
+
+    func getFirstSecondaryIdentifierOutOfBoard() -> Int? {
+        guard let legendComponent = legend.component(ofType: LegendComponent.self) else { return nil }
+        let allSecondaryCardsIdentifiers = legendComponent.secondary
+        let allIdentifiersOnBoard = getAllCardsIdentifiersOnBoard()
+        for secondaryCardIdentifier in allSecondaryCardsIdentifiers {
+            if !allIdentifiersOnBoard.contains(secondaryCardIdentifier) {
+                return secondaryCardIdentifier
+            }
+        }
+        return nil
+    }
+
+    func getAllCardsIdentifiersOnBoard() -> [Int] {
+        let identifiers: [Int] = self.cards.compactMap { card in
+            guard let cardInfo = card.component(ofType: CardInfoComponent.self) else { return nil }
+            return cardInfo.identifier
+        }
+        return identifiers
+    }
+
+    func removeCardsOfDeck(identifier: Int) {
+        self.deck.removeAll { card in
+            if let cardInfoComponent = card.component(ofType: CardInfoComponent.self) {
+                let cardIdentifier = cardInfoComponent.identifier
+                return cardIdentifier == identifier
+            }
+            return false
         }
     }
 }

@@ -9,18 +9,16 @@ import GameplayKit
 
 class InteractionComponent: GKComponent {
 
-    private var node: InteractionNode
+    private(set) var node: InteractionNode!
 
-    private var touchBeganAction: ((_ sender: GKEntity) -> Void)?
-    private var touchEndedAction: ((_ sender: GKEntity) -> Void)?
-    private var touchMovedAction: ((_ sender: GKEntity) -> Void)?
+    private var touchBeganAction: ((GKEntity, CGPoint) -> Void)?
+    private var touchEndedAction: ((GKEntity, CGPoint) -> Void)?
+    private var touchMovedAction: ((GKEntity, CGPoint) -> Void)?
 
     init(hitBox: CGSize,
-         touchBeganAction: ((_ sender: GKEntity) -> Void)? = nil,
-         touchEndedAction: ((_ sender: GKEntity) -> Void)? = nil,
-         touchMovedAction: ((_ sender: GKEntity) -> Void)? = nil) {
-
-        self.node = InteractionNode(size: hitBox)
+         touchBeganAction: ((GKEntity, CGPoint) -> Void)? = nil,
+         touchEndedAction: ((GKEntity, CGPoint) -> Void)? = nil,
+         touchMovedAction: ((GKEntity, CGPoint) -> Void)? = nil) {
 
         self.touchBeganAction = touchBeganAction
         self.touchEndedAction = touchEndedAction
@@ -28,46 +26,46 @@ class InteractionComponent: GKComponent {
 
         super.init()
 
-        self.node.touchBeganAction = self.touchBegan
-        self.node.touchEndedAction = self.touchEnded
-        self.node.touchBeganAction = self.touchMoved
+        self.node = InteractionNode(size: hitBox,
+                                    touchBeganAction: self.touchBegan,
+                                    touchEndedAction: self.touchEnded,
+                                    touchMovedAction: self.touchMoved)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setAction(touchBeganAction: @escaping () -> Void) {
-        self.node.touchBeganAction = touchBeganAction
+    func setAction(touchBeganAction: @escaping (GKEntity, CGPoint) -> Void) {
+        self.touchBeganAction = touchBeganAction
     }
 
-    func setAction(touchEndedAction: @escaping () -> Void) {
-        self.node.touchEndedAction = touchEndedAction
+    func setAction(touchEndedAction: @escaping (GKEntity, CGPoint) -> Void) {
+        self.touchEndedAction = touchEndedAction
     }
 
-    func setAction(touchMovedAction: @escaping () -> Void) {
-        self.node.touchMovedAction = touchMovedAction
+    func setAction(touchMovedAction: @escaping (GKEntity, CGPoint) -> Void) {
+        self.touchMovedAction = touchMovedAction
     }
 
-    func touchBegan() {
-        if let action = self.touchBeganAction,
-           let entity = self.entity {
-            action(entity)
-        }
+    func touchBegan(point: CGPoint) {
+        guard let entity = self.entity,
+              let action = self.touchBeganAction else { return }
+
+        action(entity, point)
     }
 
-    func touchEnded() {
-        // drop animation
-        if let action = self.touchEndedAction,
-           let entity = self.entity {
-            action(entity)
-        }
+    func touchMoved(point: CGPoint) {
+        guard let entity = self.entity,
+              let action = self.touchMovedAction else { return }
+
+        action(entity, point)
     }
 
-    func touchMoved() {
-        if let action = self.touchMovedAction,
-           let entity = self.entity {
-            action(entity)
-        }
+    func touchEnded(point: CGPoint) {
+        guard let entity = self.entity,
+              let action = self.touchEndedAction else { return }
+
+        action(entity, point)
     }
 }

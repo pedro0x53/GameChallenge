@@ -26,8 +26,46 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FEADEEDD25FA3EDA00D5A92A"
+            BuildableName = "GameChallengeTests.xctest"
+            BlueprintName = "GameChallengeTests"
+            ReferencedContainer = "container:GameChallenge.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FEADEEC625FA3ED800D5A92A"
+            BuildableName = "GameChallenge.app"
+            BlueprintName = "GameChallenge"
+            ReferencedContainer = "container:GameChallenge.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FEADEEDD25FA3EDA00D5A92A"
+               BuildableName = "GameChallengeTests.xctest"
+               BlueprintName = "GameChallengeTests"
+               ReferencedContainer = "container:GameChallenge.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FEADEEE825FA3EDA00D5A92A"
+               BuildableName = "GameChallengeUITests.xctest"
+               BlueprintName = "GameChallengeUITests"
+               ReferencedContainer = "container:GameChallenge.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

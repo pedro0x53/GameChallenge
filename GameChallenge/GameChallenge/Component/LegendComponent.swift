@@ -9,11 +9,11 @@ import GameplayKit
 
 class LegendComponent: GKComponent {
     var primary: Set<Int>
-    var secundary: Set<Int>
+    var secondary: Set<Int>
 
-    init(primary: Set<Int>, secundary: Set<Int>) {
+    init(primary: Set<Int>, secondary: Set<Int>) {
         self.primary = primary
-        self.secundary = secundary
+        self.secondary = secondary
         super.init()
     }
 
