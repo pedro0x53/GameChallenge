@@ -16,56 +16,24 @@ class MainMenuScene: SKScene {
     let soundGameButton: SKSpriteNode = SKSpriteNode(imageNamed: "audio-on-button")
     let gameNameImage = SKSpriteNode(color: .cyan, size: CGSize(width: 200, height: 100))
     lazy var backgroundImage: SKSpriteNode = SKSpriteNode(imageNamed: "mainmenu-background")
-    
     var created = false
     let manager = CMMotionManager()
-
     var soundPlayer: AVAudioPlayer?
     var backAudioActive: Bool = true
-
-    override func sceneDidLoad() {
-    }
 
     override func didMove(to view: SKView) {
         if created {
             return
         }
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        backgroundImage.size = CGSize(width: view.bounds.size.width + 20, height: view.bounds.size.height + 20)
+        backgroundImage.size = CGSize(width: view.bounds.size.width, height: view.bounds.size.height)
         addChild(backgroundImage)
         backgroundImage.zPosition = -1
         addBackgroundSound()
-        //addGameNameImage()
         addStartButton()
         addSoundGameButton()
+        //addGyroscopParalax()
         created = true
-
-        manager.startGyroUpdates()
-        manager.gyroUpdateInterval = 1/60
-        Timer.scheduledTimer(withTimeInterval: 1/60, repeats: true) { [self] _ in
-            if let gyroData = manager.gyroData {
-
-                    let currentXPosition = backgroundImage.position.x
-                    var newXPosition = currentXPosition + CGFloat(gyroData.rotationRate.y) * (2/CGFloat.pi)
-                    if newXPosition > 10 {
-                        newXPosition = 10
-                    }
-                    if newXPosition < -10 {
-                        newXPosition = -10
-                    }
-
-                    let currentYPosition = backgroundImage.position.y
-                    var newYPosition = currentYPosition + CGFloat(gyroData.rotationRate.x) * (-2/CGFloat.pi)
-                    if newYPosition > 10 {
-                        newYPosition = 10
-                    }
-                    if newYPosition < -10 {
-                        newYPosition = -10
-                    }
-
-                    backgroundImage.position = CGPoint(x: newXPosition, y: newYPosition)
-            }
-        }
 
     }
 
@@ -87,6 +55,32 @@ class MainMenuScene: SKScene {
         gameNameImage.position = CGPoint(x: 0, y: 100)
     }
 
+    func addGyroscopParalax() {
+        manager.startGyroUpdates()
+        manager.gyroUpdateInterval = 1/60
+        Timer.scheduledTimer(withTimeInterval: 1/60, repeats: true) { [self] _ in
+            if let gyroData = manager.gyroData {
+                let currentXPosition = backgroundImage.position.x
+                var newXPosition = currentXPosition + CGFloat(gyroData.rotationRate.y) * (1.5/CGFloat.pi)
+                if newXPosition > 10 {
+                    newXPosition = 10
+                }
+                if newXPosition < -10 {
+                    newXPosition = -10
+                }
+                let currentYPosition = backgroundImage.position.y
+                var newYPosition = currentYPosition + CGFloat(gyroData.rotationRate.x) * (-1.5/CGFloat.pi)
+                if newYPosition > 10 {
+                    newYPosition = 10
+                }
+                if newYPosition < -10 {
+                    newYPosition = -10
+                }
+                backgroundImage.position = CGPoint(x: newXPosition, y: newYPosition)
+            }
+        }
+    }
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             let loc = touch.location(in: self)
@@ -101,10 +95,10 @@ class MainMenuScene: SKScene {
     }
 
     func goToGameScene() {
-//        self.view?.presentScene(GameScene(size: self.size), transition: .reveal(with: .left, duration: 1))
-//        soundPlayer?.pause()
-        let pauseScene = PauseScene(size: self.size, currentScene: self)
-        pauseScene.pauseGame()
+        let gameScene = GameScene(size: self.size)
+        gameScene.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        self.view?.presentScene(gameScene, transition: .push(with: .left, duration: 1))
+        soundPlayer?.pause()
     }
 
     func calculateTopRightPosition() -> CGPoint {
