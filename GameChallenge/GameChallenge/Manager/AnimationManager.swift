@@ -24,24 +24,39 @@ class AnimationManager {
         spriteComponent.node.run(SKAction.group([rotateAction, moveAction]))
     }
 
-    public static func goTo(point: CGPoint, entity: GKEntity, duration: CGFloat = 0) {
-        guard let spriteComponent = entity.component(ofType: SpriteComponent.self),
-              let interactionComponent = entity.component(ofType: InteractionComponent.self) else { return }
+    public static func moveTo(point: CGPoint, entity: GKEntity, duration: CGFloat = 0) {
+        var toMove: [SKNode] = []
 
         let rotateAction = SKAction.rotate(toAngle: 0, duration: TimeInterval(duration))
         let moveAction = SKAction.move(to: point, duration: TimeInterval(duration))
 
-        interactionComponent.node.run(SKAction.group([rotateAction, moveAction]))
-        spriteComponent.node.run(SKAction.group([rotateAction, moveAction]))
+        if let spriteComponent = entity.component(ofType: SpriteComponent.self) {
+            toMove.append(spriteComponent.node)
+        }
+
+        if let interactionComponent = entity.component(ofType: InteractionComponent.self) {
+            toMove.append(interactionComponent.node)
+        }
+
+        toMove.forEach { (node) in
+            node.run(SKAction.group([rotateAction, moveAction]))
+        }
     }
 
-    public static func zFall(entity: GKEntity) {
+    public static func zFall(entity: GKEntity, completion: (() -> Void)? = nil) {
         guard let spriteComponent = entity.component(ofType: SpriteComponent.self) else { return }
 
         let fade = SKAction.fadeOut(withDuration: 0.3)
         let shrink = SKAction.scale(to: 0, duration: 0.6)
 
-        spriteComponent.node.run(SKAction.group([fade, shrink]))
+        if let completion = completion {
+            spriteComponent.node.run(SKAction.sequence([
+                SKAction.group([fade, shrink]),
+                SKAction.run(completion)
+            ]))
+        } else {
+            spriteComponent.node.run(SKAction.group([fade, shrink]))
+        }
     }
 
     public static func drawCardsOut(scene: SKScene, entities: [GKEntity], handler: (() -> Void)?) {
@@ -99,8 +114,46 @@ class AnimationManager {
             let rotateToOrigin = SKAction.rotate(toAngle: spriteComponent.originRotation, duration: 0.3)
 
             spriteComponent.node.run(SKAction.sequence([
-                reset, wait, moveIn, bounceDown,
+                reset,
+                SKAction.fadeAlpha(to: 1, duration: 0),
+                wait, moveIn, bounceDown,
                 SKAction.group([moveToOrigin, rotateToOrigin])
+            ]))
+        }
+    }
+
+    public static func fadeIn(entity: GKEntity, delay: CGFloat = 0, completion: (() -> Void)? = nil) {
+        guard let spriteComponent = entity.component(ofType: SpriteComponent.self) else { return }
+
+        spriteComponent.node.alpha = 0
+
+        if let completion = completion {
+            spriteComponent.node.run(SKAction.sequence([
+                SKAction.wait(forDuration: TimeInterval(delay)),
+                SKAction.fadeIn(withDuration: 0.15),
+                SKAction.run(completion)
+            ]))
+        } else {
+            spriteComponent.node.run(SKAction.sequence([
+                SKAction.wait(forDuration: TimeInterval(delay)),
+                SKAction.fadeIn(withDuration: 0.15)
+            ]))
+        }
+    }
+
+    public static func fadeOut(entity: GKEntity, delay: CGFloat = 0, completion: (() -> Void)? = nil) {
+        guard let spriteComponent = entity.component(ofType: SpriteComponent.self) else { return }
+
+        if let completion = completion {
+            spriteComponent.node.run(SKAction.sequence([
+                SKAction.wait(forDuration: TimeInterval(delay)),
+                SKAction.fadeOut(withDuration: 0.15),
+                SKAction.run(completion)
+            ]))
+        } else {
+            spriteComponent.node.run(SKAction.sequence([
+                SKAction.wait(forDuration: TimeInterval(delay)),
+                SKAction.fadeOut(withDuration: 0.15)
             ]))
         }
     }
