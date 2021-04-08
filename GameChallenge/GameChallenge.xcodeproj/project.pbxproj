@@ -12,6 +12,9 @@
 		0061561925FF949500605341 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061561825FF949500605341 /* CoreDataStack.swift */; };
 		0061562225FF991600605341 /* GameData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0061562025FF991600605341 /* GameData.xcdatamodeld */; };
 		0061562825FF9FF800605341 /* RepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061562725FF9FF800605341 /* RepositoryProtocol.swift */; };
+		27539406261C885A0026CCBA /* PauseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27539405261C885A0026CCBA /* PauseScene.swift */; };
+		27920337260B8576007E8A64 /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27920336260B8576007E8A64 /* MainMenuScene.swift */; };
+		27F6FBD8260E2BA400BE2726 /* background_jogo2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 27F6FBD7260E2BA400BE2726 /* background_jogo2.mp3 */; };
 		0061566026039A2500605341 /* StatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061565F26039A2500605341 /* StatusManager.swift */; };
 		275F490C2600EE0200EE30A9 /* BoardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275F490B2600EE0200EE30A9 /* BoardManager.swift */; };
 		275F49112600EE3C00EE30A9 /* BoardManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275F49102600EE3C00EE30A9 /* BoardManagerTests.swift */; };
@@ -67,6 +70,9 @@
 		0061561825FF949500605341 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		0061562125FF991600605341 /* GameData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GameData.xcdatamodel; sourceTree = "<group>"; };
 		0061562725FF9FF800605341 /* RepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryProtocol.swift; sourceTree = "<group>"; };
+		27539405261C885A0026CCBA /* PauseScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseScene.swift; sourceTree = "<group>"; };
+		27920336260B8576007E8A64 /* MainMenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
+		27F6FBD7260E2BA400BE2726 /* background_jogo2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background_jogo2.mp3; sourceTree = "<group>"; };
 		0061565F26039A2500605341 /* StatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusManager.swift; sourceTree = "<group>"; };
 		275F490B2600EE0200EE30A9 /* BoardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardManager.swift; sourceTree = "<group>"; };
 		275F49102600EE3C00EE30A9 /* BoardManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardManagerTests.swift; sourceTree = "<group>"; };
@@ -147,6 +153,14 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		27F6FBD6260E2B7900BE2726 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				27F6FBD7260E2BA400BE2726 /* background_jogo2.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		FE5AE4CD25FB8FD2006D4B85 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +215,7 @@
 		FEADEEC925FA3ED800D5A92A /* GameChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				27F6FBD6260E2B7900BE2726 /* Sounds */,
 				0061561725FF946B00605341 /* Model */,
 				FE5AE4CD25FB8FD2006D4B85 /* Utils */,
 				FEADEF0F25FA419900D5A92A /* Entity */,
@@ -212,6 +227,8 @@
 				FEADEED425FA3ED800D5A92A /* Main.storyboard */,
 				FEADEED725FA3EDA00D5A92A /* Assets.xcassets */,
 				FEADEED925FA3EDA00D5A92A /* Info.plist */,
+				27920336260B8576007E8A64 /* MainMenuScene.swift */,
+				27539405261C885A0026CCBA /* PauseScene.swift */,
 			);
 			path = GameChallenge;
 			sourceTree = "<group>";
@@ -401,6 +418,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27F6FBD8260E2BA400BE2726 /* background_jogo2.mp3 in Resources */,
 				FEADEED625FA3ED800D5A92A /* Main.storyboard in Resources */,
 				FEADEED825FA3EDA00D5A92A /* Assets.xcassets in Resources */,
 			);
@@ -462,7 +480,9 @@
 				275F490C2600EE0200EE30A9 /* BoardManager.swift in Sources */,
 				FEADEF3825FA44A400D5A92A /* Comment.swift in Sources */,
 				FEADEECB25FA3ED800D5A92A /* AppDelegate.swift in Sources */,
+				27539406261C885A0026CCBA /* PauseScene.swift in Sources */,
 				0061562225FF991600605341 /* GameData.xcdatamodeld in Sources */,
+				27920337260B8576007E8A64 /* MainMenuScene.swift in Sources */,
 				0061561025FF931E00605341 /* GameplayManager.swift in Sources */,
 				FE46A628260B644C0072339F /* AnimationManager.swift in Sources */,
 				FE252AEB261B29DA0049F3A6 /* ButtonNode.swift in Sources */,
@@ -646,7 +666,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TF4K4YZ8PT;
+				DEVELOPMENT_TEAM = R39G5DLZJ3;
 				INFOPLIST_FILE = GameChallenge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -665,7 +685,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TF4K4YZ8PT;
+				DEVELOPMENT_TEAM = R39G5DLZJ3;
 				INFOPLIST_FILE = GameChallenge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
