@@ -57,6 +57,9 @@ class GameplayManager {
 
         self.moveSystem.removeComponent(foundIn: entity)
 
+        entity.removeComponent(ofType: MovementComponent.self)
+        entity.removeComponent(ofType: FollowComponent.self)
+
         var toRemove: [SKNode] = []
         if let spriteComponent = entity.component(ofType: SpriteComponent.self) {
             toRemove.append(spriteComponent.node)
@@ -99,6 +102,10 @@ class GameplayManager {
     func takeDamage() {
         if !self.statusManager.update(status: .life) {
             self.gameOver()
+        } else {
+            if handManager.cards.isEmpty {
+                self.drawCards()
+            }
         }
     }
 
@@ -110,7 +117,6 @@ class GameplayManager {
 
     func putCardsOnTheTable(cards: [Card]) {
         for card in cards {
-            AnimationManager.zFall(entity: card)
             if self.boardManager.add(card) {
                 self.handManager.remove(card)
             } else {

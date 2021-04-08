@@ -43,6 +43,7 @@ class HandManager {
                                                   rotation: rotation,
                                                   zPosition: CGFloat(index + 10))
 
+            spriteComponent.node.alpha = 0
             card.addComponent(spriteComponent)
 
             let interactionComponent = InteractionComponent(hitBox: Sizes.handCard,
@@ -71,7 +72,6 @@ class HandManager {
     func remove(_ card: Card) {
         guard let index = self.cards.firstIndex(of: card) else { return }
         self.cards.remove(at: index)
-        self.gameplayManager.remove(entity: card)
     }
 
     func select(_ card: Card) {
@@ -92,7 +92,7 @@ class HandManager {
     func dragAction(entity: GKEntity, point: CGPoint) {
         guard let card = entity as? Card else { return }
 
-        AnimationManager.goTo(point: point, entity: card)
+        AnimationManager.moveTo(point: point, entity: card)
 
         if !isMoving {
             isMoving = true

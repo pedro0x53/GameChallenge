@@ -20,11 +20,11 @@ class BoardManager {
     let gamePlayManager: GameplayManager
     private var legend: Legend
 
-    private(set) var cards = Set<Card>()
+    private(set) var cards: [Card] = []
     var deck: [Card]
-    var maxCardsBoard = 4
 
-    let spaceBetweenCards: CGFloat = 10
+    private let spaceBetweenCards: CGFloat = 10
+    private var currentPosition: CGPoint = CGPoint(x: 0, y: 0)
 
     private let goldPontuation = 16
     private let silverPontuation = 13
@@ -38,12 +38,13 @@ class BoardManager {
         shuffleDeck()
 
         setupLegend()
+        setupInitialOffset()
     }
 
     private func setupLegend() {
-        let positionX: CGFloat = -(Sizes.boardCard.width + 10) / 2
+        let positionX: CGFloat = -Sizes.boardCard.width + 10
         let positionY: CGFloat = (gamePlayManager.scene.size.height - Sizes.legend.height) / 2 -
-            90 / Sizes.responsiver.sizeProportion
+            100 / Sizes.responsiver.sizeProportion
 
         legend.addComponent(SpriteComponent(assetName: "legend_default",
                                             size: Sizes.legend,
@@ -52,6 +53,12 @@ class BoardManager {
                                             zPosition: 1))
 
         self.gamePlayManager.add(entity: legend)
+    }
+
+    private func setupInitialOffset() {
+        guard let legendSprite = self.legend.component(ofType: SpriteComponent.self) else { return }
+        self.currentPosition.x = (Sizes.legend.width + Sizes.boardCard.width + 25) / 2 - Sizes.boardCard.width
+        self.currentPosition.y = legendSprite.origin.y + (Sizes.boardCard.height * 2.5 + spaceBetweenCards * 2.5)
     }
 
     func isOverLegend(point: CGPoint) -> Bool {
@@ -70,28 +77,52 @@ class BoardManager {
 
     @discardableResult
     func add(_ card: Card) -> Bool {
-        if self.cards.count >= self.maxCardsBoard { return false }
-        self.cards.insert(card)
+        if self.cards.count >= 4 { return false }
+
         guard let cardInfoComponent = card.component(ofType: CardInfoComponent.self) else { return false }
-        card.addComponent(SpriteComponent(assetName: cardInfoComponent.assetName,
-                                          size: Sizes.boardCard,
-                                          position: calcBoardNewCardPosition(),
-                                          rotation: 0,
-                                          zPosition: 0))
-        self.gamePlayManager.add(entity: card)
-        print(self.cards)
+
+        let newCard = Card(identifier: cardInfoComponent.identifier, assetName: cardInfoComponent.assetName)
+
+        AnimationManager.zFall(entity: card) { [unowned self] in
+            gamePlayManager.remove(entity: card)
+        }
+
+        self.cards.append(newCard)
+
+        newCard.addComponent(SpriteComponent(assetName: cardInfoComponent.assetName,
+                                             size: Sizes.boardCard,
+                                             position: calcBoardNewCardPosition(),
+                                             rotation: 0,
+                                             zPosition: 2))
+        self.gamePlayManager.add(entity: newCard)
+        AnimationManager.fadeIn(entity: newCard, delay: 0.3) {
+            if self.cards.count == 4 {
+                self.checkSubmition()
+            }
+        }
+
         return true
     }
 
     func calcBoardNewCardPosition() -> CGPoint {
-        let xPosition = Sizes.boardCard.width
-        let yPosition = Sizes.boardCard.height * 1.5 + (CGFloat(cards.count) * (spaceBetweenCards + Sizes.boardCard.height))
-        return CGPoint(x: xPosition, y: yPosition)
+        currentPosition.y -= (Sizes.boardCard.height + spaceBetweenCards)
+        return currentPosition
     }
 
     func clear(wrongCards: Set<Card>) {
         for card in wrongCards {
-            cards.remove(card)
+            AnimationManager.fadeOut(entity: card)
+            if let index = cards.firstIndex(of: card) {
+                cards.remove(at: index)
+            }
+        }
+        repositionRemainCards()
+    }
+
+    func repositionRemainCards() {
+        setupInitialOffset()
+        for card in cards {
+            AnimationManager.moveTo(point: calcBoardNewCardPosition(), entity: card, duration: 0.3)
         }
     }
 
@@ -118,7 +149,7 @@ class BoardManager {
     }
 
     func checkSubmition() {
-        let pontuationAndWrongCard = calculatePontuationAndWrongCards(legend: self.legend, cards: self.cards)
+        let pontuationAndWrongCard = calculatePontuationAndWrongCards(legend: self.legend, cards: Set(self.cards))
         if pontuationAndWrongCard.1.count > 0 {
             executeActionFrom(submition: .wrong, wrongCards: pontuationAndWrongCard.1)
             return
