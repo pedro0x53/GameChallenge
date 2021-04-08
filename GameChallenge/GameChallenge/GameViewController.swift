@@ -18,6 +18,7 @@ class GameViewController: UIViewController {
         let sceneNode = MainMenuScene(size: self.view.frame.size)
         sceneNode.scaleMode = .aspectFill
         sceneNode.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        sceneNode.backgroundColor = .white
 
         // Present the scene
         if let view = self.view as? SKView {
