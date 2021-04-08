@@ -98,7 +98,8 @@ class MainMenuScene: SKScene {
         let gameScene = GameScene(size: self.size)
         gameScene.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.view?.presentScene(gameScene, transition: .push(with: .left, duration: 1))
-        soundPlayer?.pause()
+        SongsManager.shared.setCurrentSong(sceneSong: .gamePlay)
+        SongsManager.shared.playSong()
     }
 
     func calculateTopRightPosition() -> CGPoint {
@@ -130,21 +131,15 @@ class MainMenuScene: SKScene {
         backAudioActive = !backAudioActive
         if backAudioActive {
             soundGameButton.texture = SKTexture(imageNamed: "audio-on-button")
-            soundPlayer?.play()
+            SongsManager.shared.playSong()
         } else {
             soundGameButton.texture = SKTexture(imageNamed: "audio-off-button")
-            soundPlayer?.pause()
+            SongsManager.shared.pauseSong()
         }
     }
 
     func addBackgroundSound() {
-        let url = Bundle.main.url(forResource: "background_jogo2", withExtension: "mp3")!
-
-        do {
-            try soundPlayer = AVAudioPlayer(contentsOf: url)
-            soundPlayer?.play()
-        } catch {
-            return
-        }
+        SongsManager.shared.setCurrentSong(sceneSong: .mainMenu)
+        SongsManager.shared.playSong()
     }
 }
