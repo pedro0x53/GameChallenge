@@ -8,22 +8,65 @@
 import SpriteKit
 import Foundation
 import AVKit
+import CoreMotion
 
 class MainMenuScene: SKScene {
 
-    let startButton: SKSpriteNode = SKSpriteNode(color: .blue, size: CGSize(width: 96, height: 96))
-    let soundGameButton: SKSpriteNode = SKSpriteNode(color: .red, size: CGSize(width: 44, height: 44))
+    let startButton: SKSpriteNode = SKSpriteNode(imageNamed: "play-button")
+    let soundGameButton: SKSpriteNode = SKSpriteNode(imageNamed: "audio-on-button")
     let gameNameImage = SKSpriteNode(color: .cyan, size: CGSize(width: 200, height: 100))
-    lazy var backgroundImage: SKSpriteNode = SKSpriteNode(color: .brown, size: view!.bounds.size)
+    lazy var backgroundImage: SKSpriteNode = SKSpriteNode(imageNamed: "mainmenu-background")
+    
+    var created = false
+    let manager = CMMotionManager()
+
     var soundPlayer: AVAudioPlayer?
     var backAudioActive: Bool = true
 
+    override func sceneDidLoad() {
+    }
+
     override func didMove(to view: SKView) {
-        addBackgroundSound()
+        if created {
+            return
+        }
+        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        backgroundImage.size = CGSize(width: view.bounds.size.width + 20, height: view.bounds.size.height + 20)
         addChild(backgroundImage)
-        addGameNameImage()
+        backgroundImage.zPosition = -1
+        addBackgroundSound()
+        //addGameNameImage()
         addStartButton()
         addSoundGameButton()
+        created = true
+
+        manager.startGyroUpdates()
+        manager.gyroUpdateInterval = 1/60
+        Timer.scheduledTimer(withTimeInterval: 1/60, repeats: true) { [self] _ in
+            if let gyroData = manager.gyroData {
+
+                    let currentXPosition = backgroundImage.position.x
+                    var newXPosition = currentXPosition + CGFloat(gyroData.rotationRate.y) * (2/CGFloat.pi)
+                    if newXPosition > 10 {
+                        newXPosition = 10
+                    }
+                    if newXPosition < -10 {
+                        newXPosition = -10
+                    }
+
+                    let currentYPosition = backgroundImage.position.y
+                    var newYPosition = currentYPosition + CGFloat(gyroData.rotationRate.x) * (-2/CGFloat.pi)
+                    if newYPosition > 10 {
+                        newYPosition = 10
+                    }
+                    if newYPosition < -10 {
+                        newYPosition = -10
+                    }
+
+                    backgroundImage.position = CGPoint(x: newXPosition, y: newYPosition)
+            }
+        }
+
     }
 
     func addStartButton() {
@@ -58,7 +101,10 @@ class MainMenuScene: SKScene {
     }
 
     func goToGameScene() {
-        self.view?.presentScene(GameScene(size: self.size), transition: .reveal(with: .left, duration: 1))
+//        self.view?.presentScene(GameScene(size: self.size), transition: .reveal(with: .left, duration: 1))
+//        soundPlayer?.pause()
+        let pauseScene = PauseScene(size: self.size, currentScene: self)
+        pauseScene.pauseGame()
     }
 
     func calculateTopRightPosition() -> CGPoint {
@@ -89,10 +135,10 @@ class MainMenuScene: SKScene {
     func toggleStateOfSound() {
         backAudioActive = !backAudioActive
         if backAudioActive {
-            soundGameButton.color = .red
+            soundGameButton.texture = SKTexture(imageNamed: "audio-on-button")
             soundPlayer?.play()
         } else {
-            soundGameButton.color = .darkGray
+            soundGameButton.texture = SKTexture(imageNamed: "audio-off-button")
             soundPlayer?.pause()
         }
     }
