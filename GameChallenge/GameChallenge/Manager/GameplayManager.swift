@@ -123,6 +123,9 @@ class GameplayManager {
         for card in cards {
             if self.boardManager.add(card) {
                 self.handManager.remove(card)
+                if handManager.cards.isEmpty {
+                    self.drawCards()
+                }
             } else {
                 self.handManager.backToHand(card)
             }
