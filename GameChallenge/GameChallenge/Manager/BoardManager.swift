@@ -34,10 +34,11 @@ class BoardManager {
         self.legend = legend
         self.deck = []
 
-        tempGenerateCards(num: 20)
+        setupLegend()
+
+        generateDeck()
         shuffleDeck()
 
-        setupLegend()
         setupInitialOffset()
     }
 
@@ -66,12 +67,18 @@ class BoardManager {
         return spriteComponent.node.frame.contains(point)
     }
 
-    // Funcao temporaria, remover quando as cartas  vierem
-    // de outro Manager
-    func tempGenerateCards(num: Int) {
-        for index in 0..<num {
-            let card = Card(identifier: index, assetName: "hand-card")
-            self.deck.append(card)
+    func generateDeck() {
+        guard let legendComponent = self.legend.component(ofType: LegendComponent.self) else { return }
+
+        for rawData in GameData.deck {
+            if let identifier = rawData["identifier"] as? Int,
+               let assetName = rawData["assetName"] as? String {
+                self.deck.append(Card(identifier: identifier, assetName: assetName))
+
+                if legendComponent.primary.contains(identifier) {
+                    self.deck.append(Card(identifier: identifier, assetName: assetName))
+                }
+            }
         }
     }
 

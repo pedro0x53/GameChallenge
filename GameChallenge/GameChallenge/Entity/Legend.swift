@@ -8,9 +8,28 @@
 import GameplayKit
 
 class Legend: GKEntity {
-    init(identifier: Int) {
+
+    override init() {
         super.init()
-        self.addComponent(LegendComponent(primary: [1, 2, 3, 4], secondary: [3, 4, 5, 6]))
+        self.addComponent(LegendComponent(primary: [], secondary: []))
+    }
+
+    init?(identifier: Int) {
+        super.init()
+
+        if identifier >= 0 && identifier < GameData.legends.count {
+            let firstLegend = GameData.legends[identifier]
+
+            guard let primarySolution = firstLegend["primarySolution"] as? [Int] else {
+                print("Lenda com ID \(identifier) não possui uma solução definida.")
+                return nil
+            }
+
+            self.addComponent(LegendComponent(primary: Set(primarySolution), secondary: []))
+        } else {
+            print("Lenda com ID \(identifier) não definida.")
+            return nil
+        }
     }
 
     required init?(coder: NSCoder) {
