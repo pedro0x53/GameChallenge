@@ -131,10 +131,7 @@ class GameplayManager {
 
     func revealCard(_ point: CGPoint) {
         if self.statusManager.update(status: .reveal) {
-            let identifiers: [Int] = self.boardManager.cards.compactMap { card in
-                guard let cardInfo = card.component(ofType: CardInfoComponent.self) else { return nil }
-                return cardInfo.identifier
-            }
+            _ = self.boardManager.addCorrectCardOfDeckOnBoard()
         }
     }
 

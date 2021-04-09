@@ -244,4 +244,19 @@ class BoardManager {
             return false
         }
     }
+
+    func addCorrectCardOfDeckOnBoard() -> Card? {
+        var chosenCard: Card?
+        guard let legendComponent = legend.component(ofType: LegendComponent.self) else { return nil }
+        for card in deck {
+            guard let cardInfo = card.component(ofType: CardInfoComponent.self) else { return nil }
+            if legendComponent.primary.contains(cardInfo.identifier) && !cards.contains(card) {
+                chosenCard = card
+                break
+            }
+        }
+        guard let cCard = chosenCard else { return nil }
+        add(cCard)
+        return cCard
+    }
 }
