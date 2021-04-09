@@ -8,8 +8,8 @@
 import GameplayKit
 
 class LegendComponent: GKComponent {
-    var primary: Set<Int>
-    var secondary: Set<Int>
+    let primary: Set<Int>
+    let secondary: Set<Int>
 
     init(primary: Set<Int>, secondary: Set<Int>) {
         self.primary = primary

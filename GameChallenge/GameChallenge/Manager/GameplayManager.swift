@@ -24,10 +24,14 @@ class GameplayManager {
 
         self.statusManager = StatusManager(manager: self)
 
-        let legend = Legend(identifier: 1)
-        self.add(entity: legend)
-
-        self.boardManager = BoardManager(manager: self, legend: legend)
+        if let legend = Legend(identifier: 0) {
+            self.add(entity: legend)
+            self.boardManager = BoardManager(manager: self, legend: legend)
+        } else {
+            let legend = Legend()
+            self.add(entity: legend)
+            self.boardManager = BoardManager(manager: self, legend: legend)
+        }
 
         self.handManager = HandManager(manager: self)
         self.drawCards()
