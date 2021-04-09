@@ -13,6 +13,7 @@ class StatusNode: SKNode {
 
     init(icon: String, label: String, size: CGSize) {
         self.label.text = label
+        self.label.fontName = "KiwiMaru-Medium"
         let texture = SKTexture(imageNamed: icon)
         self.icon = SKSpriteNode(texture: texture, color: .clear, size: size)
 
