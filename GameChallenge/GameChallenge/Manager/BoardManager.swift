@@ -94,6 +94,8 @@ class BoardManager {
             gamePlayManager.remove(entity: card)
         }
 
+        if alreadyOnTheBoard(identifier: cardInfoComponent.identifier) { return true }
+
         self.cards.append(newCard)
 
         newCard.addComponent(SpriteComponent(assetName: cardInfoComponent.assetName,
@@ -133,6 +135,15 @@ class BoardManager {
         }
     }
 
+    func alreadyOnTheBoard(identifier: Int) -> Bool {
+        let boardIdentifiers: [Int] = self.cards.compactMap { card in
+            guard let cardInfo = card.component(ofType: CardInfoComponent.self) else { return nil }
+            return cardInfo.identifier
+        }
+
+        return boardIdentifiers.contains(identifier)
+    }
+
     func drawCards(cards: [Card]) -> [Card] {
         self.deck.insert(contentsOf: cards.reversed(), at: 0)
         let returnedCards = self.deck[self.deck.count-4...self.deck.count-1]
@@ -156,21 +167,23 @@ class BoardManager {
     }
 
     func checkSubmition() {
-        let pontuationAndWrongCard = calculatePontuationAndWrongCards(legend: self.legend, cards: Set(self.cards))
-        if pontuationAndWrongCard.1.count > 0 {
-            executeActionFrom(submition: .wrong, wrongCards: pontuationAndWrongCard.1)
-            return
-        }
-        let pontuation = pontuationAndWrongCard.0
-        if pontuation>=goldPontuation {
-            executeActionFrom(submition: .gold)
-            return
-        } else if pontuation>=silverPontuation {
-            executeActionFrom(submition: .silver)
-            return
-        } else {
-            executeActionFrom(submition: .bronze)
-            return
+        if self.cards.count == 4 {
+            let pontuationAndWrongCard = calculatePontuationAndWrongCards(legend: self.legend, cards: Set(self.cards))
+            if pontuationAndWrongCard.1.count > 0 {
+                executeActionFrom(submition: .wrong, wrongCards: pontuationAndWrongCard.1)
+                return
+            }
+            let pontuation = pontuationAndWrongCard.0
+            if pontuation>=goldPontuation {
+                executeActionFrom(submition: .gold)
+                return
+            } else if pontuation>=silverPontuation {
+                executeActionFrom(submition: .silver)
+                return
+            } else {
+                executeActionFrom(submition: .bronze)
+                return
+            }
         }
     }
 
