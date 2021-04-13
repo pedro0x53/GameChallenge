@@ -9,12 +9,11 @@ import GameplayKit
 
 class Legend: GKEntity {
 
-    override init() {
-        super.init()
-        self.addComponent(LegendComponent(primary: [], secondary: []))
-    }
+    let identifier: Int
 
     init?(identifier: Int) {
+        self.identifier = identifier
+
         super.init()
 
         if identifier >= 0 && identifier < GameData.legends.count {
@@ -26,6 +25,7 @@ class Legend: GKEntity {
             }
 
             self.addComponent(LegendComponent(primary: Set(primarySolution), secondary: []))
+            
         } else {
             print("Lenda com ID \(identifier) não definida.")
             return nil

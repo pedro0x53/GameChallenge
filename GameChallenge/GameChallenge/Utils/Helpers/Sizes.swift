@@ -14,4 +14,5 @@ class Sizes {
     public static let boardCard = Sizes.responsiver.responsiveSize(for: CGSize(width: 53, height: 74))
     public static let legend    = Sizes.responsiver.responsiveSize(for: CGSize(width: 276, height: 382))
     public static let buttons   = Sizes.responsiver.responsiveSize(for: CGSize(width: 90, height: 90))
+    public static let comment   = Sizes.responsiver.responsiveSize(for: CGSize(width: 300, height: 100))
 }

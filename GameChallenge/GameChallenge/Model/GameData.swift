@@ -32,7 +32,11 @@ class GameData {
             "identifier": 0,
             "assetName": "",
             "primarySolution": [6, 2, 14, 16],
-            "secondarySolution": []
+            "secondarySolution": [],
+            "hints": [
+                "Teste 1",
+                "Teste 2"
+            ]
         ]
     ]
 }
