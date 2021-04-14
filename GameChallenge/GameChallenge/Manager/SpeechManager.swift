@@ -11,24 +11,33 @@ import GameplayKit
 enum SpeechType: String {
     case wrong = "Hahahaha..."
     case goodHand = "Hmm, gostei dessa mão."
-    case veryGoodHand = "Essa mão está bem \n proxima da vitória."
+    case veryGoodHand = "Essa mão tá MUITO boa."
 }
 
-class SpeechManager {
+class SpeechManager: SpeechBubbleDelegate {
     private let legendID: Int
 
-    private var handDrawsCount: Int = 0
+    private var handDrawsCount: Int = 0 {
+        didSet {
+            self.shouldSayHint()
+        }
+    }
 
     private var currentHintIndex: Int = 0
 
     private let gameplayManager: GameplayManager
 
-    private let node = SpeechBubbleNode()
+    private let node: SpeechBubbleNode = SpeechBubbleNode()
+
+    private var lines: [String] = []
+
+    private var actionKeys: [String] = []
 
     init(manager: GameplayManager, legendID: Int) {
         self.gameplayManager = manager
         self.legendID = legendID
         setupLayout()
+        node.delegate = self
     }
 
     private func setupLayout() {
@@ -37,37 +46,68 @@ class SpeechManager {
         self.gameplayManager.scene.addChild(self.node)
     }
 
-    private func sayHint() {
+    func speak() {
+        if let currentActionKey = actionKeys.first,
+           let currentAction = self.node.action(forKey: currentActionKey),
+           currentAction.duration == 0 {
+            self.actionKeys.removeFirst()
+            self.nextLine()
+        } else {
+            self.nextLine()
+        }
+    }
+
+    func nextLine() {
+        if let line = self.lines.first {
+
+            self.lines.removeFirst()
+            self.node.setText(line)
+
+            self.node.removeAllActions()
+
+            let actionKey = UUID().uuidString
+            self.actionKeys.append(actionKey)
+
+            self.node.run(SKAction.sequence([
+                SKAction.fadeIn(withDuration: 0.5),
+                SKAction.wait(forDuration: 3),
+                SKAction.run(self.speak)
+            ]), withKey: actionKey)
+
+        } else {
+            self.node.removeAllActions()
+            self.node.run(SKAction.fadeOut(withDuration: 0.5))
+        }
+    }
+
+    func sayComment(_ type: SpeechType) {
+        self.lines.append(type.rawValue)
+        self.speak()
+    }
+
+    private func shouldSayHint() {
+        if handDrawsCount == 4 {
+            handDrawsCount = 0
+            if let hint = self.getHint() {
+                self.lines.append(hint)
+                self.speak()
+            }
+        }
+    }
+
+    private func getHint() -> String? {
         if let hints = GameData.legends[self.legendID]["hints"] as? [String],
            !hints.isEmpty {
             if currentHintIndex == hints.count - 1 {
                 currentHintIndex = 0
             }
 
-            self.node.setText(hints[currentHintIndex])
+            let hint = hints[currentHintIndex]
             currentHintIndex += 1
 
-            self.node.run(SKAction.sequence([
-                SKAction.wait(forDuration: 5),
-                SKAction.fadeOut(withDuration: 0.5)
-            ]))
+            return hint
         }
-    }
-
-    func sayComment(_ type: SpeechType) {
-        self.node.setText(type.rawValue)
-        self.node.run(SKAction.sequence([
-            SKAction.wait(forDuration: 3),
-            SKAction.fadeOut(withDuration: 1),
-            SKAction.run(shouldSayHint)
-        ]))
-    }
-
-    private func shouldSayHint() {
-        if handDrawsCount == 4 {
-            handDrawsCount = 0
-            self.sayHint()
-        }
+        return nil
     }
 
     func drawingNewHand() {

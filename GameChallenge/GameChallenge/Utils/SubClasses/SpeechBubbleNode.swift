@@ -13,10 +13,14 @@ class SpeechBubbleNode: SKSpriteNode {
         let label = SKLabelNode()
         label.fontName = "KiwiMaru-Medium"
         label.fontSize = 15
-        label.numberOfLines = 0
+        label.numberOfLines = 3
+        label.verticalAlignmentMode = .center
+        label.horizontalAlignmentMode = .center
         label.lineBreakMode = .byWordWrapping
         return label
     }()
+
+    weak var delegate: SpeechBubbleDelegate?
 
     init() {
 //        let texture = SKTexture(imageNamed: "")
@@ -29,29 +33,30 @@ class SpeechBubbleNode: SKSpriteNode {
     }
 
     private func setupLayout() {
+        self.isUserInteractionEnabled = true
         self.zPosition = 5
+        speechLabel.position = CGPoint(x: 0, y: 0)
         self.addChild(speechLabel)
     }
 
     func setText(_ text: String) {
+        if self.speechLabel.text == text {
+            return
+        }
+
         self.speechLabel.run(SKAction.sequence([
             SKAction.fadeOut(withDuration: 0.3),
             SKAction.run({
                 self.speechLabel.text = text
             }),
-            SKAction.fadeIn(withDuration: 0.5)
+            SKAction.fadeIn(withDuration: 0.3)
         ]))
-
-        self.run(SKAction.fadeIn(withDuration: 0.5))
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        self.speechLabel.run(SKAction.fadeOut(withDuration: 0.3))
-
-        self.run(SKAction.sequence([
-            SKAction.wait(forDuration: 0),
-            SKAction.fadeOut(withDuration: 0.5)
-        ]))
+        if let delegate = self.delegate {
+            self.run(SKAction.run(delegate.nextLine))
+        }
     }
 }
