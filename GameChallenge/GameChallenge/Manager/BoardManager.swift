@@ -47,18 +47,22 @@ class BoardManager {
         let positionY: CGFloat = (gamePlayManager.scene.size.height - Sizes.legend.height) / 2 -
             100 / Sizes.responsiver.sizeProportion
 
-        legend.addComponent(SpriteComponent(assetName: "legend_default",
-                                            size: Sizes.legend,
-                                            position: CGPoint(x: positionX, y: positionY),
-                                            rotation: 0,
-                                            zPosition: 1))
+        let spriteComponent = SpriteComponent(assetName: "legend_default",
+                                              size: Sizes.legend,
+                                              position: CGPoint(x: positionX, y: positionY),
+                                              rotation: 0,
+                                              zPosition: 1)
+
+        spriteComponent.node.position = CGPoint(x: 0, y: positionY)
+
+        legend.addComponent(spriteComponent)
 
         self.gamePlayManager.add(entity: legend)
     }
 
     private func setupInitialOffset() {
         guard let legendSprite = self.legend.component(ofType: SpriteComponent.self) else { return }
-        self.currentPosition.x = (Sizes.legend.width + Sizes.boardCard.width + 25) / 2 - Sizes.boardCard.width
+        self.currentPosition.x = (Sizes.legend.width + Sizes.boardCard.width + 35) / 2 - Sizes.boardCard.width
         self.currentPosition.y = legendSprite.origin.y + (Sizes.boardCard.height * 2.5 + spaceBetweenCards * 2.5)
     }
 
@@ -85,6 +89,11 @@ class BoardManager {
     @discardableResult
     func add(_ card: Card) -> Bool {
         if self.cards.count >= 4 { return false }
+
+        if self.cards.isEmpty,
+           let legendSprite = self.legend.component(ofType: SpriteComponent.self) {
+            legendSprite.node.run(SKAction.moveTo(x: legendSprite.origin.x, duration: 0.5))
+        }
 
         guard let cardInfoComponent = card.component(ofType: CardInfoComponent.self) else { return false }
 
@@ -126,6 +135,11 @@ class BoardManager {
             }
         }
         repositionRemainCards()
+
+        if self.cards.isEmpty,
+           let legendSprite = self.legend.component(ofType: SpriteComponent.self) {
+            legendSprite.node.run(SKAction.moveTo(x: 0, duration: 0.5))
+        }
     }
 
     func repositionRemainCards() {
