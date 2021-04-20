@@ -11,10 +11,14 @@ import GameplayKit
 class GameScene: SKScene {
 
     private var lastUpdateTimeInterval: TimeInterval = 0
+    private var gameStarted: Bool = false
 
     var gameplayManager: GameplayManager!
 
     override func didMove(to view: SKView) {
+
+        if gameStarted { return }
+
         self.gameplayManager = GameplayManager(scene: self)
 
         let bkgTexture = SKTexture(imageNamed: "bkg_gameplay")
@@ -26,7 +30,7 @@ class GameScene: SKScene {
         let pauseIcon = SKSpriteNode(texture: pauseBtnTexture, size: pauseBtnTexture.size())
         pauseIcon.setScale(0.5)
         let pauseButton = ButtonNode(size: pauseIcon.size)
-//        pauseButton.setAction(for: .touchEnded, action: )
+        pauseButton.setAction(for: .touchEnded) { _ in self.showPauseMenu() }
         pauseButton.contentNode.addChild(pauseIcon)
         pauseButton.position = CGPoint(x: self.size.width / 2 - pauseButton.size.width / 2 - 20,
                                       y: self.size.height / 2 - pauseButton.size.height / 2 - 20)
@@ -49,6 +53,8 @@ class GameScene: SKScene {
         drawButton.contentNode.addChild(drawNode)
         drawButton.position = CGPoint(x: Sizes.buttons.width / 2 + 30, y: -130)
         self.addChild(drawButton)
+
+        self.gameStarted = true
     }
 
     override func update(_ currentTime: TimeInterval) {
@@ -57,11 +63,18 @@ class GameScene: SKScene {
 
         gameplayManager.update(deltaTime)
     }
+
     func goToGameOverScene() {
         let gameOverScene = GameOverScene(size: self.size, currentScene: self)
         gameOverScene.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.view?.presentScene(gameOverScene, transition: .push(with: .left, duration: 1))
         SongsManager.shared.setCurrentSong(sceneSong: .mainMenu)
         SongsManager.shared.playSong()
+    }
+
+    func showPauseMenu() {
+        let pauseScene = PauseScene(size: self.size, currentScene: self)
+        pauseScene.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        self.view?.presentScene(pauseScene, transition: .push(with: .down, duration: 1))
     }
 }
