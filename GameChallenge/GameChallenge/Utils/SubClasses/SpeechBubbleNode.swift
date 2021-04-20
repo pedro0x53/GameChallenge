@@ -12,6 +12,7 @@ class SpeechBubbleNode: SKSpriteNode {
     let speechLabel: SKLabelNode = {
         let label = SKLabelNode()
         label.fontName = "KiwiMaru-Medium"
+        label.fontColor = .black
         label.fontSize = 15
         label.numberOfLines = 3
         label.verticalAlignmentMode = .center
@@ -23,8 +24,8 @@ class SpeechBubbleNode: SKSpriteNode {
     weak var delegate: SpeechBubbleDelegate?
 
     init() {
-//        let texture = SKTexture(imageNamed: "")
-        super.init(texture: nil, color: .black, size: Sizes.comment)
+        let texture = SKTexture(imageNamed: "speechBubble")
+        super.init(texture: texture, color: .clear, size: Sizes.comment)
         setupLayout()
     }
 
