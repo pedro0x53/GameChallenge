@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "hand-card.png",
+      "filename" : "speechBubble.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "hand-card@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "hand-card@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

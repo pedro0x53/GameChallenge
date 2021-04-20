@@ -32,7 +32,7 @@ class GameScene: SKScene {
                                       y: self.size.height / 2 - pauseButton.size.height / 2 - 20)
         self.addChild(pauseButton)
 
-        let revealTexture = SKTexture(imageNamed: "reveal_icon")
+        let revealTexture = SKTexture(imageNamed: "reveal_button_icon")
         let revealNode = SKSpriteNode(texture: revealTexture, size: revealTexture.size())
         revealNode.setScale(0.4)
         let revealButton = ButtonNode(size: revealNode.size)

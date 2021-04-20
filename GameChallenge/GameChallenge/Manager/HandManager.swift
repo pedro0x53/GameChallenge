@@ -74,6 +74,20 @@ class HandManager {
         self.cards.remove(at: index)
     }
 
+    func correctCardsInHandCount() -> Int {
+        let currentIdentifiers: Set<Int> = cards.reduce(into: Set<Int>()) { (result, card) in
+            if let cardInfoComponent = card.component(ofType: CardInfoComponent.self) {
+                result.insert(cardInfoComponent.identifier)
+            }
+        }
+
+        if let primaryIdentifiers = GameData.legends[gameplayManager.currentLegendID]["primarySolution"] as? [Int] {
+            return currentIdentifiers.intersection(primaryIdentifiers).count
+        }
+
+        return 0
+    }
+
     func select(_ card: Card) {
         if !selectedCards.contains(card) {
             selectedCards.append(card)

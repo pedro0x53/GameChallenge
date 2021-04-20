@@ -16,19 +16,19 @@ class GameplayManager {
     private(set) var statusManager: StatusManager!
     private(set) var boardManager: BoardManager!
     private(set) var handManager: HandManager!
+    private(set) var speechManager: SpeechManager!
 
     let moveSystem = GKComponentSystem(componentClass: MovementComponent.self)
+
+    private(set) var currentLegendID: Int = 0
 
     init(scene: SKScene) {
         self.scene = scene
 
         self.statusManager = StatusManager(manager: self)
+        self.speechManager = SpeechManager(manager: self, legendID: currentLegendID)
 
-        if let legend = Legend(identifier: 0) {
-            self.add(entity: legend)
-            self.boardManager = BoardManager(manager: self, legend: legend)
-        } else {
-            let legend = Legend()
+        if let legend = Legend(identifier: currentLegendID) {
             self.add(entity: legend)
             self.boardManager = BoardManager(manager: self, legend: legend)
         }
@@ -101,9 +101,13 @@ class GameplayManager {
         } else {
             AnimationManager.drawCardsIn(entities: newCards, wait: 0.5)
         }
+
+        self.speechManager.drawingNewHand()
     }
 
     func takeDamage() {
+        self.speechManager.sayComment(.wrong)
+
         if !self.statusManager.update(status: .life) {
             self.gameOver()
         } else {

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0061560B25FF90FE00605341 /* CardInfoComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061560A25FF90FE00605341 /* CardInfoComponent.swift */; };
 		0061561025FF931E00605341 /* GameplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061560F25FF931E00605341 /* GameplayManager.swift */; };
-		0061562825FF9FF800605341 /* RepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061562725FF9FF800605341 /* RepositoryProtocol.swift */; };
 		0061566026039A2500605341 /* StatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061565F26039A2500605341 /* StatusManager.swift */; };
 		27248FC2261F30BC00D36F8C /* SongsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27248FC1261F30BC00D36F8C /* SongsManager.swift */; };
 		27248FCA261F352300D36F8C /* gameplay_background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 27248FC9261F352300D36F8C /* gameplay_background.mp3 */; };
@@ -20,12 +19,15 @@
 		27F6FBD8260E2BA400BE2726 /* background_jogo2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 27F6FBD7260E2BA400BE2726 /* background_jogo2.mp3 */; };
 		4BF7BD6026208FA700FB857F /* KiwiMaru-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4BF7BD5F26208FA700FB857F /* KiwiMaru-Medium.ttf */; };
 		FE252AEB261B29DA0049F3A6 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE252AEA261B29DA0049F3A6 /* ButtonNode.swift */; };
+		FE26DD8026271D5C003AB597 /* SpeechBubbleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE26DD7F26271D5C003AB597 /* SpeechBubbleDelegate.swift */; };
 		FE46A628260B644C0072339F /* AnimationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE46A627260B644C0072339F /* AnimationManager.swift */; };
 		FE51F7FE2603C1AA00F9C763 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE51F7FD2603C1AA00F9C763 /* Helper.swift */; };
 		FE5AE4D025FB8FFB006D4B85 /* InteractionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5AE4CF25FB8FFB006D4B85 /* InteractionNode.swift */; };
 		FE5AE4DE25FB9746006D4B85 /* StatusNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5AE4DD25FB9746006D4B85 /* StatusNode.swift */; };
 		FE5AE4F425FBB0FB006D4B85 /* FollowComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5AE4F325FBB0FB006D4B85 /* FollowComponent.swift */; };
 		FE5AE4F925FBB214006D4B85 /* MovementComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5AE4F825FBB214006D4B85 /* MovementComponent.swift */; };
+		FE6CD1182625C01200DAD9E8 /* SpeechBubbleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6CD1172625C01200DAD9E8 /* SpeechBubbleNode.swift */; };
+		FE6CD1262625D06200DAD9E8 /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6CD1252625D06200DAD9E8 /* SpeechManager.swift */; };
 		FE734FD6261C7ACC005FBB98 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE734FD5261C7ACC005FBB98 /* Sizes.swift */; };
 		FEA725FF26024AB600D76F68 /* Responsiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA725FE26024AB600D76F68 /* Responsiver.swift */; };
 		FEADEECB25FA3ED800D5A92A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEECA25FA3ED800D5A92A /* AppDelegate.swift */; };
@@ -37,7 +39,6 @@
 		FEADEEEE25FA3EDA00D5A92A /* GameChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEEED25FA3EDA00D5A92A /* GameChallengeUITests.swift */; };
 		FEADEF2E25FA434A00D5A92A /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEF2D25FA434A00D5A92A /* Card.swift */; };
 		FEADEF3325FA442A00D5A92A /* StatusItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEF3225FA442A00D5A92A /* StatusItem.swift */; };
-		FEADEF3825FA44A400D5A92A /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEF3725FA44A400D5A92A /* Comment.swift */; };
 		FEADEF3D25FA44C400D5A92A /* Legend.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEF3C25FA44C400D5A92A /* Legend.swift */; };
 		FEADEF4B25FA459E00D5A92A /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEF4A25FA459E00D5A92A /* SpriteComponent.swift */; };
 		FEADEF5025FA495500D5A92A /* LegendComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEADEF4F25FA495500D5A92A /* LegendComponent.swift */; };
@@ -69,7 +70,6 @@
 /* Begin PBXFileReference section */
 		0061560A25FF90FE00605341 /* CardInfoComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfoComponent.swift; sourceTree = "<group>"; };
 		0061560F25FF931E00605341 /* GameplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayManager.swift; sourceTree = "<group>"; };
-		0061562725FF9FF800605341 /* RepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryProtocol.swift; sourceTree = "<group>"; };
 		0061565F26039A2500605341 /* StatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusManager.swift; sourceTree = "<group>"; };
 		27248FC1261F30BC00D36F8C /* SongsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsManager.swift; sourceTree = "<group>"; };
 		27248FC9261F352300D36F8C /* gameplay_background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameplay_background.mp3; sourceTree = "<group>"; };
@@ -80,12 +80,15 @@
 		27F6FBD7260E2BA400BE2726 /* background_jogo2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background_jogo2.mp3; sourceTree = "<group>"; };
 		4BF7BD5F26208FA700FB857F /* KiwiMaru-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KiwiMaru-Medium.ttf"; sourceTree = "<group>"; };
 		FE252AEA261B29DA0049F3A6 /* ButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
+		FE26DD7F26271D5C003AB597 /* SpeechBubbleDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechBubbleDelegate.swift; sourceTree = "<group>"; };
 		FE46A627260B644C0072339F /* AnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationManager.swift; sourceTree = "<group>"; };
 		FE51F7FD2603C1AA00F9C763 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		FE5AE4CF25FB8FFB006D4B85 /* InteractionNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionNode.swift; sourceTree = "<group>"; };
 		FE5AE4DD25FB9746006D4B85 /* StatusNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusNode.swift; sourceTree = "<group>"; };
 		FE5AE4F325FBB0FB006D4B85 /* FollowComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowComponent.swift; sourceTree = "<group>"; };
 		FE5AE4F825FBB214006D4B85 /* MovementComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementComponent.swift; sourceTree = "<group>"; };
+		FE6CD1172625C01200DAD9E8 /* SpeechBubbleNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechBubbleNode.swift; sourceTree = "<group>"; };
+		FE6CD1252625D06200DAD9E8 /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
 		FE734FD5261C7ACC005FBB98 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
 		FEA725FE26024AB600D76F68 /* Responsiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responsiver.swift; sourceTree = "<group>"; };
 		FEADEEC725FA3ED800D5A92A /* GameChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,7 +106,6 @@
 		FEADEEEF25FA3EDA00D5A92A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FEADEF2D25FA434A00D5A92A /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		FEADEF3225FA442A00D5A92A /* StatusItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItem.swift; sourceTree = "<group>"; };
-		FEADEF3725FA44A400D5A92A /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		FEADEF3C25FA44C400D5A92A /* Legend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Legend.swift; sourceTree = "<group>"; };
 		FEADEF4A25FA459E00D5A92A /* SpriteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
 		FEADEF4F25FA495500D5A92A /* LegendComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendComponent.swift; sourceTree = "<group>"; };
@@ -151,7 +153,7 @@
 		0061562625FF9FD000605341 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				0061562725FF9FF800605341 /* RepositoryProtocol.swift */,
+				FE26DD7F26271D5C003AB597 /* SpeechBubbleDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -190,6 +192,7 @@
 				FE5AE4CF25FB8FFB006D4B85 /* InteractionNode.swift */,
 				FE5AE4DD25FB9746006D4B85 /* StatusNode.swift */,
 				FE252AEA261B29DA0049F3A6 /* ButtonNode.swift */,
+				FE6CD1172625C01200DAD9E8 /* SpeechBubbleNode.swift */,
 			);
 			path = SubClasses;
 			sourceTree = "<group>";
@@ -279,7 +282,6 @@
 			children = (
 				FEADEF2D25FA434A00D5A92A /* Card.swift */,
 				FEADEF3225FA442A00D5A92A /* StatusItem.swift */,
-				FEADEF3725FA44A400D5A92A /* Comment.swift */,
 				FEADEF3C25FA44C400D5A92A /* Legend.swift */,
 			);
 			path = Entity;
@@ -308,6 +310,7 @@
 				0061565F26039A2500605341 /* StatusManager.swift */,
 				FE46A627260B644C0072339F /* AnimationManager.swift */,
 				27248FC1261F30BC00D36F8C /* SongsManager.swift */,
+				FE6CD1252625D06200DAD9E8 /* SpeechManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -488,23 +491,24 @@
 				FED17A752604DAB800BBE660 /* CGPoint.swift in Sources */,
 				FEDE41FE26207C1100B797DA /* GameData.swift in Sources */,
 				FEADEF3D25FA44C400D5A92A /* Legend.swift in Sources */,
-				0061562825FF9FF800605341 /* RepositoryProtocol.swift in Sources */,
 				FEADEF2E25FA434A00D5A92A /* Card.swift in Sources */,
 				FEADEED325FA3ED800D5A92A /* GameViewController.swift in Sources */,
+				FE6CD1182625C01200DAD9E8 /* SpeechBubbleNode.swift in Sources */,
 				FEB4502A2600EEFA00E5B25C /* HandManager.swift in Sources */,
 				FEADEF5025FA495500D5A92A /* LegendComponent.swift in Sources */,
 				275F490C2600EE0200EE30A9 /* BoardManager.swift in Sources */,
-				FEADEF3825FA44A400D5A92A /* Comment.swift in Sources */,
 				FEADEECB25FA3ED800D5A92A /* AppDelegate.swift in Sources */,
 				27539406261C885A0026CCBA /* PauseScene.swift in Sources */,
 				27248FC2261F30BC00D36F8C /* SongsManager.swift in Sources */,
 				27920337260B8576007E8A64 /* MainMenuScene.swift in Sources */,
 				0061561025FF931E00605341 /* GameplayManager.swift in Sources */,
+				FE6CD1262625D06200DAD9E8 /* SpeechManager.swift in Sources */,
 				FE46A628260B644C0072339F /* AnimationManager.swift in Sources */,
 				FE252AEB261B29DA0049F3A6 /* ButtonNode.swift in Sources */,
 				0061560B25FF90FE00605341 /* CardInfoComponent.swift in Sources */,
 				FEADEF3325FA442A00D5A92A /* StatusItem.swift in Sources */,
 				FE734FD6261C7ACC005FBB98 /* Sizes.swift in Sources */,
+				FE26DD8026271D5C003AB597 /* SpeechBubbleDelegate.swift in Sources */,
 				FE5AE4DE25FB9746006D4B85 /* StatusNode.swift in Sources */,
 				FE5AE4D025FB8FFB006D4B85 /* InteractionNode.swift in Sources */,
 				FE5AE4F425FBB0FB006D4B85 /* FollowComponent.swift in Sources */,

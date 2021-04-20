@@ -32,7 +32,19 @@ class GameData {
             "identifier": 0,
             "assetName": "",
             "primarySolution": [6, 2, 14, 16],
-            "secondarySolution": []
+            "secondarySolution": [],
+            "hints": [
+                "Isso é bolo de fubá?",
+                "Só um ventinho de leve hihihi",
+                """
+                      Que desejos oq?
+                Eu lá tenho cara de gênio
+                """,
+                """
+                Ah! ela vai ficar bem, foi só uma...
+                       brincadeirinha HAHAHA
+                """
+            ]
         ]
     ]
 }
