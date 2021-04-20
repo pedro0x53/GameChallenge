@@ -116,7 +116,9 @@ class GameplayManager {
     func nextLevel() {}
 
     func gameOver() {
-        print("Game Over")
+        if let gameOver = scene as? GameScene {
+            gameOver.goToGameOverScene()
+        }
     }
 
     func putCardsOnTheTable(cards: [Card]) {

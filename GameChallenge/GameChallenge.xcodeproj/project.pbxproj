@@ -18,6 +18,7 @@
 		275F49112600EE3C00EE30A9 /* BoardManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275F49102600EE3C00EE30A9 /* BoardManagerTests.swift */; };
 		27920337260B8576007E8A64 /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27920336260B8576007E8A64 /* MainMenuScene.swift */; };
 		27F6FBD8260E2BA400BE2726 /* background_jogo2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 27F6FBD7260E2BA400BE2726 /* background_jogo2.mp3 */; };
+		4BC86DA2262EFE4500E02737 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC86DA1262EFE4500E02737 /* GameOverScene.swift */; };
 		4BF7BD6026208FA700FB857F /* KiwiMaru-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4BF7BD5F26208FA700FB857F /* KiwiMaru-Medium.ttf */; };
 		FE252AEB261B29DA0049F3A6 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE252AEA261B29DA0049F3A6 /* ButtonNode.swift */; };
 		FE46A628260B644C0072339F /* AnimationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE46A627260B644C0072339F /* AnimationManager.swift */; };
@@ -78,6 +79,7 @@
 		275F49102600EE3C00EE30A9 /* BoardManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardManagerTests.swift; sourceTree = "<group>"; };
 		27920336260B8576007E8A64 /* MainMenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
 		27F6FBD7260E2BA400BE2726 /* background_jogo2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background_jogo2.mp3; sourceTree = "<group>"; };
+		4BC86DA1262EFE4500E02737 /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		4BF7BD5F26208FA700FB857F /* KiwiMaru-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KiwiMaru-Medium.ttf"; sourceTree = "<group>"; };
 		FE252AEA261B29DA0049F3A6 /* ButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 		FE46A627260B644C0072339F /* AnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationManager.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				FEADEED925FA3EDA00D5A92A /* Info.plist */,
 				27920336260B8576007E8A64 /* MainMenuScene.swift */,
 				27539405261C885A0026CCBA /* PauseScene.swift */,
+				4BC86DA1262EFE4500E02737 /* GameOverScene.swift */,
 			);
 			path = GameChallenge;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				27539406261C885A0026CCBA /* PauseScene.swift in Sources */,
 				27248FC2261F30BC00D36F8C /* SongsManager.swift in Sources */,
 				27920337260B8576007E8A64 /* MainMenuScene.swift in Sources */,
+				4BC86DA2262EFE4500E02737 /* GameOverScene.swift in Sources */,
 				0061561025FF931E00605341 /* GameplayManager.swift in Sources */,
 				FE46A628260B644C0072339F /* AnimationManager.swift in Sources */,
 				FE252AEB261B29DA0049F3A6 /* ButtonNode.swift in Sources */,
