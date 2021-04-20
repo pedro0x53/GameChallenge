@@ -13,7 +13,7 @@ class SpeechBubbleNode: SKSpriteNode {
         let label = SKLabelNode()
         label.fontName = "KiwiMaru-Medium"
         label.fontColor = .black
-        label.fontSize = 15
+        label.fontSize = 15 / Sizes.responsiver.sizeProportion
         label.numberOfLines = 3
         label.verticalAlignmentMode = .center
         label.horizontalAlignmentMode = .center
