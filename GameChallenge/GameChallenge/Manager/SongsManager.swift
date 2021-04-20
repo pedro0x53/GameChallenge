@@ -37,15 +37,18 @@ class SongsManager {
         }
     }
 
-    func playSong() {
+    func playSong(startPoint: TimeInterval = 0) {
+        soundPlayer.currentTime = startPoint
         soundPlayer.play()
+        soundPlayer.setVolume(1, fadeDuration: 0.5)
     }
 
     func pauseSong() {
-        soundPlayer.pause()
+        soundPlayer.setVolume(0, fadeDuration: 0.5)
+        //soundPlayer.pause()
     }
 
-    func setVolume(to newVolume: Float) {
-        soundPlayer.volume = newVolume
+    func setVolume(to newVolume: Float, fadeDuration: TimeInterval) {
+        soundPlayer.setVolume(newVolume, fadeDuration: fadeDuration)
     }
 }

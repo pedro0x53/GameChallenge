@@ -98,8 +98,16 @@ class MainMenuScene: SKScene {
         let gameScene = GameScene(size: self.size)
         gameScene.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.view?.presentScene(gameScene, transition: .push(with: .left, duration: 1))
-        SongsManager.shared.setCurrentSong(sceneSong: .gamePlay)
-        SongsManager.shared.playSong()
+        changeSong()
+    }
+
+    func changeSong() {
+        SongsManager.shared.setVolume(to: 0, fadeDuration: 1)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            SongsManager.shared.setCurrentSong(sceneSong: .gamePlay)
+            SongsManager.shared.setVolume(to: 1, fadeDuration: 0.3)
+            SongsManager.shared.playSong(startPoint: 5)
+        }
     }
 
     func calculateTopRightPosition() -> CGPoint {
