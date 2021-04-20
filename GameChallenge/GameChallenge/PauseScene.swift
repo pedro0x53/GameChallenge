@@ -9,10 +9,9 @@ import Foundation
 import SpriteKit
 
 class PauseScene: SKScene {
-    
-    private lazy var backgroundImage: SKSpriteNode = SKSpriteNode(color: .brown, size: view!.bounds.size)
-    private let exitGameButton: SKSpriteNode = SKSpriteNode(color: .red, size: CGSize(width: 100, height: 60))
-    private let backToGameButton: SKSpriteNode = SKSpriteNode(color: .blue, size: CGSize(width: 100, height: 60))
+
+    private let exitGameButton: SKSpriteNode = SKSpriteNode(imageNamed: "home_icon")
+    private let backToGameButton: SKSpriteNode = SKSpriteNode(imageNamed: "retry_icon")
     private var currentGameScene: SKScene
 
     init(size: CGSize, currentScene: SKScene) {
@@ -37,18 +36,25 @@ class PauseScene: SKScene {
 
     private func addBackToGameButton() {
         backToGameButton.name = "back-game-button"
-        backToGameButton.position = CGPoint(x: 0, y: 48)
+        backToGameButton.position = CGPoint(x: 0, y: 60)
+        backToGameButton.size = CGSize(width: 70, height: 90)
+        backToGameButton.zPosition = 10
         addChild(backToGameButton)
     }
 
     private func addExitGameButton() {
         exitGameButton.name = "exit-game-button"
-        exitGameButton.position = CGPoint(x: 0, y: -48)
+        exitGameButton.position = CGPoint(x: 0, y: -60)
+        exitGameButton.size = CGSize(width: 70, height: 90)
+        exitGameButton.zPosition = 10
         addChild(exitGameButton)
     }
 
     private func addBackgroundImage() {
-        addChild(backgroundImage)
+        let bkgTexture = SKTexture(imageNamed: "bkg_gameplay")
+        let backgroundNode = SKSpriteNode(texture: bkgTexture, size: self.size)
+        backgroundNode.zPosition = 0
+        self.addChild(backgroundNode)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
