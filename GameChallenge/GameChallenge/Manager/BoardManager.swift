@@ -230,7 +230,7 @@ class BoardManager {
 
     func getFirstSecondaryIdentifierOutOfBoard() -> Int? {
         guard let legendComponent = legend.component(ofType: LegendComponent.self) else { return nil }
-        let allSecondaryCardsIdentifiers = legendComponent.secondary
+        let allSecondaryCardsIdentifiers = legendComponent.primary
         let allIdentifiersOnBoard = getAllCardsIdentifiersOnBoard()
         for secondaryCardIdentifier in allSecondaryCardsIdentifiers {
             if !allIdentifiersOnBoard.contains(secondaryCardIdentifier) {
@@ -258,13 +258,22 @@ class BoardManager {
         }
     }
 
+    func getCardsIdentifiers() -> [Int] {
+        return cards.compactMap({
+            guard let cardInfo = $0.component(ofType: CardInfoComponent.self) else {return nil}
+            return cardInfo.identifier
+        })
+    }
+
     func addCorrectCardOfDeckOnBoard() -> Card? {
         var chosenCard: Card?
         guard let legendComponent = legend.component(ofType: LegendComponent.self) else { return nil }
         for card in deck {
-            guard let cardInfo = card.component(ofType: CardInfoComponent.self) else { return nil }
-            if legendComponent.primary.contains(cardInfo.identifier) && !cards.contains(card) {
+            guard let cardInfo = card.component(ofType: CardInfoComponent.self) else { continue }
+            if legendComponent.primary.contains(cardInfo.identifier)
+                && !getCardsIdentifiers().contains(cardInfo.identifier) {
                 chosenCard = card
+                removeCardsOfDeck(identifier: cardInfo.identifier)
                 break
             }
         }
