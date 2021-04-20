@@ -42,26 +42,26 @@ class GameOverScene: SKScene {
         titleLabel.fontName = "KiwiMaru-Medium"
         titleLabel.fontSize = 45
         titleLabel.color = .white
-        titleLabel.position = CGPoint(x: 0, y: 0)
+        titleLabel.position = CGPoint(x: 0, y: 100)
         addChild(titleLabel)
     }
     private func addSubtitleLabel() {
         subtitleLabel.fontName = "KiwiMaru-Medium"
         subtitleLabel.fontSize = 16
         subtitleLabel.color = .white
-        subtitleLabel.position = CGPoint(x: 0, y: -40)
+        subtitleLabel.position = CGPoint(x: 0, y: 60)
         addChild(subtitleLabel)
     }
     private func addHomeButton() {
         homeButton.size = CGSize(width: 70, height: 90)
         homeButton.name = "homeButton"
-        homeButton.position = CGPoint(x: -65, y: -150)
+        homeButton.position = CGPoint(x: -65, y: -50)
         addChild(homeButton)
     }
     private func addRetryButton() {
         retryButton.size = CGSize(width: 70, height: 90)
         retryButton.name = "retryButton"
-        retryButton.position = CGPoint(x: 65, y: -150)
+        retryButton.position = CGPoint(x: 65, y: -50)
         addChild(retryButton)
     }
 
