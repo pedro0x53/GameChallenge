@@ -18,7 +18,19 @@ class SpeechBubbleNode: SKSpriteNode {
         label.verticalAlignmentMode = .center
         label.horizontalAlignmentMode = .center
         label.lineBreakMode = .byWordWrapping
+        label.zPosition = 1
         return label
+    }()
+
+    private static let attributes: [NSAttributedString.Key: Any] = {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+
+        return [
+            .font: UIFont(name: "KiwiMaru-Medium", size: 15) ?? UIFont.systemFont(ofSize: 15),
+            .foregroundColor: UIColor.black,
+            .paragraphStyle: paragraphStyle
+        ]
     }()
 
     weak var delegate: SpeechBubbleDelegate?

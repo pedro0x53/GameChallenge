@@ -34,8 +34,16 @@ class GameData {
             "primarySolution": [6, 2, 14, 16],
             "secondarySolution": [],
             "hints": [
-                "Teste 1",
-                "Teste 2"
+                "Isso é bolo de fubá?",
+                "Só um ventinho de leve hihihi",
+                """
+                      Que desejos oq?
+                Eu lá tenho cara de gênio
+                """,
+                """
+                Ah! ela vai ficar bem, foi só uma...
+                       brincadeirinha HAHAHA
+                """
             ]
         ]
     ]

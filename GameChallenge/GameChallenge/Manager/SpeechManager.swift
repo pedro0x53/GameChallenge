@@ -17,11 +17,7 @@ enum SpeechType: String {
 class SpeechManager: SpeechBubbleDelegate {
     private let legendID: Int
 
-    private var handDrawsCount: Int = 0 {
-        didSet {
-            self.shouldSayHint()
-        }
-    }
+    private var handDrawsCount: Int = 0
 
     private var currentHintIndex: Int = 0
 
@@ -41,7 +37,6 @@ class SpeechManager: SpeechBubbleDelegate {
     }
 
     private func setupLayout() {
-        // self.node.position =
         self.node.alpha = 0
         self.gameplayManager.scene.addChild(self.node)
     }
@@ -85,25 +80,23 @@ class SpeechManager: SpeechBubbleDelegate {
         self.speak()
     }
 
-    private func shouldSayHint() {
-        if handDrawsCount == 4 {
-            handDrawsCount = 0
-            if let hint = self.getHint() {
-                self.lines.append(hint)
-                self.speak()
-            }
+    private func sayHint() {
+        handDrawsCount = 0
+        if let hint = self.getHint() {
+            self.lines.append(hint)
+            self.speak()
         }
     }
 
     private func getHint() -> String? {
         if let hints = GameData.legends[self.legendID]["hints"] as? [String],
            !hints.isEmpty {
-            if currentHintIndex == hints.count - 1 {
-                currentHintIndex = 0
-            }
-
             let hint = hints[currentHintIndex]
             currentHintIndex += 1
+
+            if currentHintIndex == hints.count {
+                currentHintIndex = 0
+            }
 
             return hint
         }
@@ -112,12 +105,16 @@ class SpeechManager: SpeechBubbleDelegate {
 
     func drawingNewHand() {
         self.handDrawsCount += 1
-
-        let correctCount = self.gameplayManager.handManager.correctCardsInHandCount()
-        if correctCount >= 3 {
-            self.sayComment(.veryGoodHand)
-        } else if correctCount >= 2 {
-            self.sayComment(.goodHand)
+        if handDrawsCount == 4 {
+            handDrawsCount = 0
+            self.sayHint()
+        } else {
+            let correctCount = self.gameplayManager.handManager.correctCardsInHandCount()
+            if correctCount >= 3 {
+                self.sayComment(.veryGoodHand)
+            } else if correctCount >= 2 {
+                self.sayComment(.goodHand)
+            }
         }
     }
 }
