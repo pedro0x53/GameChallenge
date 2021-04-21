@@ -64,6 +64,14 @@ class GameScene: SKScene {
         gameplayManager.update(deltaTime)
     }
 
+    func legendFound() {
+        let legendFoundScene = LegendFoundScene(size: self.size, currentScene: self)
+        legendFoundScene.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        self.view?.presentScene(legendFoundScene, transition: .push(with: .left, duration: 1))
+        SongsManager.shared.setCurrentSong(sceneSong: .mainMenu)
+        SongsManager.shared.playSong()
+    }
+    
     func goToGameOverScene() {
         let gameOverScene = GameOverScene(size: self.size, currentScene: self)
         gameOverScene.anchorPoint = CGPoint(x: 0.5, y: 0.5)
