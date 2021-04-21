@@ -117,7 +117,11 @@ class GameplayManager {
         }
     }
 
-    func nextLevel() {}
+    func nextLevel() {
+        if let legendFound = scene as? GameScene {
+            legendFound.legendFound()
+        }
+    }
 
     func gameOver() {
         if let gameOver = scene as? GameScene {
@@ -125,6 +129,7 @@ class GameplayManager {
         }
     }
 
+   
     func putCardsOnTheTable(cards: [Card]) {
         for card in cards {
             if self.boardManager.add(card) {

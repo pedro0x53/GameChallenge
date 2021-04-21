@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		003674D326304B8C0061AAFF /* LegendFoundScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003674D226304B8C0061AAFF /* LegendFoundScene.swift */; };
 		0061560B25FF90FE00605341 /* CardInfoComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061560A25FF90FE00605341 /* CardInfoComponent.swift */; };
 		0061561025FF931E00605341 /* GameplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061560F25FF931E00605341 /* GameplayManager.swift */; };
 		0061566026039A2500605341 /* StatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061565F26039A2500605341 /* StatusManager.swift */; };
@@ -69,6 +70,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		003674D226304B8C0061AAFF /* LegendFoundScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendFoundScene.swift; sourceTree = "<group>"; };
 		0061560A25FF90FE00605341 /* CardInfoComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfoComponent.swift; sourceTree = "<group>"; };
 		0061560F25FF931E00605341 /* GameplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayManager.swift; sourceTree = "<group>"; };
 		0061565F26039A2500605341 /* StatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusManager.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				FEADEED925FA3EDA00D5A92A /* Info.plist */,
 				27920336260B8576007E8A64 /* MainMenuScene.swift */,
 				27539405261C885A0026CCBA /* PauseScene.swift */,
+				003674D226304B8C0061AAFF /* LegendFoundScene.swift */,
 				4BC86DA1262EFE4500E02737 /* GameOverScene.swift */,
 			);
 			path = GameChallenge;
@@ -491,6 +494,7 @@
 				FE5AE4F925FBB214006D4B85 /* MovementComponent.swift in Sources */,
 				FEADEED125FA3ED800D5A92A /* GameScene.swift in Sources */,
 				FEADEF5525FA49AF00D5A92A /* StatusComponent.swift in Sources */,
+				003674D326304B8C0061AAFF /* LegendFoundScene.swift in Sources */,
 				FED17A752604DAB800BBE660 /* CGPoint.swift in Sources */,
 				FEDE41FE26207C1100B797DA /* GameData.swift in Sources */,
 				FEADEF3D25FA44C400D5A92A /* Legend.swift in Sources */,
