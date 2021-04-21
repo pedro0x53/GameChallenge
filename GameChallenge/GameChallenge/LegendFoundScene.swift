@@ -38,8 +38,8 @@ class LegendFoundScene: SKScene {
         backgroundImage.size = CGSize(width: view.bounds.size.width, height: view.bounds.size.height)
         addBackgroundImage()
         addHomeButton()
-        addCongratulationsLabel()
         addLegendAnnouncementLabel()
+        addCongratulationsLabel()
         addLegendCard()
 
     }
@@ -51,40 +51,38 @@ class LegendFoundScene: SKScene {
         congratulationsLabel.fontName = "KiwiMaru-Medium"
         congratulationsLabel.fontSize = 45
         congratulationsLabel.color = .white
-        congratulationsLabel.position = CGPoint(x: 0, y: 300)
+        congratulationsLabel.position = CGPoint(x: 0, y: legendNameAnnouncementLabel.position.y+30)
         addChild(congratulationsLabel)
     }
     private func addLegendAnnouncementLabel() {
         legendNameAnnouncementLabel.fontName = "KiwiMaru-Medium"
         legendNameAnnouncementLabel.fontSize = 16
         legendNameAnnouncementLabel.color = .white
-        legendNameAnnouncementLabel.position = CGPoint(x: 0, y: 260)
+        legendNameAnnouncementLabel.position = CGPoint(x: 0, y: Sizes.legend.height/2+40)
         addChild(legendNameAnnouncementLabel)
     }
 
     private func addLegendCard(){
-        legendCard.size = CGSize(width: 280, height: 360)
+        legendCard.size = Sizes.legend
         legendCard.name = "legendCard"
-        legendCard.position = CGPoint(x: 0, y: 20)
+        legendCard.position = CGPoint(x: 0, y: 0)
         addChild(legendCard)
     }
 
     private func addHomeButton() {
         homeButton.size = CGSize(width: 70, height: 90)
         homeButton.name = "homeButton"
-        homeButton.position = CGPoint(x: 0, y: -250)
+        homeButton.position = CGPoint(x: 0, y: -Sizes.legend.height/2-80)
         addChild(homeButton)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
-            let loc = touch.location(in: self)
-            let element = atPoint(loc).name
+            let touchPoint = touch.location(in: self)
+            let element = atPoint(touchPoint).name
             switch element {
             case "homeButton":
                 backToHome()
-            case "retryButton":
-                retry()
             default:
                 return
             }
