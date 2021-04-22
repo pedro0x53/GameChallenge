@@ -157,4 +157,24 @@ class AnimationManager {
             ]))
         }
     }
+
+    public static func select(_ entity: GKEntity) {
+        guard let spriteComponent = entity.component(ofType: SpriteComponent.self),
+              let interactionComponent = entity.component(ofType: InteractionComponent.self) else { return }
+
+        let moveTo = SKAction.moveTo(y: spriteComponent.origin.y + 15, duration: 0.2)
+
+        spriteComponent.node.run(moveTo)
+        interactionComponent.node.run(moveTo)
+    }
+
+    public static func deselect(_ entity: GKEntity) {
+        guard let spriteComponent = entity.component(ofType: SpriteComponent.self),
+              let interactionComponent = entity.component(ofType: InteractionComponent.self) else { return }
+
+        let moveTo = SKAction.moveTo(y: spriteComponent.origin.y, duration: 0.2)
+
+        spriteComponent.node.run(moveTo)
+        interactionComponent.node.run(moveTo)
+    }
 }

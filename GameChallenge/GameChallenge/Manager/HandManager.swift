@@ -98,8 +98,10 @@ class HandManager {
         if self.selectedCards.contains(card),
            let index = self.selectedCards.firstIndex(of: card) {
             self.selectedCards.remove(at: index)
+            AnimationManager.deselect(card)
         } else {
             self.selectedCards.append(card)
+            AnimationManager.select(card)
         }
     }
 
@@ -139,14 +141,15 @@ class HandManager {
         guard let card = entity as? Card,
               let spriteComponent = card.component(ofType: SpriteComponent.self) else { return }
 
-        let deltaPoint = spriteComponent.node.position - spriteComponent.origin
-        if deltaPoint < 0.1 {
+        if  (spriteComponent.node.position.x - spriteComponent.origin.x) < 0.1 &&
+            spriteComponent.node.position.y <= spriteComponent.origin.y + 15 {
             self.toggleSelection(card)
         } else if self.gameplayManager.isOverLegend(point: point) {
             gameplayManager.putCardsOnTheTable(cards: self.selectedCards)
             self.selectedCards = []
         } else {
             self.backToOrigin()
+            self.selectedCards = []
         }
     }
 
