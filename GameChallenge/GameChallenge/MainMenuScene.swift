@@ -16,6 +16,7 @@ class MainMenuScene: SKScene {
     let soundGameButton: SKSpriteNode = SKSpriteNode(imageNamed: "audio-on-button")
     let gameNameImage = SKSpriteNode(color: .cyan, size: CGSize(width: 200, height: 100))
     lazy var backgroundImage: SKSpriteNode = SKSpriteNode(imageNamed: "mainmenu-background")
+    lazy var logoImage: SKSpriteNode = SKSpriteNode(imageNamed: "lendas_logo")
     var created = false
     let manager = CMMotionManager()
     var soundPlayer: AVAudioPlayer?
@@ -33,13 +34,24 @@ class MainMenuScene: SKScene {
         addStartButton()
         addSoundGameButton()
         //addGyroscopParalax()
+        addLogo()
         created = true
 
     }
 
+    
+    func addLogo() {
+        logoImage.name = "start-button"
+        logoImage.size = CGSize(width: 540, height: 405)
+        
+        logoImage.position = CGPoint(x: 0, y: 100)
+        addChild(logoImage)
+    }
+
+    
     func addStartButton() {
         startButton.name = "start-button"
-        startButton.position = CGPoint(x: 0, y: -24)
+        startButton.position = CGPoint(x: 0, y: -150)
         addChild(startButton)
     }
 
